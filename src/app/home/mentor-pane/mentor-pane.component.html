@@ -1,0 +1,69 @@
+<div *ngIf="model.status == 'ineligible'" class="jumbotron">
+  <h2>Not Eligible to be a Mentor</h2>
+  <h4>
+    To qualify as a mentor you must be at least 5 years out from your post doctorate or fellowship training program.
+    <span *ngIf="model.trainingDate"> Current recorded date in the system is {{model.trainingDate | date:'MM/dd/yyyy'}}.</span>
+    <span *ngIf="!model.trainingDate"> A Post Doctorate Date has not be recorded in the system.</span>
+  </h4>
+  <p *ngIf="!showUpdateDateForm" class="buttons">
+    <button *ngIf="model.trainingDate" class="btn btn-primary btn-md" role="button" (click)="updateDate()">Update Date</button>
+    <button *ngIf="!model.trainingDate" class="btn btn-primary btn-md" role="button" (click)="updateDate()">Enter Date</button>
+  </p>
+  <p *ngIf="showUpdateDateForm" class="buttons">
+    <label for="trainingDate" class="hidden">Post Doctorate Date:</label>
+    <input type="text" class="form-control"
+      id="trainingDate" name="trainingDate" placeholder="Post Doctorla Date..." [(ngModel)]="trainingDate" bsDatepicker />
+    <button class="btn btn-primary btn-sm" role="button" (click)="updateDateConfirm()">Save</button>
+    <button class="btn btn-primary btn-sm" role="button" (click)="cancel()">Cancel</button>
+  </p>
+</div>
+
+<div *ngIf="model.status == 'eligible'" class="jumbotron">
+  <h2>Become an Mentor</h2>
+  <h4>
+    Being a mentor is a commitment lorem ipsum... Shaping the future of Myositis research.  Since you are 5 or more years out from you
+    post doctorate or fellowship training program, you are qualified to become a Mentor.   Lorem ipsum...
+  </h4>
+  <p class="buttons">
+    <button class="btn btn-primary btn-md" role="button" (click)="becomeMentor()">Go</button>
+  </p>
+</div>
+
+<div *ngIf="model.status == 'pending'" class="jumbotron">
+  <h2>Pending Mentorship</h2>
+  <h4>
+    Your Mentorship application (to be a Mentor) is currently in process. You will be notified by E-Mail about your status.
+  </h4>
+</div>
+
+<div *ngIf="model.status == 'current' && !model.mentee" class="jumbotron">
+  <h2>Mentor with</h2>
+  <h4>{{model.pendingRequests ? model.pendingRequests.length : 0}} pending Mentorship Request(s)</h4>
+  <p class="buttons">
+    <button *ngIf="model.pendingRequests && model.pendingRequests != 0" class="btn btn-primary btn-md" role="button">View Requests</button>
+  </p>
+</div>
+
+<div *ngIf="model.status == 'current' && model.mentee" class="jumbotron">
+  <h2>Mentor to</h2>
+  <h4>{{model.mentee.name}} (ends {{model.mentee.endsOn | date:'MM/dd/yyyy'}})</h4>
+  <p *ngIf="!showContactForm && !showCancelReqForm" class="buttons">
+    <button class="btn btn-primary btn-md" role="button" (click)="contact()">Contact Mentee</button>
+    <button class="btn btn-primary btn-md" role="button" (click)="cancelMentorship()">Cancel Mentorship</button>
+  </p>
+  <p *ngIf="showContactForm" class="buttons">
+    <label for="messageToMentee" class="hidden">Send E-Mail to {{model.mentee.email}}:</label>
+    <textarea rows="5" cols="50" class='form-control' id="messageToMentee" 
+      name="messageToMentee" 
+      placeholder="Send E-Mail to {{model.mentee.name}} [{{model.mentee.email}}]..." 
+      [(ngModel)]="message"></textarea>
+    <button *ngIf="message"  class="btn btn-primary btn-sm" role="button" (click)="contactConfirm()">Send</button>
+    <button class="btn btn-primary btn-sm" role="button" (click)="cancel()">Cancel</button>
+  </p>
+  <p *ngIf="showCancelReqForm" class="buttons">
+    <small>Are you sure you would like to cancel Mentorship?</small>
+    <br />
+    <button class="btn btn-primary btn-sm" role="button" (click)="cancelMentorshipConfirm()">Yes</button>
+    <button class="btn btn-primary btn-sm" role="button" (click)="cancel()">No</button>
+  </p>
+</div>

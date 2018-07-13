@@ -1,0 +1,51 @@
+<div *ngIf="model.status == 'eligible'" class="jumbotron">
+  <h2>Get a Mentor</h2>
+  <p class="buttons">
+    <button class="btn btn-primary btn-md" role="button">Go</button>
+  </p>
+</div>
+
+<div *ngIf="model.status == 'pending'" class="jumbotron">
+  <h2>Pending Mentee request to</h2>
+  <h4>{{model.mentor.name}} (expires {{model.mentor.expiresOn | date:'MM/dd/yyy'}})</h4>
+  <p *ngIf="!showContactForm && !showCancelReqForm" class="buttons">
+    <button class="btn btn-primary btn-md" role="button" (click)="contact('mentee')">Contact Mentor</button>
+    <button class="btn btn-primary btn-md" role="button" (click)="cancelMentorship('mentee')">Cancel Mentorship Request</button>
+  </p>
+  <p *ngIf="showContactForm" class="buttons">
+    <label for="messageToMentor" class="hidden">Send E-Mail to {{model.mentor.email}}:</label>
+    <textarea rows="5" cols="50" class='form-control' id="messageToMentor" name="messageToMentor" placeholder="Send E-Mail to {{model.mentor.name}} [{{model.mentor.email}}].."></textarea>
+    <button class="btn btn-primary btn-sm" role="button" (click)="sendMessage('mentee')">Send</button>
+    <button class="btn btn-primary btn-sm" role="button" (click)="cancel()">Cancel</button>
+  </p>
+  <p *ngIf="showCancelReqForm" class="buttons">
+    <small>Are you sure you would like to cancel Mentorship Request?</small>
+    <br />
+    <button class="btn btn-primary btn-sm" role="button" (click)="cancelMentorshipConfirm()">Yes</button>
+    <button class="btn btn-primary btn-sm" role="button" (click)="cancel()">No</button>
+  </p>
+</div>
+
+<div *ngIf="model.status == 'current'" class="jumbotron">
+  <h2>Mentee to </h2>
+  <h4>{{model.mentor.name}} (ends {{model.mentor.endsOn | date:'MM/dd/yyyy'}})</h4>
+  <p *ngIf="!showContactForm && !showCancelReqForm" class="buttons">
+    <button class="btn btn-primary btn-md" role="button" (click)="contact('mentee')">Contact your Mentor</button>
+    <button class="btn btn-primary btn-md" role="button" (click)="cancelMentorship('mentee')">Cancel Mentorship</button>
+  </p>
+  <p *ngIf="showContactForm" class="buttons">
+    <label for="messageToMentor" class="hidden">Send E-Mail to {{model.mentor.email}}:</label>
+    <textarea rows="5" cols="50" class='form-control' id="messageToMentor" 
+      name="messageToMentor" 
+      placeholder="Send E-Mail to {{model.mentor.name}} [{{model.mentor.email}}]..." 
+      [(ngModel)]="message"></textarea>
+    <button *ngIf="message" class="btn btn-primary btn-sm" role="button" (click)="contactConfirm()">Send</button>
+    <button class="btn btn-primary btn-sm" role="button" (click)="cancel()">Cancel</button>
+  </p>
+  <p *ngIf="showCancelReqForm" class="buttons">
+    <small>Are you sure you would like to cancel Mentorship?</small>
+    <br />
+    <button class="btn btn-primary btn-sm" role="button" (click)="cancelMentorshipConfirm()">Yes</button>
+    <button class="btn btn-primary btn-sm" role="button" (click)="cancel()">No</button>
+  </p>
+</div>

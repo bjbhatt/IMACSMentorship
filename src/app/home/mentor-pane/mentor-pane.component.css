@@ -1,0 +1,8 @@
+.jumbotron {
+    min-height: 400px;
+    position: relative;
+}
+.jumbotron .buttons {
+    position: absolute;
+    bottom: 0;
+}
