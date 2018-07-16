@@ -75,9 +75,11 @@ export class MentorPaneComponent implements OnInit {
   }
 
   becomeMentor() {
-    // TBD: Save Data
-    this.alertifyService.message('Request to become a mentor sent!');
-    this.model.status = 'pending';
+    if (this.isLoggedIn) {
+      // TBD: Save Data
+      this.alertifyService.message('Your are now a mentor');
+      this.model.status = 'current';
+    }
   }
 
   contact() {
@@ -86,10 +88,12 @@ export class MentorPaneComponent implements OnInit {
   }
 
   contactConfirm() {
-    // TBD: Send Message
-    console.log(this.message);
-    this.alertifyService.message('Message sent!');
-    this.cancel();
+    if (this.isLoggedIn) {
+      // TBD: Send Message
+      console.log(this.message);
+      this.alertifyService.message('Message sent!');
+      this.cancel();
+    }
   }
 
   cancelMentorship() {
@@ -97,10 +101,13 @@ export class MentorPaneComponent implements OnInit {
   }
 
   cancelMentorshipConfirm() {
-    // TBD: Cancel Mentorship
-    this.alertifyService.message('Mentorship cancelled');
-    this.model.mentee = null;
-    this.cancel();
+    if (this.isLoggedIn) {
+      // TBD: Cancel Mentorship
+      this.alertifyService.message('Mentorship cancelled');
+      this.model.mentee = null;
+      this.cancel();
+    }
+
   }
 
   cancel() {

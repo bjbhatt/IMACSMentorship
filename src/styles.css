@@ -2,6 +2,9 @@
 
 body {
   background-image: url("assets/images/background-pattern-poly.gif");
-  background-color: #cccccc;
+  background-color: #e0e0e0;
   background-blend-mode: screen, difference, lighten;
+}
+.btn {
+    margin: 5px;
 }

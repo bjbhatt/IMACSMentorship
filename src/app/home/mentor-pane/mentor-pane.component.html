@@ -14,7 +14,7 @@
     <input type="text" class="form-control"
       id="trainingDate" name="trainingDate" placeholder="Post Doctorla Date..." [(ngModel)]="trainingDate" bsDatepicker />
     <button class="btn btn-primary btn-sm" role="button" (click)="updateDateConfirm()">Save</button>
-    <button class="btn btn-primary btn-sm" role="button" (click)="cancel()">Cancel</button>
+    <button class="btn btn-default btn-sm" role="button" (click)="cancel()">Cancel</button>
   </p>
 </div>
 
@@ -58,12 +58,12 @@
       placeholder="Send E-Mail to {{model.mentee.name}} [{{model.mentee.email}}]..." 
       [(ngModel)]="message"></textarea>
     <button *ngIf="message"  class="btn btn-primary btn-sm" role="button" (click)="contactConfirm()">Send</button>
-    <button class="btn btn-primary btn-sm" role="button" (click)="cancel()">Cancel</button>
+    <button class="btn btn-default btn-sm" role="button" (click)="cancel()">Cancel</button>
   </p>
   <p *ngIf="showCancelReqForm" class="buttons">
     <small>Are you sure you would like to cancel Mentorship?</small>
     <br />
     <button class="btn btn-primary btn-sm" role="button" (click)="cancelMentorshipConfirm()">Yes</button>
-    <button class="btn btn-primary btn-sm" role="button" (click)="cancel()">No</button>
+    <button class="btn btn-default btn-sm" role="button" (click)="cancel()">No</button>
   </p>
 </div>
