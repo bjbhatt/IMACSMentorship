@@ -14,6 +14,7 @@ import { UserProfile } from './../_models/userDetails';
 })
 export class NavComponent implements OnInit {
   model: UserProfile;
+  isLoggedIn: boolean;
 
   constructor(private apiService: ApiMockService, private alertifyService: AlertifyService, private router: Router) { }
 
@@ -22,14 +23,17 @@ export class NavComponent implements OnInit {
   }
 
   loadModel() {
-    this.apiService.getUserProfile().subscribe((userProfile: UserProfile) => {
-      if (userProfile) {
-        this.model = userProfile;
-      } else {
-        this.router.navigate(['/notLoggedIn']);
+    this.apiService.isLoggedIn().subscribe((loggedIn: boolean) => {
+      this.isLoggedIn = loggedIn;
+      if (this.isLoggedIn) {
+        this.apiService.getUserProfile().subscribe((userProfile: UserProfile) => {
+          if (userProfile) {
+            this.model = userProfile;
+          }
+        }, error => {
+          this.alertifyService.error(error);
+        });
       }
-    }, error => {
-      this.alertifyService.error(error);
     });
   }
 }
