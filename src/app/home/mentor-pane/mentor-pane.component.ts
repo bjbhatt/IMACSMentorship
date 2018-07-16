@@ -19,6 +19,7 @@ export class MentorPaneComponent implements OnInit {
   showCancelReqForm = false;
   message = '';
   showUpdateDateForm = false;
+  isLoggedIn: boolean;
 
   constructor(private apiService: ApiMockService, private alertifyService: AlertifyService, private router: Router) { }
 
@@ -41,10 +42,13 @@ export class MentorPaneComponent implements OnInit {
   }
 
   loadModel() {
-    this.apiService.getUserMentorInfo().subscribe((mentor: Mentor) => {
-      this.model = mentor;
-    }, error => {
-      this.alertifyService.error(error);
+    this.apiService.isLoggedIn().subscribe((loggedIn: boolean) => {
+      this.isLoggedIn = loggedIn;
+      this.apiService.getUserMentorInfo().subscribe((mentor: Mentor) => {
+        this.model = mentor;
+      }, error => {
+        this.alertifyService.error(error);
+      });
     });
   }
 
@@ -54,18 +58,20 @@ export class MentorPaneComponent implements OnInit {
   }
 
   updateDateConfirm() {
-    // TBD: Save trainingDate
-    const today = new Date();
-    this.alertifyService.message('Date saved!');
-    this.model.trainingDate = new Date(this.trainingDate);
-    let years = today.getFullYear() - this.model.trainingDate.getFullYear();
-    if (this.model.trainingDate > this.addYearsToDate(today, -5)) {
-      years--;
+    if (this.isLoggedIn) {
+      // TBD: Save trainingDate
+      const today = new Date();
+      this.alertifyService.message('Date saved!');
+      this.model.trainingDate = new Date(this.trainingDate);
+      let years = today.getFullYear() - this.model.trainingDate.getFullYear();
+      if (this.model.trainingDate > this.addYearsToDate(today, -5)) {
+        years--;
+      }
+      if (years >= 5) {
+        this.model.status = 'eligible';
+      }
+      this.cancel();
     }
-    if (years >= 5) {
-      this.model.status = 'eligible';
-    }
-    this.cancel();
   }
 
   becomeMentor() {

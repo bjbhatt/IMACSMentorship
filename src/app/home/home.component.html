@@ -1,9 +1,12 @@
-<app-nav></app-nav>
-<div class="container">
+<div *ngIf="isLoggedIn" class="container">
   <div class="col-md-6 col-sm-6 col-lg-6">
     <app-home-mentor-pane></app-home-mentor-pane>
   </div>
   <div class="col-md-6 col-sm-6 col-lg-6">
     <app-home-mentee-pane></app-home-mentee-pane>
   </div>
+</div>
+
+<div *ngIf="!isLoggedIn" class="container">
+  <span>Not Logged In</span>
 </div>

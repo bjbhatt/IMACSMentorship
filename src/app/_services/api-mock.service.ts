@@ -11,6 +11,11 @@ export class ApiMockService {
 
   constructor() { }
 
+  isLoggedIn(): Observable<boolean> {
+    const isLoggedIn = true;
+    return Observable.create((observer: Observer<boolean>) => observer.next(isLoggedIn));
+  }
+
   getUserProfile(): Observable<UserProfile> {
     const userProfile: UserProfile = {
       id: 1,

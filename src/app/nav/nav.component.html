@@ -15,7 +15,7 @@
       </button>
       <a [routerLink]="['/']" routerLinkActive="router-link-active" class="navbar-brand">IMACS Mentorship</a>
     </div>
-    <div *ngIf="model?.name" id="navbar" class="navbar-collapse collapse">
+    <div *ngIf="isLoggedIn" id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" dropdown>
           <a class="dropdown-toggle" dropdownToggle data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Logged in as {{model?.name}}
