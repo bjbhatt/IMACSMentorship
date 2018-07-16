@@ -1,7 +1,17 @@
 div.logo {
-    background-color: #fff;
+  background-color: #fff;
 }
-div.container > img {
-    margin-top: 10px;
-    margin-bottom: 10px;
+
+div.container>img {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.navbar {
+  background: linear-gradient( rgba(175, 228, 47, 0.63), rgba(141, 214, 14, 0.63)), url('../../assets/images/research-parallax-2.jpg');
+}
+
+.navbar .navbar-brand {
+  color: #ffffff;
+  font-weight: bold;
 }
