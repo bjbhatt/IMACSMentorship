@@ -9,9 +9,29 @@ div.container>img {
 
 .navbar {
   background: linear-gradient( rgba(175, 228, 47, 0.63), rgba(141, 214, 14, 0.63)), url('../../assets/images/research-parallax-2.jpg');
+  background-position-y: center;
+  border-radius: 0px;
 }
 
 .navbar .navbar-brand {
   color: #ffffff;
   font-weight: bold;
+}
+
+.navbar a:hover{
+  background: rgba(255,255,255,.2);
+}
+
+.navbar .dropdown-toggle{
+  background: rgba(255,255,255,0);
+  color: #fff;
+}
+
+.dropdown-toggle:active, .open .dropdown-toggle {
+  background:rgba(255,255,255,.2); 
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+  background-color: rgba(195,220,180,1);
+  color: #fff;
 }
