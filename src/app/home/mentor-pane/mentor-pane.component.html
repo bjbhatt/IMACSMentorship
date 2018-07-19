@@ -1,5 +1,6 @@
+<div [ngStyle]="{'display': showModal ? 'block' : 'none'}" class="backdrop"></div>
 <div *ngIf="model.status == 'ineligible'" class="jumbotron">
-  <h2>Not Eligible to be a Mentor</h2>
+  <h2><strong>Not Eligible to be a Mentor</strong></h2>
   <h4>
     To qualify as a mentor you must be at least 5 years out from your post doctorate or fellowship training program.
     <span *ngIf="model.trainingDate"> Current recorded date in the system is {{model.trainingDate | date:'MM/dd/yyyy'}}.</span>
@@ -19,25 +20,25 @@
 </div>
 
 <div *ngIf="model.status == 'eligible'" class="jumbotron">
-  <h2>Become an Mentor</h2>
+  <h2><strong>Become an IMACS Mentor</strong></h2>
   <h4>
     Being a mentor is a commitment lorem ipsum... Shaping the future of Myositis research.  Since you are 5 or more years out from you
     post doctorate or fellowship training program, you are qualified to become a Mentor.   Lorem ipsum...
   </h4>
   <p class="buttons">
-    <button class="btn btn-primary btn-md" role="button" (click)="becomeMentor()">Go</button>
+    <button class="btn btn-primary btn-md" role="button" (click)="becomeMentor()">Yes, I want to become a Mentor</button>
   </p>
 </div>
 
 <div *ngIf="model.status == 'pending'" class="jumbotron">
-  <h2>Pending Mentorship</h2>
+  <h2><strong>Pending Mentorship</strong></h2>
   <h4>
     Your Mentorship application (to be a Mentor) is currently in process. You will be notified by E-Mail about your status.
   </h4>
 </div>
 
 <div *ngIf="model.status == 'current' && !model.mentee" class="jumbotron">
-  <h2>Mentor with</h2>
+  <h2><strong>Mentor with</strong></h2>
   <h4>{{model.pendingRequests ? model.pendingRequests.length : 0}} pending Mentorship Request(s)</h4>
   <p class="buttons">
     <button *ngIf="model.pendingRequests && model.pendingRequests != 0" class="btn btn-primary btn-md" role="button">View Requests</button>
@@ -45,7 +46,7 @@
 </div>
 
 <div *ngIf="model.status == 'current' && model.mentee" class="jumbotron">
-  <h2>Mentor to</h2>
+  <h2><strong>Mentor to</strong></h2>
   <h4>{{model.mentee.name}} (ends {{model.mentee.endsOn | date:'MM/dd/yyyy'}})</h4>
   <p *ngIf="!showContactForm && !showCancelReqForm" class="buttons">
     <button class="btn btn-primary btn-md" role="button" (click)="contact()">Contact Mentee</button>
@@ -66,4 +67,18 @@
     <button class="btn btn-primary btn-sm" role="button" (click)="cancelMentorshipConfirm()">Yes</button>
     <button class="btn btn-default btn-sm" role="button" (click)="cancel()">No</button>
   </p>
+</div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">{{modal_header}}</h3>
+      </div>
+      <div class="modal-body"><h4>{{modal_body}}</h4></div>
+        <div class="modal-footer" align="right">
+          <button type="button" id="btnClose" class="btn btn-default "(click)="openModal(false)">{{modal_cancel}}</button>
+          <button type="button" id="btnOK" class="btn btn-success" (click)="becomeMentorConfirm()">{{modal_okay}}</button>
+        </div>
+    </div>
+  </div>
 </div>

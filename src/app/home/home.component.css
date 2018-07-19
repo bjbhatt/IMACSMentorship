@@ -1,0 +1,17 @@
+.welcome-message{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgba(76,76,76,1);
+}
+
+.welcome{
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.container{
+    background: rgba(255,255,255,.8);
+    min-height: 100%;
+}

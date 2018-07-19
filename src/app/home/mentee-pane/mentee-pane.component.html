@@ -1,12 +1,12 @@
 <div *ngIf="model.status == 'eligible'" class="jumbotron">
-  <h2>Get a Mentor</h2>
+  <h2><strong>Get a Mentor</strong></h2>
   <p class="buttons">
     <button class="btn btn-primary btn-md" role="button">Go</button>
   </p>
 </div>
 
 <div *ngIf="model.status == 'pending'" class="jumbotron">
-  <h2>Pending Mentee request to</h2>
+  <h2><strong>Pending Mentee request to</strong></h2>
   <h4>{{model.mentor.name}} (expires {{model.mentor.expiresOn | date:'MM/dd/yyy'}})</h4>
   <p *ngIf="!showContactForm && !showCancelReqForm" class="buttons">
     <button class="btn btn-primary btn-md" role="button" (click)="contact('mentee')">Contact Mentor</button>
@@ -27,7 +27,7 @@
 </div>
 
 <div *ngIf="model.status == 'current'" class="jumbotron">
-  <h2>Mentee to </h2>
+  <h2><strong>Mentee to </strong></h2>
   <h4>{{model.mentor.name}} (ends {{model.mentor.endsOn | date:'MM/dd/yyyy'}})</h4>
   <p *ngIf="!showContactForm && !showCancelReqForm" class="buttons">
     <button class="btn btn-primary btn-md" role="button" (click)="contact('mentee')">Contact your Mentor</button>

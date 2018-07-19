@@ -20,6 +20,12 @@ export class MentorPaneComponent implements OnInit {
   message = '';
   showUpdateDateForm = false;
   isLoggedIn: boolean;
+  showModal: boolean;
+  modal_header = '';
+  modal_body = '';
+  modal_cancel = 'Cancel';
+  modal_okay = 'OK';
+  modal_context = '';
 
   constructor(private apiService: ApiMockService, private alertifyService: AlertifyService, private router: Router) { }
 
@@ -80,6 +86,10 @@ export class MentorPaneComponent implements OnInit {
       this.alertifyService.message('Your are now a mentor');
       this.model.status = 'current';
     }
+  }
+
+  openModal(open) {
+    this.showModal = open;
   }
 
   contact() {

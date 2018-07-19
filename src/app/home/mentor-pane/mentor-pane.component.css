@@ -2,8 +2,9 @@
     min-height: 400px;
     position: relative;
     background-color: rgba(217, 233, 201,.9);
+    padding: 10px;
 }
 .jumbotron .buttons {
     position: absolute;
-    bottom: 0;
+    bottom: 0;   
 }
