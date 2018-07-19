@@ -6,6 +6,8 @@ export interface UserProfile {
 export interface PendingRequest {
     name: string;
     email: string;
+    degree: string;
+    location: string;
     expiresOn: Date;
 }
 

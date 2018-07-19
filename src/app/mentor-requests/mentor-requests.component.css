@@ -1,0 +1,39 @@
+.container{
+    background: rgba(255,255,255,1);
+    min-height: 100%;
+}
+
+.request-header{
+    padding: 10px;
+    color: rgba(76,76,76,1);
+}
+
+.btn-group > .btn {
+    margin: 0px;
+}
+
+.mentee-image{
+    height: 75px;
+    width: 75px;
+}
+
+.mentee-list{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 2em;
+}
+
+.mentee-text{
+    font-size: 14pt;
+    color: rgba(76,76,76,1);
+}
+
+.requests{
+    margin-top:50px;
+    margin-bottom:10px;
+}
+
+.days-left{
+    color: rgba(76,76,76,1);
+    text-align: center;
+}

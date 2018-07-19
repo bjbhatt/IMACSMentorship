@@ -17,6 +17,7 @@ import { AlertifyService } from './_services/alertify.service';
 import { appRoutes } from './routes';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NotLoggedInComponent } from './not-logged-in/not-logged-in.component';
+import { MentorRequestsComponent } from './mentor-requests/mentor-requests.component';
 
 @NgModule({
    declarations: [
@@ -26,7 +27,8 @@ import { NotLoggedInComponent } from './not-logged-in/not-logged-in.component';
       MentorPaneComponent,
       MenteePaneComponent,
       UserProfileComponent,
-      NotLoggedInComponent
+      NotLoggedInComponent,
+      MentorRequestsComponent
    ],
    imports: [
       BrowserModule,

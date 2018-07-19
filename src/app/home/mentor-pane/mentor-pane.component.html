@@ -41,7 +41,7 @@
   <h2><strong>Mentor with</strong></h2>
   <h4>{{model.pendingRequests ? model.pendingRequests.length : 0}} pending Mentorship Request(s)</h4>
   <p class="buttons">
-    <button *ngIf="model.pendingRequests && model.pendingRequests != 0" class="btn btn-primary btn-md" role="button">View Requests</button>
+    <button *ngIf="model.pendingRequests && model.pendingRequests != 0" class="btn btn-primary btn-md" role="button" [routerLink]="['/requests']" routerLink="router-link-active">View Requests</button>
   </p>
 </div>
 

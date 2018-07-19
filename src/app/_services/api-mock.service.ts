@@ -27,20 +27,36 @@ export class ApiMockService {
   getUserMentorInfo(): Observable<Mentor> {
     const mentor: Mentor = {
       id: 1,
-      status: 'ineligible',
+      status: 'eligible',
       trainingDate: new Date('01/01/2014'),
-      // pendingRequests: [
-      //   {
-      //     name: 'B J Bhatt',
-      //     email: 'a@a.com',
-      //     expiresOn: new Date('07/27/2018')
-      //   }
-      // ],
-      mentee: {
-        name: 'John',
-        email: 'x@x.com',
-        endsOn: new Date('01/01/2020')
-      }
+      pendingRequests: [
+        {
+          name: 'B J Bhatt',
+          email: 'a@a.com',
+          degree: 'Phd, MD',
+          location: 'Hospital de Clinicas',
+          expiresOn: new Date('07/27/2018')
+        },
+        {
+          name: 'Sagar Thakore',
+          email: 'sagar@mentee.com',
+          degree: 'MD, MBBS',
+          location: 'Duke Medical Research',
+          expiresOn: new Date('07/27/2018')
+        },
+        {
+          name: 'Jessica Reynolds',
+          email: 'jessica@mentee.com',
+          degree: 'MD, PA-C, MBBS',
+          location: 'John Hopkins University School',
+          expiresOn: new Date('07/27/2018')
+        }
+      ],
+      // mentee: {
+      //   name: 'John',
+      //   email: 'x@x.com',
+      //   endsOn: new Date('01/01/2020')
+      // }
     };
     return Observable.create((observer: Observer<Mentor>) => observer.next(mentor));
   }
