@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiMockService } from '../_services/api-mock.service';
 import { AlertifyService } from '../_services/alertify.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Mentor } from '../_models/userDetails';
 
 @Component({
@@ -17,6 +17,12 @@ export class MentorRequestsComponent implements OnInit {
 
   ngOnInit() {
     this.loadModel();
+  }
+
+  acceptMentee(id: number) {
+    // TBD: Accept Mentee
+    console.log(id);
+    this.router.navigate(['/home']);
   }
 
   loadModel() {

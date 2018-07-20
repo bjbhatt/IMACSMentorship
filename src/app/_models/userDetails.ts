@@ -4,6 +4,7 @@ export interface UserProfile {
 }
 
 export interface PendingRequest {
+    id: string;
     name: string;
     email: string;
     degree: string;
@@ -17,6 +18,7 @@ export interface Mentor {
     trainingDate?: Date;
     pendingRequests?: PendingRequest[];
     mentee?: {
+        id: string,
         name: string;
         email: string;
         endsOn: Date;
