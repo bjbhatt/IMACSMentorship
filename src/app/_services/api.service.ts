@@ -1,9 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError, Observer } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import { UserProfile, Mentor, Mentee } from './../_models/userDetails';
+import { UserProfile, Mentor, Mentee, Login } from './../_models/userDetails';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -12,85 +12,92 @@ import { environment } from '../../environments/environment';
 export class ApiService {
   private baseUrl = environment.baseUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  isLoggedIn(): Observable<boolean> {
-    return this.http
-      .get(
-        'https://connect3dev.niehs.nih.gov/imacs/rest/loginService.cfc?method=isLoggedIn'
-      )
+  isLoggedIn(): Observable<Login> {
+    return this.http.get<Login>(this.baseUrl + 'LoggedIn')
       .pipe(
-        map((response: any) => {
-          return response && response.loggedIn;
+        map((response) => {
+          return response;
         }),
         catchError(this.handleError)
       );
   }
-  isLoggedInMock(): Observable<boolean> {
-    const isLoggedIn = true;
-    return Observable.create((observer: Observer<boolean>) =>
-      observer.next(isLoggedIn)
+  isLoggedInMock(): Observable<Login> {
+    const login: Login = {
+      userId: 1,
+      fullName: 'John Doe',
+    };
+    return Observable.create((observer: Observer<Login>) =>
+      observer.next(login)
     );
   }
 
-  getUserProfile(): Observable<UserProfile> {
-    return this.http.get(this.baseUrl + '/' + 'userprofile').pipe(
-      map(response => <UserProfile>response),
-      catchError(this.handleError)
-    );
+  getUserProfile(userId: number): Observable<UserProfile> {
+    return this.http.get<UserProfile>(this.baseUrl + 'GetUserProfile&userId=' + userId)
+      .pipe(
+        map(response => response),
+        catchError(this.handleError)
+      );
   }
-  getUserProfileMock(): Observable<UserProfile> {
+  getUserProfileMock(userId: number): Observable<UserProfile> {
     const userProfile: UserProfile = {
-      id: 1,
-      name: 'John Doe'
+      id: userId,
+      fullName: 'John Doe',
+      emailAddress: 'jdoe@email.com',
     };
     return Observable.create((observer: Observer<UserProfile>) =>
       observer.next(userProfile)
     );
   }
 
-  getUserMentorInfo(): Observable<Mentor> {
-    return this.http.get(this.baseUrl + '/' + 'mentor').pipe(
-      map(response => <Mentor>response),
-      catchError(this.handleError)
-    );
+  getUserMentorInfo(userId: number): Observable<Mentor> {
+    return this.http.get<Mentor>(this.baseUrl + '/' + 'GetMentorInfo&userId=' + userId)
+      .pipe(
+        map(response => response),
+        catchError(this.handleError)
+      );
   }
-  getUserMentorInfoMock(): Observable<Mentor> {
+  getUserMentorInfoMock(userId: number): Observable<Mentor> {
     const mentor: Mentor = {
-      id: 1,
+      userId: userId,
       status: 'eligible',
       trainingDate: new Date('01/01/2014'),
       pendingRequests: [
         {
-          id: '001',
-          name: 'B J Bhatt',
-          email: 'a@a.com',
+          userId: 2,
+          fullName: 'B J Bhatt',
+          emailAddress: 'a@a.com',
+          requestDate: new Date('06/27/2018'),
+          expirationDate: new Date('07/27/2018'),
           degree: 'Phd, MD',
           location: 'Hospital de Clinicas',
-          expiresOn: new Date('07/27/2018')
         },
         {
-          id: '002',
-          name: 'Sagar Thakore',
-          email: 'sagar@mentee.com',
+          userId: 3,
+          fullName: 'Sagar Thakore',
+          emailAddress: 'sagar@mentee.com',
+          requestDate: new Date('06/27/2018'),
+          expirationDate: new Date('07/27/2018'),
           degree: 'MD, MBBS',
-          location: 'Duke Medical Research',
-          expiresOn: new Date('07/27/2018')
+          location: 'Duke Medical Research'
         },
         {
-          id: '003',
-          name: 'Jessica Reynolds',
-          email: 'jessica@mentee.com',
+          userId: 4,
+          fullName: 'Jessica Reynolds',
+          emailAddress: 'jessica@mentee.com',
+          requestDate: new Date('06/27/2018'),
+          expirationDate: new Date('07/27/2018'),
           degree: 'MD, PA-C, MBBS',
-          location: 'John Hopkins University School',
-          expiresOn: new Date('07/27/2018')
+          location: 'John Hopkins University School'
         }
       ],
-      mentee: {
-        id: '002',
-        name: 'Sagar Thakore',
-        email: 'sagar@mentee.com',
-        endsOn: new Date('07/27/2018')
+      currentMentee: {
+        userId: 2,
+        fullName: 'Jessica Reynolds',
+        emailAddress: 'jessica@mentee.com',
+        startDate: new Date('06/27/2018'),
+        endDate: new Date('06/26/2020')
       }
     };
     return Observable.create((observer: Observer<Mentor>) =>
@@ -98,21 +105,32 @@ export class ApiService {
     );
   }
 
-  getUserMenteeInfo(): Observable<Mentee> {
-    return this.http.get(this.baseUrl + '/' + 'mentee').pipe(
-      map(response => <Mentee>response),
-      catchError(this.handleError)
-    );
+  getUserMenteeInfo(userId: number): Observable<Mentee> {
+    return this.http.get<Mentor>(this.baseUrl + '/' + 'GetMenteeInfo&userId=' + userId)
+      .pipe(
+        map(response => <Mentee>response),
+        catchError(this.handleError)
+      );
   }
-  getUserMenteeInfoMock(): Observable<Mentee> {
+  getUserMenteeInfoMock(userId: number): Observable<Mentee> {
     const mentee: Mentee = {
-      id: 1,
-      status: 'current',
-      mentor: {
-        name: 'John',
-        email: 'x@x.com',
-        expiresOn: new Date('07/27/2018'),
-        endsOn: new Date('01/01/2020')
+      userId: 1,
+      status: 'Current',
+      pendingRequests: [
+        {
+          userId: 2,
+          fullName: 'B J Bhatt',
+          emailAddress: 'a@a.com',
+          requestDate: new Date('06/27/2018'),
+          expirationDate: new Date('07/27/2018')
+        }
+      ],
+      currentMentor: {
+        userId: 1,
+        fullName: 'John',
+        emailAddress: 'x@x.com',
+        startDate: new Date('07/27/2018'),
+        endDate: new Date('01/01/2020')
       }
     };
     return Observable.create((observer: Observer<Mentee>) =>

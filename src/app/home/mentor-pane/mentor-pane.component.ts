@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from './../../_services/api.service';
 import { AlertifyService } from './../../_services/alertify.service';
 
-import { Mentor } from './../../_models/userDetails';
+import { Mentor, Login } from './../../_models/userDetails';
 
 @Component({
   selector: 'app-home-mentor-pane',
@@ -26,9 +26,11 @@ export class MentorPaneComponent implements OnInit {
   modal_okay = 'OK';
   modal_context = '';
 
-  constructor(private apiService: ApiService,
+  constructor(
+    private apiService: ApiService,
     private alertifyService: AlertifyService,
-    private router: Router) { }
+    private router: Router
+  ) { }
 
   private addYearsToDate(dt: Date, years: number) {
     if (!dt) {
@@ -49,15 +51,11 @@ export class MentorPaneComponent implements OnInit {
   }
 
   loadModel() {
-    this.apiService.isLoggedInMock().subscribe((loggedIn: boolean) => {
-      this.isLoggedIn = loggedIn;
-      this.apiService.getUserMentorInfoMock().subscribe((mentor: Mentor) => {
+    this.apiService.isLoggedInMock().subscribe((login: Login) => {
+      this.isLoggedIn = true;
+      this.apiService.getUserMentorInfoMock(1).subscribe((mentor: Mentor) => {
         this.model = mentor;
-      }, error => {
-        this.alertifyService.error(error);
       });
-    }, error => {
-      this.alertifyService.error(error);
     });
   }
 
@@ -77,16 +75,18 @@ export class MentorPaneComponent implements OnInit {
         years--;
       }
       if (years >= 5) {
-        this.model.status = 'eligible';
+        this.model.status = 'Eligible';
       }
       this.cancel();
     }
   }
 
   becomeMentor() {
-    // TBD: Save Data
-    this.alertifyService.message('Your are now a mentor');
-    this.model.status = 'current';
+    if (this.isLoggedIn) {
+      // TBD: Save Data
+      this.alertifyService.message('Your are now a mentor');
+      this.model.status = 'Current';
+    }
   }
 
   openModal(open) {
@@ -102,7 +102,7 @@ export class MentorPaneComponent implements OnInit {
     if (this.isLoggedIn) {
       // TBD: Send Message
       console.log(this.message);
-      this.alertifyService.message('Message sent!');
+      this.alertifyService.message('Message sent');
       this.cancel();
     }
   }
@@ -115,10 +115,9 @@ export class MentorPaneComponent implements OnInit {
     if (this.isLoggedIn) {
       // TBD: Cancel Mentorship
       this.alertifyService.message('Mentorship cancelled');
-      this.model.mentee = null;
+      this.model.currentMentee = null;
       this.cancel();
     }
-
   }
 
   cancel() {

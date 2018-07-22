@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from './../_services/api.service';
 import { AlertifyService } from './../_services/alertify.service';
 
-import { UserProfile } from './../_models/userDetails';
+import { UserProfile, Login } from './../_models/userDetails';
 
 @Component({
   selector: 'app-nav',
@@ -12,8 +12,8 @@ import { UserProfile } from './../_models/userDetails';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  model: UserProfile;
   isLoggedIn: boolean;
+  fullName = '';
 
   constructor(private apiService: ApiService,
     private alertifyService: AlertifyService,
@@ -24,17 +24,9 @@ export class NavComponent implements OnInit {
   }
 
   loadModel() {
-    this.apiService.isLoggedInMock().subscribe((loggedIn: boolean) => {
-      this.isLoggedIn = loggedIn;
-      if (this.isLoggedIn) {
-        this.apiService.getUserProfileMock().subscribe((userProfile: UserProfile) => {
-          if (userProfile) {
-            this.model = userProfile;
-          }
-        }, error => {
-          this.alertifyService.error(error);
-        });
-      }
+    this.apiService.isLoggedInMock().subscribe((login: Login) => {
+      this.isLoggedIn = true;
+      this.fullName = login.fullName;
     });
   }
 }

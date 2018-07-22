@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from './../../_services/api.service';
 import { AlertifyService } from './../../_services/alertify.service';
 
-import { Mentee } from './../../_models/userDetails';
+import { Mentee, Login } from './../../_models/userDetails';
 
 @Component({
   selector: 'app-home-mentee-pane',
@@ -30,18 +30,11 @@ export class MenteePaneComponent implements OnInit {
   }
 
   loadModel() {
-    this.apiService.isLoggedInMock().subscribe((loggedIn: boolean) => {
-      this.isLoggedIn = loggedIn;
-      this.apiService.getUserMenteeInfoMock().subscribe(
-        (mentee: Mentee) => {
-          this.model = mentee;
-        },
-        error => {
-          this.alertifyService.error(error);
-        }
-      );
-    }, error => {
-      this.alertifyService.error(error);
+    this.apiService.isLoggedInMock().subscribe((login: Login) => {
+      this.isLoggedIn = true;
+      this.apiService.getUserMenteeInfoMock(1).subscribe((mentee: Mentee) => {
+        this.model = mentee;
+      });
     });
   }
 
@@ -66,12 +59,12 @@ export class MenteePaneComponent implements OnInit {
     if (this.isLoggedIn) {
       // TBD: Cancel Mentorship
       const message: string =
-        this.model.status === 'pending'
+        this.model.status === 'Pending'
           ? 'Mentorship request cancelled'
           : 'Mentorship cancelled';
       this.alertifyService.message(message);
-      this.model.status = 'eligible';
-      this.model.mentor = null;
+      this.model.status = 'Eligible';
+      this.model.currentMentor = null;
       this.cancel();
     }
   }

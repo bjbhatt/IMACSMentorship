@@ -1,3 +1,4 @@
+import { Login } from './../_models/userDetails';
 import { ApiService } from './../_services/api.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
   isLoggedIn: boolean;
+
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
@@ -16,8 +17,8 @@ export class HomeComponent implements OnInit {
   }
 
   loadModel() {
-    this.apiService.isLoggedInMock().subscribe((loggedIn: boolean) => {
-      this.isLoggedIn = loggedIn;
+    this.apiService.isLoggedInMock().subscribe((login: Login) => {
+      this.isLoggedIn = true;
     });
   }
 

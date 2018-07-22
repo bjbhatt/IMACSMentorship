@@ -1,5 +1,6 @@
 <div [ngStyle]="{'display': showModal ? 'block' : 'none'}" class="backdrop"></div>
-<div *ngIf="model.status == 'ineligible'" class="jumbotron">
+
+<div *ngIf="model.status == 'Ineligible'" class="jumbotron">
   <h2><strong>Not Eligible to be a Mentor</strong></h2>
   <h4>
     To qualify as a mentor you must be at least 5 years out from your post doctorate or fellowship training program.
@@ -19,7 +20,7 @@
   </p>
 </div>
 
-<div *ngIf="model.status == 'eligible'" class="jumbotron">
+<div *ngIf="model.status == 'Eligible'" class="jumbotron">
   <h2><strong>Become an IMACS Mentor</strong></h2>
   <h4>
     Being a mentor is a commitment lorem ipsum... Shaping the future of Myositis research.  Since you are 5 or more years out from you
@@ -30,14 +31,7 @@
   </p>
 </div>
 
-<div *ngIf="model.status == 'pending'" class="jumbotron">
-  <h2><strong>Pending Mentorship</strong></h2>
-  <h4>
-    Your Mentorship application (to be a Mentor) is currently in process. You will be notified by E-Mail about your status.
-  </h4>
-</div>
-
-<div *ngIf="model.status == 'current' && !model.mentee" class="jumbotron">
+<div *ngIf="model.status == 'Current' && !model.currentMentee" class="jumbotron">
   <h2><strong>Mentor with</strong></h2>
   <h4>{{model.pendingRequests ? model.pendingRequests.length : 0}} pending Mentorship Request(s)</h4>
   <p class="buttons">
@@ -45,18 +39,18 @@
   </p>
 </div>
 
-<div *ngIf="model.status == 'current' && model.mentee" class="jumbotron">
+<div *ngIf="model.status == 'Current' && model.currentMentee" class="jumbotron">
   <h2><strong>Mentor to</strong></h2>
-  <h4>{{model.mentee.name}} (ends {{model.mentee.endsOn | date:'MM/dd/yyyy'}})</h4>
+  <h4>{{model.currentMentee.fullName}} (ends {{model.currentMentee.endDate | date:'MM/dd/yyyy'}})</h4>
   <p *ngIf="!showContactForm && !showCancelReqForm" class="buttons">
     <button class="btn btn-primary btn-md" role="button" (click)="contact()">Contact Mentee</button>
     <button class="btn btn-primary btn-md" role="button" (click)="cancelMentorship()">Cancel Mentorship</button>
   </p>
   <p *ngIf="showContactForm" class="buttons">
-    <label for="messageToMentee" class="hidden">Send E-Mail to {{model.mentee.email}}:</label>
+    <label for="messageToMentee" class="hidden">Send E-Mail to {{model.currentMentee.emailAddress}}:</label>
     <textarea rows="5" cols="50" class='form-control' id="messageToMentee" 
       name="messageToMentee" 
-      placeholder="Send E-Mail to {{model.mentee.name}} [{{model.mentee.email}}]..." 
+      placeholder="Send E-Mail to {{model.currentMentee.fullName}} [{{model.currentMentee.emailAddress}}]..." 
       [(ngModel)]="message"></textarea>
     <button *ngIf="message"  class="btn btn-primary btn-sm" role="button" (click)="contactConfirm()">Send</button>
     <button class="btn btn-default btn-sm" role="button" (click)="cancel()">Cancel</button>
@@ -68,6 +62,7 @@
     <button class="btn btn-default btn-sm" role="button" (click)="cancel()">No</button>
   </p>
 </div>
+
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
