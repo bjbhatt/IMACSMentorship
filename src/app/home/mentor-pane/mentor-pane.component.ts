@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ApiService } from './../../_services/api.service';
-import { ApiMockService } from './../../_services/api-mock.service';
 import { AlertifyService } from './../../_services/alertify.service';
 
 import { Mentor } from './../../_models/userDetails';
@@ -27,7 +26,7 @@ export class MentorPaneComponent implements OnInit {
   modal_okay = 'OK';
   modal_context = '';
 
-  constructor(private apiService: ApiMockService, private alertifyService: AlertifyService, private router: Router) { }
+  constructor(private apiService: ApiService, private alertifyService: AlertifyService, private router: Router) { }
 
   private addYearsToDate(dt: Date, years: number) {
     if (!dt) {
@@ -48,9 +47,9 @@ export class MentorPaneComponent implements OnInit {
   }
 
   loadModel() {
-    this.apiService.isLoggedIn().subscribe((loggedIn: boolean) => {
+    this.apiService.isLoggedInMock().subscribe((loggedIn: boolean) => {
       this.isLoggedIn = loggedIn;
-      this.apiService.getUserMentorInfo().subscribe((mentor: Mentor) => {
+      this.apiService.getUserMentorInfoMock().subscribe((mentor: Mentor) => {
         this.model = mentor;
       }, error => {
         this.alertifyService.error(error);

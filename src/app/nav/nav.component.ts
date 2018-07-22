@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ApiService } from './../_services/api.service';
-import { ApiMockService } from './../_services/api-mock.service';
 import { AlertifyService } from './../_services/alertify.service';
 
 import { UserProfile } from './../_models/userDetails';
@@ -16,17 +15,19 @@ export class NavComponent implements OnInit {
   model: UserProfile;
   isLoggedIn: boolean;
 
-  constructor(private apiService: ApiMockService, private alertifyService: AlertifyService, private router: Router) { }
+  constructor(private apiService: ApiService,
+    private alertifyService: AlertifyService,
+    private router: Router) { }
 
   ngOnInit() {
     this.loadModel();
   }
 
   loadModel() {
-    this.apiService.isLoggedIn().subscribe((loggedIn: boolean) => {
+    this.apiService.isLoggedInMock().subscribe((loggedIn: boolean) => {
       this.isLoggedIn = loggedIn;
       if (this.isLoggedIn) {
-        this.apiService.getUserProfile().subscribe((userProfile: UserProfile) => {
+        this.apiService.getUserProfileMock().subscribe((userProfile: UserProfile) => {
           if (userProfile) {
             this.model = userProfile;
           }

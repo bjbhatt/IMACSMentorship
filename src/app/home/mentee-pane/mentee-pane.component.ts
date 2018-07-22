@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ApiService } from './../../_services/api.service';
-import { ApiMockService } from './../../_services/api-mock.service';
 import { AlertifyService } from './../../_services/alertify.service';
 
 import { Mentee } from './../../_models/userDetails';
@@ -19,14 +18,14 @@ export class MenteePaneComponent implements OnInit {
   message = '';
   showUpdateDateForm = false;
 
-  constructor(private apiService: ApiMockService, private alertifyService: AlertifyService, private router: Router) { }
+  constructor(private apiService: ApiService, private alertifyService: AlertifyService, private router: Router) { }
 
   ngOnInit() {
     this.loadModel();
   }
 
   loadModel() {
-    this.apiService.getUserMenteeInfo().subscribe((mentee: Mentee) => {
+    this.apiService.getUserMenteeInfoMock().subscribe((mentee: Mentee) => {
       this.model = mentee;
     }, error => {
       this.alertifyService.error(error);
