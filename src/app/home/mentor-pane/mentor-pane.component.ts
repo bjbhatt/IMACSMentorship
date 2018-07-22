@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { ApiService } from './../../_services/api.service';
 import { AlertifyService } from './../../_services/alertify.service';
 
+import { Utilities } from './../../_helpers/Utilities';
+
 import { Mentor, Login } from './../../_models/userDetails';
 
 @Component({
@@ -32,20 +34,6 @@ export class MentorPaneComponent implements OnInit {
     private router: Router
   ) { }
 
-  private addYearsToDate(dt: Date, years: number) {
-    if (!dt) {
-      return null;
-    }
-    const yy = dt.getFullYear();
-    const mm = dt.getMonth();
-    const dd = dt.getDate();
-
-    if (years) {
-      return new Date(yy + years, mm, dd);
-    }
-    return dt;
-  }
-
   ngOnInit() {
     this.loadModel();
   }
@@ -60,7 +48,7 @@ export class MentorPaneComponent implements OnInit {
   }
 
   updateDate() {
-    this.trainingDate = this.model.trainingDate.toLocaleDateString();
+    this.trainingDate = this.model.trainingDate ? this.model.trainingDate.toLocaleDateString() : '';
     this.showUpdateDateForm = true;
   }
 
@@ -71,7 +59,7 @@ export class MentorPaneComponent implements OnInit {
       this.alertifyService.message('Date saved!');
       this.model.trainingDate = new Date(this.trainingDate);
       let years = today.getFullYear() - this.model.trainingDate.getFullYear();
-      if (this.model.trainingDate > this.addYearsToDate(today, -5)) {
+      if (this.model.trainingDate > Utilities.addYearsToDate(today, -5)) {
         years--;
       }
       if (years >= 5) {

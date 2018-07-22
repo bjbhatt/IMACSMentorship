@@ -61,35 +61,35 @@ export class ApiService {
   getUserMentorInfoMock(userId: number): Observable<Mentor> {
     const mentor: Mentor = {
       userId: userId,
-      status: 'eligible',
-      trainingDate: new Date('01/01/2014'),
+      status: 'Ineligible',
+      // trainingDate: new Date('01/01/2014'),
       pendingRequests: [
         {
           userId: 2,
           fullName: 'B J Bhatt',
           emailAddress: 'a@a.com',
-          requestDate: new Date('06/27/2018'),
-          expirationDate: new Date('07/27/2018'),
           degree: 'Phd, MD',
           location: 'Hospital de Clinicas',
+          requestDate: new Date('06/27/2018'),
+          expirationDate: new Date('07/22/2018')
         },
         {
           userId: 3,
           fullName: 'Sagar Thakore',
           emailAddress: 'sagar@mentee.com',
-          requestDate: new Date('06/27/2018'),
-          expirationDate: new Date('07/27/2018'),
           degree: 'MD, MBBS',
-          location: 'Duke Medical Research'
+          location: 'Duke Medical Research',
+          requestDate: new Date('06/27/2018'),
+          expirationDate: new Date('07/27/2018')
         },
         {
           userId: 4,
           fullName: 'Jessica Reynolds',
           emailAddress: 'jessica@mentee.com',
-          requestDate: new Date('06/27/2018'),
-          expirationDate: new Date('07/27/2018'),
           degree: 'MD, PA-C, MBBS',
-          location: 'John Hopkins University School'
+          location: 'John Hopkins University School',
+          requestDate: new Date('06/27/2018'),
+          expirationDate: new Date('07/27/2018')
         }
       ],
       currentMentee: {
@@ -116,15 +116,15 @@ export class ApiService {
     const mentee: Mentee = {
       userId: 1,
       status: 'Current',
-      pendingRequests: [
-        {
+      pendingRequest: {
           userId: 2,
           fullName: 'B J Bhatt',
           emailAddress: 'a@a.com',
+          degree: 'x',
+          location: 'x',
           requestDate: new Date('06/27/2018'),
           expirationDate: new Date('07/27/2018')
-        }
-      ],
+        },
       currentMentor: {
         userId: 1,
         fullName: 'John',

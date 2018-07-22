@@ -7,10 +7,10 @@ export interface PendingMentorRequest {
     userId: number;
     fullName: string;
     emailAddress: string;
-    requestDate: Date;
-    expirationDate: Date;
     degree?: string;
     location?: string;
+    requestDate: Date;
+    expirationDate: Date;
 }
 
 export interface CurrentMentee {
@@ -43,10 +43,10 @@ export interface PendingMenteeRequest {
     userId: number;
     fullName: string;
     emailAddress: string;
-    requestDate: Date;
-    expirationDate: Date;
     degree?: string;
     location?: string;
+    requestDate: Date;
+    expirationDate: Date;
 }
 
 export interface CurrentMentor {
@@ -60,7 +60,7 @@ export interface CurrentMentor {
 export interface Mentee {
     userId: number;
     status: string;
-    pendingRequests?: PendingMenteeRequest[];
+    pendingRequest?: PendingMenteeRequest;
     currentMentor?: CurrentMentor;
 }
 

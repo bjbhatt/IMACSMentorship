@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+
 import { ApiService } from '../_services/api.service';
 import { AlertifyService } from '../_services/alertify.service';
-import { Router, RouterLink } from '@angular/router';
-import { Mentor } from '../_models/userDetails';
+import { Login, Mentor } from './../_models/userDetails';
+
+import { Utilities } from '../_helpers/Utilities';
 
 @Component({
   selector: 'app-mentor-requests',
@@ -12,6 +15,7 @@ import { Mentor } from '../_models/userDetails';
 export class MentorRequestsComponent implements OnInit {
   model: Mentor;
   isLoggedIn: boolean;
+  today = new Date();
 
   constructor(private apiService: ApiService, private alertifyService: AlertifyService, private router: Router) { }
 
@@ -26,13 +30,15 @@ export class MentorRequestsComponent implements OnInit {
   }
 
   loadModel() {
-    this.apiService.isLoggedInMock().subscribe((loggedIn: boolean) => {
-      this.isLoggedIn = loggedIn;
-      this.apiService.getUserMentorInfoMock().subscribe((mentor: Mentor) => {
+    this.apiService.isLoggedInMock().subscribe((login: Login) => {
+      this.isLoggedIn = true;
+      this.apiService.getUserMentorInfoMock(1).subscribe((mentor: Mentor) => {
         this.model = mentor;
-      }, error => {
-        this.alertifyService.error(error);
       });
     });
+  }
+
+  diffInDays(dt: Date): Number {
+    return Utilities.dateDiffInDays(dt, new Date());
   }
 }

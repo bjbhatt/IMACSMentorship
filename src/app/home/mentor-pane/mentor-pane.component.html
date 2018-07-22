@@ -5,17 +5,17 @@
   <h4>
     To qualify as a mentor you must be at least 5 years out from your post doctorate or fellowship training program.
     <span *ngIf="model.trainingDate"> Current recorded date in the system is {{model.trainingDate | date:'MM/dd/yyyy'}}.</span>
-    <span *ngIf="!model.trainingDate"> A Post Doctorate Date has not be recorded in the system.</span>
+    <span *ngIf="!model.trainingDate"> A Post Doctorate / Fellowship Training Date has not be recorded in the system.</span>
   </h4>
   <p *ngIf="!showUpdateDateForm" class="buttons">
     <button *ngIf="model.trainingDate" class="btn btn-primary btn-md" role="button" (click)="updateDate()">Update Date</button>
-    <button *ngIf="!model.trainingDate" class="btn btn-primary btn-md" role="button" (click)="updateDate()">Enter Date</button>
+    <button *ngIf="!model.trainingDate" class="btn btn-primary btn-md" role="button" (click)="updateDate()">Set Date</button>
   </p>
   <p *ngIf="showUpdateDateForm" class="buttons">
-    <label for="trainingDate" class="hidden">Post Doctorate Date:</label>
+    <label for="trainingDate" class="hidden">Post Doctoral Training Date:</label>
     <input type="text" class="form-control"
-      id="trainingDate" name="trainingDate" placeholder="Post Doctorla Date..." [(ngModel)]="trainingDate" bsDatepicker />
-    <button class="btn btn-primary btn-sm" role="button" (click)="updateDateConfirm()">Save</button>
+      id="trainingDate" name="trainingDate" placeholder="Training Date..." [(ngModel)]="trainingDate" bsDatepicker />
+    <button class="btn btn-primary btn-sm" role="button" (click)="updateDateConfirm()">Set/Update</button>
     <button class="btn btn-default btn-sm" role="button" (click)="cancel()">Cancel</button>
   </p>
 </div>
@@ -44,7 +44,7 @@
   <h4>{{model.currentMentee.fullName}} (ends {{model.currentMentee.endDate | date:'MM/dd/yyyy'}})</h4>
   <p *ngIf="!showContactForm && !showCancelReqForm" class="buttons">
     <button class="btn btn-primary btn-md" role="button" (click)="contact()">Contact Mentee</button>
-    <button class="btn btn-primary btn-md" role="button" (click)="cancelMentorship()">Cancel Mentorship</button>
+    <button class="btn btn-danger btn-md" role="button" (click)="cancelMentorship()">Cancel Mentorship</button>
   </p>
   <p *ngIf="showContactForm" class="buttons">
     <label for="messageToMentee" class="hidden">Send E-Mail to {{model.currentMentee.emailAddress}}:</label>
@@ -58,7 +58,7 @@
   <p *ngIf="showCancelReqForm" class="buttons">
     <small>Are you sure you would like to cancel Mentorship?</small>
     <br />
-    <button class="btn btn-primary btn-sm" role="button" (click)="cancelMentorshipConfirm()">Yes</button>
+    <button class="btn btn-danger btn-sm" role="button" (click)="cancelMentorshipConfirm()">Yes</button>
     <button class="btn btn-default btn-sm" role="button" (click)="cancel()">No</button>
   </p>
 </div>

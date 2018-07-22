@@ -1,6 +1,10 @@
-import { Login } from './../_models/userDetails';
-import { ApiService } from './../_services/api.service';
 import { Component, OnInit } from '@angular/core';
+
+import { ApiService } from './../_services/api.service';
+
+import { Utilities } from './../_helpers/Utilities';
+
+import { Login } from './../_models/userDetails';
 
 @Component({
   selector: 'app-home',

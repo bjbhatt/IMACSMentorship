@@ -17,7 +17,7 @@
         <td>
           <div class="mentee-details">
             <span class="mentee-text">
-              {{m.name}}<br>
+              {{m.fullName}}<br>
               {{m.degree}}<br>
               {{m.location}}
             </span>
@@ -33,8 +33,8 @@
         <td align="right">
           <div class="days-left">
             <span class="text-center">
-              <span class="small">DAYS</span><br>
-              <span>9</span><br>
+              <span class="small">{{diffInDays(m.expirationDate)}} DAYS</span>
+              <br />
               <span class="small">to accept</span>
             </span>
           </div>
