@@ -12,21 +12,34 @@ import { Mentee } from './../../_models/userDetails';
   styleUrls: ['./mentee-pane.component.css']
 })
 export class MenteePaneComponent implements OnInit {
+  isLoggedIn: boolean;
   model: Mentee;
   showContactForm = false;
   showCancelReqForm = false;
   message = '';
   showUpdateDateForm = false;
 
-  constructor(private apiService: ApiService, private alertifyService: AlertifyService, private router: Router) { }
+  constructor(
+    private apiService: ApiService,
+    private alertifyService: AlertifyService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.loadModel();
   }
 
   loadModel() {
-    this.apiService.getUserMenteeInfoMock().subscribe((mentee: Mentee) => {
-      this.model = mentee;
+    this.apiService.isLoggedInMock().subscribe((loggedIn: boolean) => {
+      this.isLoggedIn = loggedIn;
+      this.apiService.getUserMenteeInfoMock().subscribe(
+        (mentee: Mentee) => {
+          this.model = mentee;
+        },
+        error => {
+          this.alertifyService.error(error);
+        }
+      );
     }, error => {
       this.alertifyService.error(error);
     });
@@ -38,9 +51,11 @@ export class MenteePaneComponent implements OnInit {
   }
 
   contactConfirm() {
-    // TBD: Send Message
-    this.alertifyService.message('Message sent!');
-    this.cancel();
+    if (this.isLoggedIn) {
+      // TBD: Send Message
+      this.alertifyService.message('Message sent!');
+      this.cancel();
+    }
   }
 
   cancelMentorship() {
@@ -48,15 +63,17 @@ export class MenteePaneComponent implements OnInit {
   }
 
   cancelMentorshipConfirm() {
-    // TBD: Cancel Mentorship
-    const message: string =
-      this.model.status === 'pending' ?
-      'Mentorship request cancelled' :
-      'Mentorship cancelled';
-    this.alertifyService.message(message);
-    this.model.status = 'eligible';
-    this.model.mentor = null;
-    this.cancel();
+    if (this.isLoggedIn) {
+      // TBD: Cancel Mentorship
+      const message: string =
+        this.model.status === 'pending'
+          ? 'Mentorship request cancelled'
+          : 'Mentorship cancelled';
+      this.alertifyService.message(message);
+      this.model.status = 'eligible';
+      this.model.mentor = null;
+      this.cancel();
+    }
   }
 
   cancel() {

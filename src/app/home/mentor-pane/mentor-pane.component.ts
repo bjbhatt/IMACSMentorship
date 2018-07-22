@@ -12,13 +12,13 @@ import { Mentor } from './../../_models/userDetails';
   styleUrls: ['./mentor-pane.component.css']
 })
 export class MentorPaneComponent implements OnInit {
+  isLoggedIn: boolean;
   model: Mentor;
+  showUpdateDateForm = false;
   trainingDate: string;
   showContactForm = false;
-  showCancelReqForm = false;
   message = '';
-  showUpdateDateForm = false;
-  isLoggedIn: boolean;
+  showCancelReqForm = false;
   showModal: boolean;
   modal_header = '';
   modal_body = '';
@@ -26,7 +26,9 @@ export class MentorPaneComponent implements OnInit {
   modal_okay = 'OK';
   modal_context = '';
 
-  constructor(private apiService: ApiService, private alertifyService: AlertifyService, private router: Router) { }
+  constructor(private apiService: ApiService,
+    private alertifyService: AlertifyService,
+    private router: Router) { }
 
   private addYearsToDate(dt: Date, years: number) {
     if (!dt) {
@@ -54,6 +56,8 @@ export class MentorPaneComponent implements OnInit {
       }, error => {
         this.alertifyService.error(error);
       });
+    }, error => {
+      this.alertifyService.error(error);
     });
   }
 
@@ -80,11 +84,9 @@ export class MentorPaneComponent implements OnInit {
   }
 
   becomeMentor() {
-    if (this.isLoggedIn) {
-      // TBD: Save Data
-      this.alertifyService.message('Your are now a mentor');
-      this.model.status = 'current';
-    }
+    // TBD: Save Data
+    this.alertifyService.message('Your are now a mentor');
+    this.model.status = 'current';
   }
 
   openModal(open) {
