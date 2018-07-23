@@ -7,8 +7,8 @@ export interface PendingMentorRequest {
     userId: number;
     fullName: string;
     emailAddress: string;
-    degree?: string;
-    location?: string;
+    degree: string;
+    location: string;
     requestDate: Date;
     expirationDate: Date;
 }
@@ -30,7 +30,7 @@ export interface Mentor {
 }
 
 export interface MentorshipHistory {
-    id: string;
+    userId: string;
     fullName: string;
     emailAddress: string;
     outcome: string;
@@ -43,8 +43,8 @@ export interface PendingMenteeRequest {
     userId: number;
     fullName: string;
     emailAddress: string;
-    degree?: string;
-    location?: string;
+    degree: string;
+    location: string;
     requestDate: Date;
     expirationDate: Date;
 }
@@ -68,12 +68,14 @@ export interface MentorSearch {
     userId: number;
     fullName: string;
     emailAddress: string;
+    degree: string;
+    location: string;
     available: boolean;
     availableAfter?: Date;
 }
 
 export interface UserProfile {
-    id: number;
+    userId: number;
     fullName: string;
     emailAddress: string;
 }

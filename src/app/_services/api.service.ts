@@ -42,7 +42,7 @@ export class ApiService {
   }
   getUserProfileMock(userId: number): Observable<UserProfile> {
     const userProfile: UserProfile = {
-      id: userId,
+      userId: userId,
       fullName: 'John Doe',
       emailAddress: 'jdoe@email.com',
     };
