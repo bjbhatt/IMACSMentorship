@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "IMACMentorship": {
+    "IMACSMentorship": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/IMACMentorship",
+            "outputPath": "dist/IMACSMentorship",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -35,11 +35,45 @@
             ]
           },
           "configurations": {
+            "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.test.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
             "production": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.production.ts"
                 }
               ],
               "optimization": true,
@@ -57,18 +91,24 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "IMACMentorship:build"
+            "browserTarget": "IMACSMentorship:build"
           },
           "configurations": {
+            "development": {
+              "browserTarget": "IMACSMentorship:build:developoment"
+            },
+            "test": {
+              "browserTarget": "IMACSMentorship:build:test"
+            },
             "production": {
-              "browserTarget": "IMACMentorship:build:production"
+              "browserTarget": "IMACSMentorship:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "IMACMentorship:build"
+            "browserTarget": "IMACSMentorship:build"
           }
         },
         "test": {
@@ -102,7 +142,7 @@
         }
       }
     },
-    "IMACMentorship-e2e": {
+    "IMACSMentorship-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -110,11 +150,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "IMACMentorship:serve"
+            "devServerTarget": "IMACSMentorship:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "IMACMentorship:serve:production"
+              "devServerTarget": "IMACSMentorship:serve:production"
             }
           }
         },
@@ -130,5 +170,5 @@
       }
     }
   },
-  "defaultProject": "IMACMentorship"
+  "defaultProject": "IMACSMentorship"
 }
