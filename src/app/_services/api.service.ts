@@ -138,21 +138,26 @@ export class ApiService {
     );
   }
 
-  private handleError(error: any) {
-    const applicationError = error.headers.get('Application-Error');
+  private handleError(httpError: any) {
+    const applicationError = httpError.headers.get('Application-Error');
+    let error = {};
     if (applicationError) {
-      return throwError(applicationError);
-    }
-    const serverError = error.json();
-    let errors = '';
-    if (serverError) {
-      for (const key in serverError) {
-        if (serverError[key]) {
-          errors += serverError[key] + '\n';
-        }
-      }
+      error = {
+        type: 'application',
+        content: JSON.parse(applicationError)
+      };
+    } else if (httpError.status === 403) {
+      error = {
+        type: 'system',
+        message: 'You are either not logged in or you don\'t have perimssions to perform requested operation'
+      };
+    } else {
+      error = {
+        type: 'system',
+        message: 'Internal Server Error while performing the requested operation'
+      };
     }
 
-    return throwError(errors || 'Server Error');
+    return throwError(error);
   }
 }
