@@ -18,6 +18,7 @@ export class MentorRequestsComponent implements OnInit {
   today = new Date();
   showAcceptDeclineButtons = true;
   showConfirmFormId = 0;
+  showDeclineFormId = 0;
 
   constructor(private apiService: ApiService, private alertifyService: AlertifyService, private router: Router) { }
 
@@ -26,11 +27,27 @@ export class MentorRequestsComponent implements OnInit {
   }
 
   acceptMentee(id: number) {
-    // TBD: Accept Mentee
-    console.log(id);
     this.showConfirmFormId = id;
     this.showAcceptDeclineButtons = false;
-    // this.router.navigate(['/home']);
+  }
+
+  confirmMentee(id: number) {
+    // TBD: Accept Mentee
+    this.alertifyService.message('Request Accepted');
+    this.router.navigate(['/home']);
+  }
+
+  declineMentee(id: number) {
+    this.showDeclineFormId = id;
+    this.showAcceptDeclineButtons = false;
+  }
+
+  confirmDeclineMentee(id: number) {
+    // TBD: Decline Mentee
+    const index = this.model.pendingRequests.findIndex(x => x.userId === id);
+    this.model.pendingRequests.splice(index, 1);
+    this.alertifyService.message('Request Declined');
+    this.cancel();
   }
 
   loadModel() {
@@ -44,5 +61,11 @@ export class MentorRequestsComponent implements OnInit {
 
   diffInDays(dt: Date): Number {
     return Utilities.dateDiffInDays(dt, new Date());
+  }
+
+  cancel() {
+    this.showAcceptDeclineButtons = true;
+    this.showConfirmFormId = 0;
+    this.showDeclineFormId = 0;
   }
 }

@@ -24,21 +24,29 @@
         </div>  
         </td>
         <td align="right" class="mentee-actions">
-          <div *ngIf="diffInDays(m.expirationDate) >= 0 && !(m.userId == showConfirmFormId)" class="btn-group btn-group-lg">
+          <div *ngIf="diffInDays(m.expirationDate) >= 0 && !(m.userId == showConfirmFormId) && !(m.userId == showDeclineFormId)" class="btn-group btn-group-lg">
             <button class="btn btn-lg btn-primary" (click)="acceptMentee(m.userId)">Accept</button>
-            <button class="btn btn-lg btn-danger">Decline</button>
+            <button class="btn btn-lg btn-danger" (click)="declineMentee(m.userId)">Decline</button>
             <button class="btn btn-lg btn-default">Learn More</button>
         </div>
         <div *ngIf="m.userId == showConfirmFormId">
           <div>
-            <span>Are you sure you would like to accept <strong>{{m.fullName}}</strong> as your Mentee?</span>
+            <span class="request-text">Are you sure you want to accept <strong>{{m.fullName}}</strong> as your Mentee?</span>
             <br />
-            <button class="btn btn-success btn-sm" role="button">Yes</button>
-            <button class="btn btn-default btn-sm" role="button">No</button>
+            <button class="btn btn-success btn-lg" role="button" (click)="confirmMentee(m.userId)">Yes</button>
+            <button class="btn btn-default btn-lg" role="button" (click)="cancel()">No</button>
+          </div>
+        </div>
+        <div *ngIf="m.userId == showDeclineFormId">
+          <div>
+            <span class="request-text">Are you sure you want to decline <strong>{{m.fullName}}'s</strong> request?</span>
+            <br />
+            <button class="btn btn-danger btn-lg" role="button" (click)="confirmDeclineMentee(m.userId)">Yes</button>
+            <button class="btn btn-default btn-lg" role="button" (click)="cancel()">No</button>
           </div>
         </div>
         <div *ngIf="!(diffInDays(m.expirationDate) >= 0)">
-          <span>Request Expired On {{m.expirationDate | date:'MM/dd/yyyy'}}</span>
+          <span class="request-text">Request Expired On {{m.expirationDate | date:'MM/dd/yyyy'}}</span>
         </div>  
         </td>
         <td align="right">

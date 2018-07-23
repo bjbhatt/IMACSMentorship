@@ -24,7 +24,12 @@
 }
 
 .mentee-actions{
-    width: 60%;
+    width: 55%;
+}
+
+.request-text {
+    font-size: 14pt;
+    color: rgba(76,76,76,1);
 }
 
 .confirm-form {
@@ -37,7 +42,7 @@
 }
 
 .requests{
-    margin-top:50px;
+    margin-top:20px;
     margin-bottom:10px;
 }
 
