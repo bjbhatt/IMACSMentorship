@@ -62,18 +62,3 @@
     <button class="btn btn-default btn-sm" role="button" (click)="cancel()">No</button>
   </p>
 </div>
-
-<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': showModal ? 'block' : 'none'}">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">{{modal_header}}</h3>
-      </div>
-      <div class="modal-body"><h4>{{modal_body}}</h4></div>
-        <div class="modal-footer" align="right">
-          <button type="button" id="btnClose" class="btn btn-default "(click)="openModal(false)">{{modal_cancel}}</button>
-          <button type="button" id="btnOK" class="btn btn-success" (click)="becomeMentorConfirm()">{{modal_okay}}</button>
-        </div>
-    </div>
-  </div>
-</div>

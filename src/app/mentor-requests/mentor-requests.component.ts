@@ -16,6 +16,8 @@ export class MentorRequestsComponent implements OnInit {
   model: Mentor;
   isLoggedIn: boolean;
   today = new Date();
+  showAcceptDeclineButtons = true;
+  showConfirmFormId = 0;
 
   constructor(private apiService: ApiService, private alertifyService: AlertifyService, private router: Router) { }
 
@@ -26,7 +28,9 @@ export class MentorRequestsComponent implements OnInit {
   acceptMentee(id: number) {
     // TBD: Accept Mentee
     console.log(id);
-    this.router.navigate(['/home']);
+    this.showConfirmFormId = id;
+    this.showAcceptDeclineButtons = false;
+    // this.router.navigate(['/home']);
   }
 
   loadModel() {

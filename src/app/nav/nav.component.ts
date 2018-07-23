@@ -1,3 +1,4 @@
+import { catchError } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -26,9 +27,9 @@ export class NavComponent implements OnInit {
   }
 
   loadModel() {
-    this.apiService.isLoggedInMock().subscribe((login: Login) => {
+    this.apiService.isLoggedIn().subscribe((login: Login) => {
       this.isLoggedIn = true;
       this.fullName = login.fullName;
-    });
+    }, (error) => this.alertifyService.error(error));
   }
 }

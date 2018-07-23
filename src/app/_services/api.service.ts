@@ -15,7 +15,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   isLoggedIn(): Observable<Login> {
-    return this.http.get<Login>(this.baseUrl + 'LoggedIn')
+    return this.http.get<Login>(this.baseUrl + 'IsLoggedIn')
       .pipe(
         map((response) => {
           return response;
@@ -61,7 +61,7 @@ export class ApiService {
   getUserMentorInfoMock(userId: number): Observable<Mentor> {
     const mentor: Mentor = {
       userId: userId,
-      status: 'Ineligible',
+      status: 'Eligible',
       // trainingDate: new Date('01/01/2014'),
       pendingRequests: [
         {
@@ -117,14 +117,14 @@ export class ApiService {
       userId: 1,
       status: 'Current',
       pendingRequest: {
-          userId: 2,
-          fullName: 'B J Bhatt',
-          emailAddress: 'a@a.com',
-          degree: 'x',
-          location: 'x',
-          requestDate: new Date('06/27/2018'),
-          expirationDate: new Date('07/27/2018')
-        },
+        userId: 2,
+        fullName: 'B J Bhatt',
+        emailAddress: 'a@a.com',
+        degree: 'x',
+        location: 'x',
+        requestDate: new Date('06/27/2018'),
+        expirationDate: new Date('07/27/2018')
+      },
       currentMentor: {
         userId: 1,
         fullName: 'John',

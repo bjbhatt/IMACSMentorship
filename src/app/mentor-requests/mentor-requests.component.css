@@ -23,6 +23,14 @@
     border-spacing: 0 2em;
 }
 
+.mentee-actions{
+    width: 60%;
+}
+
+.confirm-form {
+    padding: 10px;
+}
+
 .mentee-text{
     font-size: 14pt;
     color: rgba(76,76,76,1);
