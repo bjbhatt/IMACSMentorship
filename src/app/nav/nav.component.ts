@@ -15,7 +15,7 @@ import { Login } from './../_models/userDetails';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  isLoggedIn: boolean;
+  isLoggedIn = false;
   fullName = '';
 
   constructor(private apiService: ApiService,
@@ -30,6 +30,6 @@ export class NavComponent implements OnInit {
     this.apiService.isLoggedIn().subscribe((login: Login) => {
       this.isLoggedIn = true;
       this.fullName = login.fullName;
-    }, (error) => this.alertifyService.error(error));
+    });
   }
 }
