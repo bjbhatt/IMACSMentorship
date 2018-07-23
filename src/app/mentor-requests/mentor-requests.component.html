@@ -50,7 +50,7 @@
         </div>  
         </td>
         <td align="right">
-          <div *ngIf="diffInDays(m.expirationDate) >= 0 && !(m.userId == showConfirmFormId)" class="days-left">
+          <div *ngIf="diffInDays(m.expirationDate) >= 0 && !(m.userId == showConfirmFormId) && !(m.userId == showDeclineFormId)" class="days-left">
             <span class="text-center">
               <span class="small">{{diffInDays(m.expirationDate)}} DAYS</span>
               <br />
