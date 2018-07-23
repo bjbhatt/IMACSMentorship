@@ -32,6 +32,6 @@ div.container>img {
 }
 
 .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
-  background-color: rgba(195,220,180,1);
+  background-color: rgba(120,162,46,1);
   color: #fff;
 }

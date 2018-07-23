@@ -1,9 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 body {
-  background-image: url("assets/images/background-pattern-poly.gif");
-  background-color: #e0e0e0;
-  background-blend-mode: screen, difference, lighten;
+  background-image: linear-gradient(rgba(245,245,245,0.9) 100%, rgba(255,255,255,0.8)), url("assets/images/background-pattern-poly.gif");
 }
 .btn {
   margin: 2px;
