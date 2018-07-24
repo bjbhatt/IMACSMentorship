@@ -28,16 +28,18 @@ export class MentorRequestsComponent implements OnInit {
 
   acceptMentee(id: number) {
     this.showConfirmFormId = id;
+    this.showDeclineFormId = 0;
     this.showAcceptDeclineButtons = false;
   }
 
-  confirmMentee(id: number) {
+  confirmAcceptMentee(id: number) {
     // TBD: Accept Mentee
     this.alertifyService.message('Request Accepted');
     this.router.navigate(['/home']);
   }
 
   declineMentee(id: number) {
+    this.showConfirmFormId = 0;
     this.showDeclineFormId = id;
     this.showAcceptDeclineButtons = false;
   }
@@ -51,9 +53,9 @@ export class MentorRequestsComponent implements OnInit {
   }
 
   loadModel() {
-    this.apiService.isLoggedInMock().subscribe((login: Login) => {
+    this.apiService.isLoggedIn().subscribe((login: Login) => {
       this.isLoggedIn = true;
-      this.apiService.getUserMentorInfoMock(1).subscribe((mentor: Mentor) => {
+      this.apiService.getUserMentorInfo(1).subscribe((mentor: Mentor) => {
         this.model = mentor;
       });
     });

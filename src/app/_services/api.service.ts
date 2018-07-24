@@ -15,15 +15,13 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   isLoggedIn(): Observable<Login> {
-    return this.http.get<Login>(this.baseUrl + 'IsLoggedIn')
-      .pipe(
-        map((response) => {
-          return response;
-        }),
-        catchError(this.handleError)
-      );
-  }
-  isLoggedInMock(): Observable<Login> {
+    // return this.http.get<Login>(this.baseUrl + 'IsLoggedIn')
+    //   .pipe(
+    //     map((response) => {
+    //       return response;
+    //     }),
+    //     catchError(this.handleError)
+    //   );
     const login: Login = {
       userId: 1,
       fullName: 'John Doe',
@@ -34,13 +32,11 @@ export class ApiService {
   }
 
   getUserProfile(userId: number): Observable<UserProfile> {
-    return this.http.get<UserProfile>(this.baseUrl + 'GetUserProfile&userId=' + userId)
-      .pipe(
-        map(response => response),
-        catchError(this.handleError)
-      );
-  }
-  getUserProfileMock(userId: number): Observable<UserProfile> {
+    //   return this.http.get<UserProfile>(this.baseUrl + 'GetUserProfile&userId=' + userId)
+    //     .pipe(
+    //       map(response => response),
+    //       catchError(this.handleError)
+    //     );
     const userProfile: UserProfile = {
       userId: userId,
       fullName: 'John Doe',
@@ -52,13 +48,11 @@ export class ApiService {
   }
 
   getUserMentorInfo(userId: number): Observable<Mentor> {
-    return this.http.get<Mentor>(this.baseUrl + '/' + 'GetMentorInfo&userId=' + userId)
-      .pipe(
-        map(response => response),
-        catchError(this.handleError)
-      );
-  }
-  getUserMentorInfoMock(userId: number): Observable<Mentor> {
+    // return this.http.get<Mentor>(this.baseUrl + '/' + 'GetMentorInfo&userId=' + userId)
+    //   .pipe(
+    //     map(response => response),
+    //     catchError(this.handleError)
+    //   );
     const mentor: Mentor = {
       userId: userId,
       status: 'Eligible',
@@ -106,13 +100,11 @@ export class ApiService {
   }
 
   getUserMenteeInfo(userId: number): Observable<Mentee> {
-    return this.http.get<Mentor>(this.baseUrl + '/' + 'GetMenteeInfo&userId=' + userId)
-      .pipe(
-        map(response => <Mentee>response),
-        catchError(this.handleError)
-      );
-  }
-  getUserMenteeInfoMock(userId: number): Observable<Mentee> {
+    // return this.http.get<Mentor>(this.baseUrl + '/' + 'GetMenteeInfo&userId=' + userId)
+    //   .pipe(
+    //     map(response => <Mentee>response),
+    //     catchError(this.handleError)
+    //   );
     const mentee: Mentee = {
       userId: 1,
       status: 'Current',

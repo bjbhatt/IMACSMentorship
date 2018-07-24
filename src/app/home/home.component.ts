@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadModel() {
-    this.apiService.isLoggedInMock().subscribe((login: Login) => {
+    this.apiService.isLoggedIn().subscribe((login: Login) => {
       this.isLoggedIn = true;
     });
   }

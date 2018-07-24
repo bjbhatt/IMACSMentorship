@@ -32,9 +32,9 @@ export class MenteePaneComponent implements OnInit {
   }
 
   loadModel() {
-    this.apiService.isLoggedInMock().subscribe((login: Login) => {
+    this.apiService.isLoggedIn().subscribe((login: Login) => {
       this.isLoggedIn = true;
-      this.apiService.getUserMenteeInfoMock(1).subscribe((mentee: Mentee) => {
+      this.apiService.getUserMenteeInfo(1).subscribe((mentee: Mentee) => {
         this.model = mentee;
       });
     });

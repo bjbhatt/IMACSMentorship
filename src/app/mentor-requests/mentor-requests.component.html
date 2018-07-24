@@ -1,8 +1,9 @@
 <div class="container">
   <div class="request-header">
     <h3>
-      <p>Manage your {{model.pendingRequests.length}} mentor requests <br> 
-       Remember <strong>you can only have one mentee at a time</strong>
+      <p>Manage your {{model.pendingRequests.length}} mentor requests
+        <br> Remember
+        <strong>you can only have one mentee at a time</strong>
       </p>
     </h3>
   </div>
@@ -17,46 +18,51 @@
         <td>
           <div class="mentee-details">
             <span class="mentee-text">
-              {{m.fullName}}<br>
-              {{m.degree}}<br>
-              {{m.location}}
+              {{m.fullName}}
+              <br /> {{m.degree}}
+              <br /> {{m.location}}
             </span>
-        </div>  
+          </div>
         </td>
-        <td align="right" class="mentee-actions">
-          <div *ngIf="diffInDays(m.expirationDate) >= 0 && !(m.userId == showConfirmFormId) && !(m.userId == showDeclineFormId)" class="btn-group btn-group-lg">
+        <td *ngIf="diffInDays(m.expirationDate) >= 0 && !(m.userId == showConfirmFormId) && !(m.userId == showDeclineFormId)" class="mentee-actions"
+          align="right">
+          <div class="btn-group btn-group-lg">
             <button class="btn btn-lg btn-primary" (click)="acceptMentee(m.userId)">Accept</button>
             <button class="btn btn-lg btn-danger" (click)="declineMentee(m.userId)">Decline</button>
             <button class="btn btn-lg btn-default">Learn More</button>
-        </div>
-        <div *ngIf="m.userId == showConfirmFormId">
-          <div>
-            <span class="request-text">Are you sure you want to accept <strong>{{m.fullName}}</strong> as your Mentee?</span>
-            <br />
-            <button class="btn btn-success btn-lg" role="button" (click)="confirmMentee(m.userId)">Yes</button>
-            <button class="btn btn-default btn-lg" role="button" (click)="cancel()">No</button>
           </div>
-        </div>
-        <div *ngIf="m.userId == showDeclineFormId">
-          <div>
-            <span class="request-text">Are you sure you want to decline <strong>{{m.fullName}}'s</strong> request?</span>
-            <br />
-            <button class="btn btn-danger btn-lg" role="button" (click)="confirmDeclineMentee(m.userId)">Yes</button>
-            <button class="btn btn-default btn-lg" role="button" (click)="cancel()">No</button>
-          </div>
-        </div>
-        <div *ngIf="!(diffInDays(m.expirationDate) >= 0)">
-          <span class="request-text">Request Expired On {{m.expirationDate | date:'MM/dd/yyyy'}}</span>
-        </div>  
         </td>
-        <td align="right">
-          <div *ngIf="diffInDays(m.expirationDate) >= 0 && !(m.userId == showConfirmFormId) && !(m.userId == showDeclineFormId)" class="days-left">
+        <td *ngIf="diffInDays(m.expirationDate) >= 0 && (m.userId == showConfirmFormId) && !(m.userId == showDeclineFormId)" class="mentee-actions"
+          align="right">
+          <span class="request-text">
+            Accept
+            <strong>{{m.fullName}}</strong> as your Mentee?
+          </span>
+          <br />
+          <button class="btn btn-success btn-md" role="button" (click)="confirmAcceptMentee(m.userId)">Yes</button>
+          <button class="btn btn-default btn-md" role="button" (click)="cancel()">No</button>
+        </td>
+        <td *ngIf="diffInDays(m.expirationDate) >= 0 && !(m.userId == showConfirmFormId) && (m.userId == showDeclineFormId)" class="mentee-actions"
+          align="right">
+          <span class="request-text">
+            Decline
+            <strong>{{m.fullName}}'s</strong> request?
+          </span>
+          <br />
+          <button class="btn btn-danger btn-md" role="button" (click)="confirmDeclineMentee(m.userId)">Yes</button>
+          <button class="btn btn-default btn-md" role="button" (click)="cancel()">No</button>
+        </td>
+        <td *ngIf="diffInDays(m.expirationDate) >= 0" align="right">
+          <div class="days-left">
             <span class="text-center">
               <span class="small">{{diffInDays(m.expirationDate)}} DAYS</span>
               <br />
               <span class="small">to accept</span>
             </span>
           </div>
+        </td>
+        <td *ngIf="!(diffInDays(m.expirationDate) >= 0)" colspan="2" class="mentee-actions" align="right">
+          <span class="request-text">Request Expired On {{m.expirationDate | date:'MM/dd/yyyy'}}</span>
         </td>
       </tr>
     </table>
