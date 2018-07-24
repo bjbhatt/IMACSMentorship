@@ -16,7 +16,6 @@ export class MentorRequestsComponent implements OnInit {
   model: Mentor;
   isLoggedIn: boolean;
   today = new Date();
-  showAcceptDeclineButtons = true;
   showConfirmFormId = 0;
   showDeclineFormId = 0;
 
@@ -29,7 +28,6 @@ export class MentorRequestsComponent implements OnInit {
   acceptMentee(id: number) {
     this.showConfirmFormId = id;
     this.showDeclineFormId = 0;
-    this.showAcceptDeclineButtons = false;
   }
 
   confirmAcceptMentee(id: number) {
@@ -41,7 +39,6 @@ export class MentorRequestsComponent implements OnInit {
   declineMentee(id: number) {
     this.showConfirmFormId = 0;
     this.showDeclineFormId = id;
-    this.showAcceptDeclineButtons = false;
   }
 
   confirmDeclineMentee(id: number) {
@@ -66,7 +63,6 @@ export class MentorRequestsComponent implements OnInit {
   }
 
   cancel() {
-    this.showAcceptDeclineButtons = true;
     this.showConfirmFormId = 0;
     this.showDeclineFormId = 0;
   }
