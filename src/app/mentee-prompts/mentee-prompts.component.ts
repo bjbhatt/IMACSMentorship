@@ -4,7 +4,6 @@ import { ApiService } from '../_services/api.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Router } from '../../../node_modules/@angular/router';
 import { Login } from '../_models/userDetails';
-import { timingSafeEqual } from 'crypto';
 
 @Component({
   selector: 'app-mentee-prompts',
