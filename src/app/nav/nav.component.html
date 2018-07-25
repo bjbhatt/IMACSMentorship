@@ -15,15 +15,16 @@
       </button>
       <a [routerLink]="['/']" routerLinkActive="router-link-active" class="navbar-brand">IMACS Mentorship</a>
     </div>
-    <div *ngIf="isLoggedIn" id="navbar" class="navbar-collapse collapse">
+    <div *ngIf="userInfo" id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" dropdown>
-          <a class="dropdown-toggle" dropdownToggle data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Logged in as {{fullName}}
+          <a class="dropdown-toggle" dropdownToggle data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Logged in as {{userInfo.fullName}}
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
             <li>
-              <a [routerLink]="['/profile']" routerLinkActive="router-link-active">Update Profile</a>
+              <a *ngIf="userInfo.isAdmin" [routerLink]="['/administration']" routerLinkActive="router-link-active">Administration</a>
+              <a *ngIf="userInfo" [routerLink]="['/profile']" routerLinkActive="router-link-active">Update Profile</a>
             </li>
           </ul>
         </li>

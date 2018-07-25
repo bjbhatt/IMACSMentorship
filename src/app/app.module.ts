@@ -19,6 +19,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NotLoggedInComponent } from './not-logged-in/not-logged-in.component';
 import { MentorRequestsComponent } from './mentor-requests/mentor-requests.component';
 import { MenteePromptsComponent } from './mentee-prompts/mentee-prompts.component';
+import { AdministrationComponent } from './administration/administration.component';
 
 @NgModule({
    declarations: [
@@ -30,7 +31,8 @@ import { MenteePromptsComponent } from './mentee-prompts/mentee-prompts.componen
       UserProfileComponent,
       NotLoggedInComponent,
       MentorRequestsComponent,
-      MenteePromptsComponent
+      MenteePromptsComponent,
+      AdministrationComponent
    ],
    imports: [
       BrowserModule,

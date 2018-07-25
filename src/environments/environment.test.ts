@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://connect3tst.niehs.nih.gov/imacs/rest/loginService.cfc?method='
+  baseUrl: 'https://connect3tst.niehs.nih.gov/imacs/ws/MentorshipService.cfc'
 };

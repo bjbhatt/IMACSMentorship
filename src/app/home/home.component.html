@@ -1,4 +1,4 @@
-<div *ngIf="isLoggedIn" class="container">
+<div *ngIf="login" class="container">
   <div class="welcome">
       <div class="welcome-message">    
         <h1>Welcome To <strong>IMACS Mentorship</strong> Program</h1>
@@ -14,7 +14,4 @@
     <app-home-mentee-pane></app-home-mentee-pane>
   </div>
 </div>
-
-<div *ngIf="!isLoggedIn" class="container">
-  <span>Not Logged In</span>
-</div>
+<app-not-logged-in *ngIf="!login"></app-not-logged-in>

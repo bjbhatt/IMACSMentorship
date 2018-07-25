@@ -11,48 +11,50 @@ import { environment } from '../../environments/environment';
 })
 export class ApiService {
   private baseUrl = environment.baseUrl;
+  private useMock = !environment.production;
 
   constructor(private http: HttpClient) { }
 
   isLoggedIn(): Observable<Login> {
-    // return this.http.get<Login>(this.baseUrl + 'IsLoggedIn')
-    //   .pipe(
-    //     map((response) => {
-    //       return response;
-    //     }),
-    //     catchError(this.handleError)
-    //   );
-    const login: Login = {
-      userId: 1,
-      fullName: 'John Doe',
-    };
-    return Observable.create((observer: Observer<Login>) =>
-      observer.next(login)
-    );
+    if (this.useMock) {
+      const login: Login = {
+        userId: 1,
+        fullName: 'John Doe',
+        isAdmin: false
+      };
+      // const login: Login = null;
+      return Observable.create((observer: Observer<Login>) =>
+        observer.next(login)
+      );
+    } else {
+      return this.http.get<Login>(this.baseUrl + '?method=LoggedIn')
+        .pipe(
+          map((response) => {
+            return response;
+          }),
+          catchError(this.handleError)
+        );
+    }
   }
 
   getUserProfile(userId: number): Observable<UserProfile> {
+    const userProfile: UserProfile = {
+      userId: userId,
+      fullName: 'John Doe',
+      emailAddress: 'jdoe@email.com',
+      isAdmin: false
+    };
+    return Observable.create((observer: Observer<UserProfile>) =>
+      observer.next(userProfile)
+    );
     //   return this.http.get<UserProfile>(this.baseUrl + 'GetUserProfile&userId=' + userId)
     //     .pipe(
     //       map(response => response),
     //       catchError(this.handleError)
     //     );
-    const userProfile: UserProfile = {
-      userId: userId,
-      fullName: 'John Doe',
-      emailAddress: 'jdoe@email.com',
-    };
-    return Observable.create((observer: Observer<UserProfile>) =>
-      observer.next(userProfile)
-    );
   }
 
   getUserMentorInfo(userId: number): Observable<Mentor> {
-    // return this.http.get<Mentor>(this.baseUrl + '/' + 'GetMentorInfo&userId=' + userId)
-    //   .pipe(
-    //     map(response => response),
-    //     catchError(this.handleError)
-    //   );
     const mentor: Mentor = {
       userId: userId,
       status: 'Eligible',
@@ -97,14 +99,14 @@ export class ApiService {
     return Observable.create((observer: Observer<Mentor>) =>
       observer.next(mentor)
     );
+    // return this.http.get<Mentor>(this.baseUrl + '/' + 'GetMentorInfo&userId=' + userId)
+    //   .pipe(
+    //     map(response => response),
+    //     catchError(this.handleError)
+    //   );
   }
 
   getUserMenteeInfo(userId: number): Observable<Mentee> {
-    // return this.http.get<Mentor>(this.baseUrl + '/' + 'GetMenteeInfo&userId=' + userId)
-    //   .pipe(
-    //     map(response => <Mentee>response),
-    //     catchError(this.handleError)
-    //   );
     const mentee: Mentee = {
       userId: 1,
       status: 'Current',
@@ -128,6 +130,11 @@ export class ApiService {
     return Observable.create((observer: Observer<Mentee>) =>
       observer.next(mentee)
     );
+    // return this.http.get<Mentor>(this.baseUrl + '/' + 'GetMenteeInfo&userId=' + userId)
+    //   .pipe(
+    //     map(response => <Mentee>response),
+    //     catchError(this.handleError)
+    //   );
   }
 
   private handleError(httpError: any) {

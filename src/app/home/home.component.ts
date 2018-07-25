@@ -12,7 +12,7 @@ import { Login } from './../_models/userDetails';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  isLoggedIn = false;
+  login: Login;
 
   constructor(private apiService: ApiService) { }
 
@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
 
   loadModel() {
     this.apiService.isLoggedIn().subscribe((login: Login) => {
-      this.isLoggedIn = true;
+      this.login = login;
     });
   }
 

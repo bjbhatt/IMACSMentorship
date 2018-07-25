@@ -1,6 +1,7 @@
 export interface Login {
     userId: number;
     fullName: string;
+    isAdmin: boolean;
 }
 
 export interface PendingMentorRequest {
@@ -77,5 +78,6 @@ export interface MentorSearch {
 export interface UserProfile {
     userId: number;
     fullName: string;
+    isAdmin: boolean;
     emailAddress: string;
 }
