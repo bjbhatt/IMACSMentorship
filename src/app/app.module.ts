@@ -18,6 +18,7 @@ import { appRoutes } from './routes';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NotLoggedInComponent } from './not-logged-in/not-logged-in.component';
 import { MentorRequestsComponent } from './mentor-requests/mentor-requests.component';
+import { MenteePromptsComponent } from './mentee-prompts/mentee-prompts.component';
 
 @NgModule({
    declarations: [
@@ -28,7 +29,8 @@ import { MentorRequestsComponent } from './mentor-requests/mentor-requests.compo
       MenteePaneComponent,
       UserProfileComponent,
       NotLoggedInComponent,
-      MentorRequestsComponent
+      MentorRequestsComponent,
+      MenteePromptsComponent
    ],
    imports: [
       BrowserModule,

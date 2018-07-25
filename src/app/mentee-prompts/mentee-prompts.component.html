@@ -1,0 +1,46 @@
+<div class="container">
+  <div align="center" id="progress-bar" class="prompt-progress-bar row">
+    <div [ngClass]="{'progress-active': step >= 1}" class="progress-item col-md-2 col-sm-2 col-lg-2">Clinical Care</div>
+    <div [ngClass]="{'progress-active': step >= 2}" class="progress-item col-md-2 col-sm-2 col-lg-2">Focus</div>
+    <div [ngClass]="{'progress-active': step >= 3}" class="progress-item col-md-2 col-sm-2 col-lg-4">Specializations</div>
+    <div [ngClass]="{'progress-active': step >= 4}" class="progress-item col-md-2 col-sm-2 col-lg-2">Expertise</div>
+    <div [ngClass]="{'progress-active': step >= 5}" class="progress-item col-md-2 col-sm-2 col-lg-2">Location</div>
+  </div>
+  <div *ngIf="step === 1" id="clinical-care">
+    <div class="prompt-header">
+      <h3>
+        <p>Do you want a mentor <strong>who is responsible</strong> for the clinical care of the patients?
+        </p>
+      </h3>
+    </div>
+    <div class="prompt-body">
+      <div class="row">
+          <div align="center" class="col-md-4 col-sm-4 col-lg-4"><button [ngClass]="{'btn-success': model.clinicalCare === 'yes'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setClinical('yes')">Yes</button></div>
+          <div align="center" class="col-md-4 col-sm-4 col-lg-4"><button [ngClass]="{'btn-success': model.clinicalCare === 'no'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setClinical('no')">No</button></div>
+          <div align="center" class="col-md-4 col-sm-4 col-lg-4"><button [ngClass]="{'btn-success': model.clinicalCare === 'n/a'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setClinical('n/a')">Doesn't<br />Matter</button></div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="step === 2" id="focus">
+      <div class="prompt-header">
+        <h3>
+          <p>What do you want your mentor to focus on?
+          </p>
+        </h3>
+      </div>
+      <div class="prompt-body">
+        <div class="row">
+            <div align="center" class="col-md-4 col-sm-4 col-lg-4"><button [ngClass]="{'btn-success': model.focus === 'adult'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setFocus('adult')">Adult <br />Myositis</button></div>
+            <div align="center" class="col-md-4 col-sm-4 col-lg-4"><button [ngClass]="{'btn-success': model.focus === 'juvenile'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setFocus('juvenile')">Juvenile <br />Myositis</button></div>
+            <div align="center" class="col-md-4 col-sm-4 col-lg-4"><button [ngClass]="{'btn-success': model.focus === 'n/a'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setFocus('n/a')">Doesn't<br />Matter</button></div>
+        </div>
+      </div>
+    </div>
+  <div id="navigation-buttons" class="navigation-buttons">
+    <div class="row">
+      <div align="center" class="col-md-6 col-sm-6 col-lg-6"><button [disabled]='step === 1' class="btn btn-primary btn-lg btn-block btn-nav" (click)="previousPage()">Previous</button></div>
+      <div align="center" class="col-md-6 col-sm-6 col-lg-6"><button [disabled]='disableNext()' class="btn btn-primary btn-lg btn-block btn-nav" (click)="nextPage()">Next</button></div>
+    </div>
+  </div>
+</div>
+

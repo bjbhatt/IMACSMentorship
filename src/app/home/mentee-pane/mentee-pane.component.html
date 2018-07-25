@@ -1,7 +1,7 @@
 <div *ngIf="model.status == 'Eligible'" class="jumbotron">
   <h2><strong>Get a Mentor</strong></h2>
   <p class="buttons">
-    <button class="btn btn-primary btn-md" role="button">Go</button>
+    <button class="btn btn-primary btn-md" role="button" [routerLink]="['/find']" routerLink="router-link-active">Go</button>
   </p>
 </div>
 
