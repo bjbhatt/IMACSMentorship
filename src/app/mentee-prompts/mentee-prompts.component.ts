@@ -70,7 +70,7 @@ export class MenteePromptsComponent implements OnInit {
   disableNext() {
     if ((this.step === 1 && this.model.clinicalCare == null)
     || (this.step === 2 && this.model.focus == null)
-    || (this.step === 3 && this.model.specialization == null)) {
+    || (this.step === 3 && this.model.specialization.length === 0)) {
       return true;
     } else {
       return false;
