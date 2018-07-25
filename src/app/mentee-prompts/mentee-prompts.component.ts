@@ -46,6 +46,10 @@ export class MenteePromptsComponent implements OnInit {
   }
 
   setSpecialization(specialization?: string) {
+    if (specialization === 'n/a') {
+      this.model.specialization = [];
+      this.model.specialization.push('n/a');
+    }
     if (this.model.specialization.includes(specialization)) {
       const index = this.model.specialization.indexOf(specialization, 0);
       this.model.specialization.splice(index, 1);
