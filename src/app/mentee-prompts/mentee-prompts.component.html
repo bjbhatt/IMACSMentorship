@@ -24,7 +24,7 @@
   <div *ngIf="step === 2" id="focus">
       <div class="prompt-header">
         <h3>
-          <p>What do you want your mentor to focus on?
+          <p>I want my mentor to focus on...
           </p>
         </h3>
       </div>
@@ -36,6 +36,23 @@
         </div>
       </div>
     </div>
+    <div *ngIf="step === 3" id="specialization">
+        <div class="prompt-header">
+          <h3>
+            <p>Who specializes in these forms of Myositis:
+              <br /> (Click all that apply, then Next)
+            </p>
+          </h3>
+        </div>
+        <div class="prompt-body">
+          <div class="row">
+              <div align="center" class="col-md-3 col-sm-3 col-lg-3"><button [ngClass]="{'btn-success': model.specialization.includes('dermatomyositis')}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setSpecialization('dermatomyositis')">Dermato-<br />myositis</button></div>
+              <div align="center" class="col-md-3 col-sm-3 col-lg-3"><button [ngClass]="{'btn-success': model.specialization.includes('polymyositis')}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setSpecialization('polymyositis')">Polymyositis</button></div>
+              <div align="center" class="col-md-3 col-sm-3 col-lg-3"><button [ngClass]="{'btn-success': model.specialization.includes('inclusion_body_myositis')}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setSpecialization('inclusion_body_myositis')">Inclusion Body<br />Myositis</button></div>
+              <div align="center" class="col-md-3 col-sm-3 col-lg-3"><button [ngClass]="{'btn-success': model.specialization.includes('n/a')}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setSpecialization('n/a')">Doesn't<br />Matter</button></div>
+          </div>
+        </div>
+      </div>
   <div id="navigation-buttons" class="navigation-buttons">
     <div class="row">
       <div align="center" class="col-md-6 col-sm-6 col-lg-6"><button [disabled]='step === 1' class="btn btn-primary btn-lg btn-block btn-nav" (click)="previousPage()">Previous</button></div>

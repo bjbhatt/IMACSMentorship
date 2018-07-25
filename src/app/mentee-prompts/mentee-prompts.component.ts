@@ -20,7 +20,13 @@ export class MenteePromptsComponent implements OnInit {
 
   ngOnInit() {
     this.loadModel();
-    this.model = {};
+    this.model = {
+      clinicalCare: null,
+      focus: null,
+      specialization: [],
+      expertise: [],
+      location: [],
+    };
   }
 
   loadModel() {
@@ -39,6 +45,16 @@ export class MenteePromptsComponent implements OnInit {
     console.log(focus);
   }
 
+  setSpecialization(specialization?: string) {
+    if (this.model.specialization.includes(specialization)) {
+      const index = this.model.specialization.indexOf(specialization, 0);
+      this.model.specialization.splice(index, 1);
+    } else {
+      this.model.specialization.push(specialization);
+    }
+    console.log(this.model.specialization);
+  }
+
   nextPage() {
     if (this.step < 5) {
       this.step++;
@@ -52,7 +68,9 @@ export class MenteePromptsComponent implements OnInit {
   }
 
   disableNext() {
-    if ((this.step === 1 && this.model.clinicalCare == null) || (this.step === 2 && this.model.focus == null)) {
+    if ((this.step === 1 && this.model.clinicalCare == null)
+    || (this.step === 2 && this.model.focus == null)
+    || (this.step === 3 && this.model.specialization == null)) {
       return true;
     } else {
       return false;
