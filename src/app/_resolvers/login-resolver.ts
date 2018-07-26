@@ -1,8 +1,8 @@
-import { Login } from './../_models/userDetails';
-import { catchError } from 'rxjs/operators';
+import { Login } from '../_models/userDetails';
+import { catchError, map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
-import { AlertifyService } from './../_services/alertify.service';
-import { ApiService } from './../_services/api.service';
+import { AlertifyService } from '../_services/alertify.service';
+import { ApiService } from '../_services/api.service';
 import { Resolve, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
 
@@ -14,7 +14,6 @@ export class LoginResolver implements Resolve<Login> {
         return this.apiService.loggedIn().pipe(
             catchError(error => {
                 this.alertifyService.error('Problem retrieving data');
-                this.router.navigate(['/home']);
                 return of(null);
             })
         );
