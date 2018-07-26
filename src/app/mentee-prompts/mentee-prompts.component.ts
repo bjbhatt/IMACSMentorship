@@ -29,15 +29,12 @@ export class MenteePromptsComponent implements OnInit {
       expertise: [],
       location: [],
     };
-    this.specializations = new Map<string, string>();
-    this.expertises = new Map<string, string>();
-    this.locations = new Map<string, string>();
-    this.specializations
+    this.specializations = new Map<string, string>()
       .set('dermatomyositis', 'Dermato-myositis')
       .set('polymyositis', 'Polymyositis')
       .set('inclusion_body_myositis', 'Inclusion Body Myositis')
       .set('n/a', 'Doesn\'t Matter');
-    this.expertises
+    this.expertises = new Map<string, string>()
       .set('epidemiology', 'Epidemiology')
       .set('disease_assesment', 'Disease Assesment')
       .set('clinical_trials_therapy', 'Clinical Trials/Therapy')
@@ -46,7 +43,7 @@ export class MenteePromptsComponent implements OnInit {
       .set('outcomes', 'Outcomes')
       .set('muscle_molecular_biology', 'Muscle Molecular Biology')
       .set('immunology', 'Immunology');
-    this.locations
+    this.locations = new Map<string, string>()
       .set('north_america', 'North America')
       .set('europe', 'Europe')
       .set('asia', 'Asia')
@@ -69,14 +66,14 @@ export class MenteePromptsComponent implements OnInit {
 
   setClinical(clinical?: string) {
     this.model.clinicalCare = clinical;
-    console.log(clinical);
   }
 
   setFocus(focus?: string) {
     this.model.focus = focus;
-    console.log(focus);
   }
 
+  // TBD : Wish to use this unified function but getting issues.
+  // using individual funtions for now.
   // setData(string?: string, array?: string[]) {
   //   const index = array.indexOf(string, 0);
   //   if (string === 'n/a') {
@@ -116,7 +113,6 @@ export class MenteePromptsComponent implements OnInit {
       }
       this.model.specialization.push(specialization);
     }
-    console.log(this.model.specialization);
   }
 
   setExpertise(expertise?: string) {
@@ -137,7 +133,6 @@ export class MenteePromptsComponent implements OnInit {
       }
       this.model.expertise.push(expertise);
     }
-    console.log(this.model.expertise);
   }
 
   setLocation(location?: string) {
@@ -158,11 +153,9 @@ export class MenteePromptsComponent implements OnInit {
       }
       this.model.location.push(location);
     }
-    console.log(this.model.location);
   }
 
   nextPage() {
-    console.log(this.model);
     if (this.step < 5) {
       this.step++;
     }
@@ -176,10 +169,10 @@ export class MenteePromptsComponent implements OnInit {
 
   disableNext() {
     if ((this.step === 1 && this.model.clinicalCare == null)
-    || (this.step === 2 && this.model.focus == null)
-    || (this.step === 3 && this.model.specialization.length === 0)
-    || (this.step === 4 && this.model.expertise.length === 0)
-    || (this.step === 5 && this.model.location.length === 0)) {
+      || (this.step === 2 && this.model.focus == null)
+      || (this.step === 3 && this.model.specialization.length === 0)
+      || (this.step === 4 && this.model.expertise.length === 0)
+      || (this.step === 5 && this.model.location.length === 0)) {
       return true;
     } else {
       return false;
