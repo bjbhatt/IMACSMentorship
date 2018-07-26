@@ -11,7 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { MentorPaneComponent } from './home/mentor-pane/mentor-pane.component';
 import { MenteePaneComponent } from './home/mentee-pane/mentee-pane.component';
 import { ApiService } from './_services/api.service';
-
+import { LoginResolver } from './_resolvers/login-resolver';
 
 import { AlertifyService } from './_services/alertify.service';
 import { appRoutes } from './routes';
@@ -44,7 +44,8 @@ import { AdministrationComponent } from './administration/administration.compone
    ],
    providers: [
     AlertifyService,
-    ApiService
+    ApiService,
+    LoginResolver
    ],
    bootstrap: [
       AppComponent

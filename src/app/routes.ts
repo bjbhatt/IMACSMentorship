@@ -7,12 +7,14 @@ import { MentorRequestsComponent } from './mentor-requests/mentor-requests.compo
 import { AdministrationComponent } from './administration/administration.component';
 import { MenteePromptsComponent } from './mentee-prompts/mentee-prompts.component';
 
+import { LoginResolver } from './_resolvers/login-resolver';
+
 export const appRoutes: Routes = [
-    {path: 'home', component: HomeComponent },
+    {path: 'home', component: HomeComponent, resolve: {login: LoginResolver} },
     {path: 'profile', component: UserProfileComponent },
     {path: 'administration', component: AdministrationComponent },
     {path: 'requests', component: MentorRequestsComponent},
     {path: 'find', component: MenteePromptsComponent},
     {path: 'notLoggedIn', component: NotLoggedInComponent},
-    {path: '**', component: HomeComponent },
+    {path: '**', component: HomeComponent, resolve: {login: LoginResolver} },
 ];
