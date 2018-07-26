@@ -45,14 +45,22 @@ export class MenteePromptsComponent implements OnInit {
   }
 
   setSpecialization(specialization?: string) {
+    const index = this.model.specialization.indexOf(specialization, 0);
     if (specialization === 'n/a') {
-      this.model.specialization = [];
-      this.model.specialization.push('n/a');
+      if (index > -1) {
+        this.model.specialization.splice(index, 1);
+      } else {
+        this.model.specialization = [];
+        this.model.specialization.push('n/a');
+      }
     }
-    if (this.model.specialization.includes(specialization)) {
-      const index = this.model.specialization.indexOf(specialization, 0);
+    else if (index > -1) {
       this.model.specialization.splice(index, 1);
     } else {
+      const index_na = this.model.specialization.indexOf('n/a', 0);
+      if (index_na > -1) {
+        this.model.specialization.splice(index_na, 1);
+      }
       this.model.specialization.push(specialization);
     }
     console.log(this.model.specialization);
