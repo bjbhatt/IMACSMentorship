@@ -25,7 +25,7 @@ export interface CurrentMentee {
 export interface Mentor {
     userId: number;
     status: string;
-    trainingDate?: Date;
+    trainingDate?: string;
     pendingRequests?: PendingMentorRequest[];
     currentMentee?: CurrentMentee;
 }

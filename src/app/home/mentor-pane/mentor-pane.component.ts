@@ -14,19 +14,14 @@ import { Mentor, Login } from './../../_models/userDetails';
   styleUrls: ['./mentor-pane.component.css']
 })
 export class MentorPaneComponent implements OnInit {
-  isLoggedIn: boolean;
+  login: Login;
   model: Mentor;
   showUpdateDateForm = false;
   trainingDate: string;
   showContactForm = false;
   message = '';
   showCancelReqForm = false;
-  showModal: boolean;
-  modal_header = '';
-  modal_body = '';
-  modal_cancel = 'Cancel';
-  modal_okay = 'OK';
-  modal_context = '';
+  status = '';
 
   constructor(
     private apiService: ApiService,
@@ -40,45 +35,45 @@ export class MentorPaneComponent implements OnInit {
 
   loadModel() {
     this.apiService.isLoggedIn().subscribe((login: Login) => {
-      this.isLoggedIn = true;
-      this.apiService.getUserMentorInfo(1).subscribe((mentor: Mentor) => {
+      this.login = login;
+      this.apiService.getUserMentorInfo(login.userId).subscribe((mentor: Mentor) => {
         this.model = mentor;
+        this.status = mentor.status;
       });
     });
   }
 
   updateDate() {
-    this.trainingDate = this.model.trainingDate ? this.model.trainingDate.toLocaleDateString() : '';
+    this.trainingDate = this.model.trainingDate;
     this.showUpdateDateForm = true;
   }
 
   updateDateConfirm() {
-    if (this.isLoggedIn) {
+    if (this.login && this.trainingDate) {
       // TBD: Save trainingDate
-      const today = new Date();
-      this.alertifyService.message('Date saved!');
-      this.model.trainingDate = new Date(this.trainingDate);
-      let years = today.getFullYear() - this.model.trainingDate.getFullYear();
-      if (this.model.trainingDate > Utilities.addYearsToDate(today, -5)) {
-        years--;
-      }
-      if (years >= 5) {
-        this.model.status = 'Eligible';
-      }
-      this.cancel();
+      this.model.trainingDate = this.trainingDate;
+      this.apiService.updateMentorTrainingDate(this.login.userId, new Date(this.model.trainingDate)).subscribe(() => {
+        const today = new Date();
+        this.alertifyService.message('Date saved!');
+        let years = today.getFullYear() - new Date(this.model.trainingDate).getFullYear();
+        if (new Date(this.model.trainingDate) > Utilities.addYearsToDate(today, -5)) {
+          years--;
+        }
+        if (years >= 5) {
+          this.model.status = 'Eligible';
+          this.status = 'Eligible';
+        }
+        this.cancel();
+      });
     }
   }
 
   becomeMentor() {
-    if (this.isLoggedIn) {
+    if (this.login) {
       // TBD: Save Data
       this.alertifyService.message('Your are now a mentor');
       this.model.status = 'Current';
     }
-  }
-
-  openModal(open) {
-    this.showModal = open;
   }
 
   contact() {
@@ -87,7 +82,7 @@ export class MentorPaneComponent implements OnInit {
   }
 
   contactConfirm() {
-    if (this.isLoggedIn) {
+    if (this.login) {
       // TBD: Send Message
       console.log(this.message);
       this.alertifyService.message('Message sent');
@@ -100,7 +95,7 @@ export class MentorPaneComponent implements OnInit {
   }
 
   cancelMentorshipConfirm() {
-    if (this.isLoggedIn) {
+    if (this.login) {
       // TBD: Cancel Mentorship
       this.alertifyService.message('Mentorship cancelled');
       this.model.currentMentee = null;

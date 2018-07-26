@@ -84,7 +84,7 @@ export class ApiService {
       return of(mentor);
     } else {
       return this.http
-        .get<Mentor>(this.baseUrl + '?method=GetMentorInfo&userId=' + userId)
+        .get<Mentor>(this.baseUrl + '?method=MentorInfo&userId=' + userId)
         .pipe(
           map(response => {
             return response;
@@ -128,7 +128,7 @@ export class ApiService {
       return of(mentorshipHistoryItems);
     } else {
       return this.http
-        .get<MentorshipHistory[]>(this.baseUrl + '?method=GetPastMentees&userId=' + userId)
+        .get<MentorshipHistory[]>(this.baseUrl + '?method=PastMentees&userId=' + userId)
         .pipe(
           map(response => {
             return response;
@@ -147,7 +147,7 @@ export class ApiService {
         trainingDate: trainingDate
       };
       return this.http
-        .post<void>(this.baseUrl + '?method=UpdateMentorAvailibility', body)
+        .post<void>(this.baseUrl + '?method=MentorTrainingDate&userId=' + userId + '&trainingDate=' + trainingDate, body)
         .pipe(
           map(response => {
             return response;
@@ -166,7 +166,7 @@ export class ApiService {
         available: available
       };
       return this.http
-        .post<void>(this.baseUrl + '?method=UpdateMentorAvailibility', body)
+        .post<void>(this.baseUrl + '?method=MentorAvailibility', body)
         .pipe(
           map(response => {
             return response;

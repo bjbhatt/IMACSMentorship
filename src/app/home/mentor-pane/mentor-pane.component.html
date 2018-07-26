@@ -1,6 +1,4 @@
-<div [ngStyle]="{'display': showModal ? 'block' : 'none'}" class="backdrop"></div>
-
-<div *ngIf="model.status == 'Ineligible'" class="jumbotron">
+<div *ngIf="status == 'Ineligible'" class="jumbotron">
   <h2><strong>Not Eligible to be a Mentor</strong></h2>
   <h4>
     To qualify as a mentor you must be at least 5 years out from your post doctorate or fellowship training program.
@@ -20,7 +18,7 @@
   </p>
 </div>
 
-<div *ngIf="model.status == 'Eligible'" class="jumbotron">
+<div *ngIf="status == 'Eligible'" class="jumbotron">
   <h2><strong>Become an IMACS Mentor</strong></h2>
   <h4>
     Being a mentor is a commitment lorem ipsum... Shaping the future of Myositis research.  Since you are 5 or more years out from you
@@ -31,7 +29,7 @@
   </p>
 </div>
 
-<div *ngIf="model.status == 'Current' && !model.currentMentee" class="jumbotron">
+<div *ngIf="status == 'Current' && !model.currentMentee" class="jumbotron">
   <h2><strong>Mentor with</strong></h2>
   <h4>{{model.pendingRequests ? model.pendingRequests.length : 0}} pending Mentorship Request(s)</h4>
   <p class="buttons">
@@ -39,7 +37,7 @@
   </p>
 </div>
 
-<div *ngIf="model.status == 'Current' && model.currentMentee" class="jumbotron">
+<div *ngIf="status == 'Current' && model.currentMentee" class="jumbotron">
   <h2><strong>Mentor to</strong></h2>
   <h4>{{model.currentMentee.fullName}} (ends {{model.currentMentee.endDate | date:'MM/dd/yyyy'}})</h4>
   <p *ngIf="!showContactForm && !showCancelReqForm" class="buttons">
