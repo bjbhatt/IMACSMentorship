@@ -46,10 +46,10 @@
         </div>
         <div class="prompt-body">
           <div class="row">
-              <div align="center" class="col-md-3 col-sm-3 col-lg-3"><button [ngClass]="{'btn-success': model.specialization.includes('dermatomyositis')}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setSpecialization('dermatomyositis')">Dermato-<br />myositis</button></div>
-              <div align="center" class="col-md-3 col-sm-3 col-lg-3"><button [ngClass]="{'btn-success': model.specialization.includes('polymyositis')}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setSpecialization('polymyositis')">Polymyositis</button></div>
-              <div align="center" class="col-md-3 col-sm-3 col-lg-3"><button [ngClass]="{'btn-success': model.specialization.includes('inclusion_body_myositis')}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setSpecialization('inclusion_body_myositis')">Inclusion Body<br />Myositis</button></div>
-              <div align="center" class="col-md-3 col-sm-3 col-lg-3"><button [ngClass]="{'btn-success': model.specialization.includes('n/a')}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setSpecialization('n/a')">Doesn't<br />Matter</button></div>
+              <div align="center" class="col-md-3 col-sm-3 col-lg-3"><button [ngClass]="{'btn-success': model.specialization.indexOf('dermatomyositis', 0) > -1}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setSpecialization('dermatomyositis')">Dermato-<br />myositis</button></div>
+              <div align="center" class="col-md-3 col-sm-3 col-lg-3"><button [ngClass]="{'btn-success': model.specialization.indexOf('polymyositis', 0) > -1}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setSpecialization('polymyositis')">Polymyositis</button></div>
+              <div align="center" class="col-md-3 col-sm-3 col-lg-3"><button [ngClass]="{'btn-success': model.specialization.indexOf('inclusion_body_myositis', 0) > -1}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setSpecialization('inclusion_body_myositis')">Inclusion Body<br />Myositis</button></div>
+              <div align="center" class="col-md-3 col-sm-3 col-lg-3"><button [ngClass]="{'btn-success': model.specialization.indexOf('n/a', 0) > -1}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setSpecialization('n/a')">Doesn't<br />Matter</button></div>
           </div>
         </div>
       </div>
