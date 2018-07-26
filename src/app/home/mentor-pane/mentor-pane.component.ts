@@ -73,6 +73,7 @@ export class MentorPaneComponent implements OnInit {
       // TBD: Save Data
       this.alertifyService.message('Your are now a mentor');
       this.model.status = 'Current';
+      this.status = 'Current';
     }
   }
 

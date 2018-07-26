@@ -1,11 +1,11 @@
-<div *ngIf="model.status == 'Eligible'" class="jumbotron">
+<div *ngIf="status == 'Eligible'" class="jumbotron">
   <h2><strong>Get a Mentor</strong></h2>
   <p class="buttons">
     <button class="btn btn-primary btn-md" role="button" [routerLink]="['/find']" routerLink="router-link-active">Go</button>
   </p>
 </div>
 
-<div *ngIf="model.status == 'Pending'" class="jumbotron">
+<div *ngIf="status == 'Pending'" class="jumbotron">
   <h2><strong>Pending Mentee request to</strong></h2>
   <h4>{{model.pendingRequest.fullName}} (expires {{model.pendingRequest.expirationDate | date:'MM/dd/yyy'}})</h4>
   <p *ngIf="!showContactForm && !showCancelReqForm" class="buttons">
@@ -26,7 +26,7 @@
   </p>
 </div>
 
-<div *ngIf="model.status == 'Current'" class="jumbotron">
+<div *ngIf="status == 'Current'" class="jumbotron">
   <h2><strong>Mentee to </strong></h2>
   <h4>{{model.currentMentor.fullName}} (ends {{model.currentMentor.endDate | date:'MM/dd/yyyy'}})</h4>
   <p *ngIf="!showContactForm && !showCancelReqForm" class="buttons">

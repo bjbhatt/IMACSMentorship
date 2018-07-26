@@ -20,6 +20,7 @@ export class MenteePaneComponent implements OnInit {
   showCancelReqForm = false;
   message = '';
   showUpdateDateForm = false;
+  status = '';
 
   constructor(
     private apiService: ApiService,
@@ -36,6 +37,7 @@ export class MenteePaneComponent implements OnInit {
       this.isLoggedIn = true;
       this.apiService.getUserMenteeInfo(1).subscribe((mentee: Mentee) => {
         this.model = mentee;
+        this.status = this.model.status;
       });
     });
   }
@@ -66,6 +68,7 @@ export class MenteePaneComponent implements OnInit {
           : 'Mentorship cancelled';
       this.alertifyService.message(message);
       this.model.status = 'Eligible';
+      this.status = 'Eligible';
       this.model.currentMentor = null;
       this.cancel();
     }
