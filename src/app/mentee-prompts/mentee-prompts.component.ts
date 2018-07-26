@@ -53,8 +53,7 @@ export class MenteePromptsComponent implements OnInit {
         this.model.specialization = [];
         this.model.specialization.push('n/a');
       }
-    }
-    else if (index > -1) {
+    } else if (index > -1) {
       this.model.specialization.splice(index, 1);
     } else {
       const index_na = this.model.specialization.indexOf('n/a', 0);
