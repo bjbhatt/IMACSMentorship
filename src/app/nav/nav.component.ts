@@ -15,7 +15,7 @@ import { Login } from './../_models/userDetails';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  userInfo: Login;
+  login: Login;
 
   constructor(private apiService: ApiService,
     private alertifyService: AlertifyService,
@@ -27,7 +27,7 @@ export class NavComponent implements OnInit {
 
   loadModel() {
     this.apiService.isLoggedIn().subscribe((login: Login) => {
-      this.userInfo = login;
+      this.login = login;
     });
   }
 }

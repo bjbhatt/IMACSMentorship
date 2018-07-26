@@ -31,9 +31,10 @@ export interface Mentor {
 }
 
 export interface MentorshipHistory {
-    userId: string;
+    userId: number;
     fullName: string;
-    emailAddress: string;
+    degree: string;
+    location: string;
     outcome: string;
     startDate: Date;
     endDate?: Date;
