@@ -178,4 +178,12 @@ export class MenteePromptsComponent implements OnInit {
       return false;
     }
   }
+
+  searchMentor() {
+    this.step++;
+    if (this.model != null) {
+      // TBD : Get mentors based on parameters passed from the model.
+      console.log(this.model);
+    }
+  }
 }
