@@ -8,10 +8,10 @@
       </div>
   </div>
   <div class="col-md-6 col-sm-6 col-lg-6">
-    <app-home-mentor-pane></app-home-mentor-pane>
+    <app-home-mentor-pane [login]="login"></app-home-mentor-pane>
   </div>
   <div class="col-md-6 col-sm-6 col-lg-6">
-    <app-home-mentee-pane></app-home-mentee-pane>
+    <app-home-mentee-pane [login]="login"></app-home-mentee-pane>
   </div>
 </div>
 <app-not-logged-in *ngIf="!login"></app-not-logged-in>

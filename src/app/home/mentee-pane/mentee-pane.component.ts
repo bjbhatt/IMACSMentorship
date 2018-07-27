@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ApiService } from './../../_services/api.service';
@@ -14,7 +14,7 @@ import { Mentee, Login } from './../../_models/userDetails';
   styleUrls: ['./mentee-pane.component.css']
 })
 export class MenteePaneComponent implements OnInit {
-  isLoggedIn: boolean;
+  @Input() login: Login;
   model: Mentee;
   showContactForm = false;
   showCancelReqForm = false;
@@ -33,13 +33,12 @@ export class MenteePaneComponent implements OnInit {
   }
 
   loadModel() {
-    this.apiService.isLoggedIn().subscribe((login: Login) => {
-      this.isLoggedIn = true;
+    if (this.login) {
       this.apiService.getUserMenteeInfo(1).subscribe((mentee: Mentee) => {
         this.model = mentee;
         this.status = this.model.status;
       });
-    });
+    }
   }
 
   contact() {
@@ -48,7 +47,7 @@ export class MenteePaneComponent implements OnInit {
   }
 
   contactConfirm() {
-    if (this.isLoggedIn) {
+    if (this.login) {
       // TBD: Send Message
       this.alertifyService.message('Message sent!');
       this.cancel();
@@ -60,7 +59,7 @@ export class MenteePaneComponent implements OnInit {
   }
 
   cancelMentorshipConfirm() {
-    if (this.isLoggedIn) {
+    if (this.login) {
       // TBD: Cancel Mentorship
       const message: string =
         this.model.status === 'Pending'

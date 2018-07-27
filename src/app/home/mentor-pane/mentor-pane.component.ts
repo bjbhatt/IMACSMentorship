@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ApiService } from './../../_services/api.service';
@@ -14,7 +14,7 @@ import { Mentor, Login } from './../../_models/userDetails';
   styleUrls: ['./mentor-pane.component.css']
 })
 export class MentorPaneComponent implements OnInit {
-  login: Login;
+  @Input() login: Login;
   model: Mentor;
   showUpdateDateForm = false;
   trainingDate: string;
@@ -34,12 +34,9 @@ export class MentorPaneComponent implements OnInit {
   }
 
   loadModel() {
-    this.apiService.isLoggedIn().subscribe((login: Login) => {
-      this.login = login;
-      this.apiService.getUserMentorInfo(login.userId).subscribe((mentor: Mentor) => {
-        this.model = mentor;
-        this.status = mentor.status;
-      });
+    this.apiService.getUserMentorInfo(this.login.userId).subscribe((mentor: Mentor) => {
+      this.model = mentor;
+      this.status = mentor.status;
     });
   }
 
@@ -49,32 +46,29 @@ export class MentorPaneComponent implements OnInit {
   }
 
   updateDateConfirm() {
-    if (this.login && this.trainingDate) {
-      // TBD: Save trainingDate
-      this.model.trainingDate = this.trainingDate;
-      this.apiService.updateMentorTrainingDate(this.login.userId, this.model.trainingDate).subscribe(() => {
+    if (this.trainingDate || this.trainingDate !== 'Invalid Date') {
+      this.apiService.updateMentorTrainingDate(this.login.userId, this.trainingDate).subscribe(() => {
+        this.model.trainingDate = this.trainingDate;
         const today = new Date();
-        this.alertifyService.message('Date saved!');
         let years = today.getFullYear() - new Date(this.model.trainingDate).getFullYear();
         if (new Date(this.model.trainingDate) > Utilities.addYearsToDate(today, -5)) {
           years--;
         }
         if (years >= 5) {
           this.model.status = 'Eligible';
-          this.status = 'Eligible';
         }
+        this.status = this.model.status;
         this.cancel();
+        this.alertifyService.message('Date saved!');
       });
     }
   }
 
   becomeMentor() {
-    if (this.login) {
-      // TBD: Save Data
-      this.alertifyService.message('Your are now a mentor');
-      this.model.status = 'Current';
-      this.status = 'Current';
-    }
+    // TBD: Save Data
+    this.alertifyService.message('Your are now a mentor');
+    this.model.status = 'Current';
+    this.status = 'Current';
   }
 
   contact() {
@@ -83,12 +77,10 @@ export class MentorPaneComponent implements OnInit {
   }
 
   contactConfirm() {
-    if (this.login) {
-      // TBD: Send Message
-      console.log(this.message);
-      this.alertifyService.message('Message sent');
-      this.cancel();
-    }
+    // TBD: Send Message
+    console.log(this.message);
+    this.alertifyService.message('Message sent');
+    this.cancel();
   }
 
   cancelMentorship() {
@@ -96,12 +88,10 @@ export class MentorPaneComponent implements OnInit {
   }
 
   cancelMentorshipConfirm() {
-    if (this.login) {
-      // TBD: Cancel Mentorship
-      this.alertifyService.message('Mentorship cancelled');
-      this.model.currentMentee = null;
-      this.cancel();
-    }
+    // TBD: Cancel Mentorship
+    this.alertifyService.message('Mentorship cancelled');
+    this.model.currentMentee = null;
+    this.cancel();
   }
 
   cancel() {
