@@ -63,3 +63,7 @@
     color: white;
     /* border-radius: 5px; */
 }
+
+.loading-spinner {
+    margin-top: 50px;
+}

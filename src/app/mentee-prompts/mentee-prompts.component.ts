@@ -156,7 +156,7 @@ export class MenteePromptsComponent implements OnInit {
   }
 
   nextPage() {
-    if (this.step < 5) {
+    if (this.step < 6) {
       this.step++;
     }
   }
