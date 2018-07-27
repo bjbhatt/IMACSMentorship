@@ -39,7 +39,6 @@ export class MentorPaneComponent implements OnInit {
       this.apiService.getUserMentorInfo(login.userId).subscribe((mentor: Mentor) => {
         this.model = mentor;
         this.status = mentor.status;
-        this.status = 'Ineligible';
       });
     });
   }
