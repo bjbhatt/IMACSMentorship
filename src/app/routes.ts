@@ -1,3 +1,4 @@
+import { MentorResultsComponent } from './mentor-results/mentor-results.component';
 import { Routes } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
@@ -14,6 +15,7 @@ export const appRoutes: Routes = [
     {path: 'profile', component: UserProfileComponent, resolve: {login: LoginResolver}  },
     {path: 'administration', component: AdministrationComponent, resolve: {login: LoginResolver}  },
     {path: 'requests', component: MentorRequestsComponent, resolve: {login: LoginResolver} },
+    {path: 'results', component: MentorResultsComponent, resolve: {login: LoginResolver} },
     {path: 'find', component: MenteePromptsComponent, resolve: {login: LoginResolver} },
     {path: 'notLoggedIn', component: NotLoggedInComponent },
     {path: '**', component: HomeComponent, resolve: {login: LoginResolver} },

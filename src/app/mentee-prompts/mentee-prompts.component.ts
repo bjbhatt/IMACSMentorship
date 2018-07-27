@@ -182,8 +182,11 @@ export class MenteePromptsComponent implements OnInit {
   searchMentor() {
     this.step++;
     if (this.model != null) {
-      // TBD : Get mentors based on parameters passed from the model.
-      // console.log(this.model);
+      // TBD : Service call to get mentor search results based on parameters passed from the model.
+      setTimeout(() => { // TBD : Remove timeout after implementing service.
+        this.router.navigate(['/results']);
+      },
+    3000);
     }
   }
 }

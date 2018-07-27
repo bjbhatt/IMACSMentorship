@@ -20,6 +20,7 @@ import { NotLoggedInComponent } from './not-logged-in/not-logged-in.component';
 import { MentorRequestsComponent } from './mentor-requests/mentor-requests.component';
 import { MenteePromptsComponent } from './mentee-prompts/mentee-prompts.component';
 import { AdministrationComponent } from './administration/administration.component';
+import { MentorResultsComponent } from './mentor-results/mentor-results.component';
 
 @NgModule({
    declarations: [
@@ -32,7 +33,8 @@ import { AdministrationComponent } from './administration/administration.compone
       NotLoggedInComponent,
       MentorRequestsComponent,
       MenteePromptsComponent,
-      AdministrationComponent
+      AdministrationComponent,
+      MentorResultsComponent
    ],
    imports: [
       BrowserModule,
