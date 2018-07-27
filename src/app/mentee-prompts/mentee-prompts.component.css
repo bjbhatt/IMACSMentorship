@@ -59,13 +59,14 @@
 }
 
 .progress-active {
-    background-color: rgba(51,122,183,.9);
+    background-color: rgba(51,122,183,1);
     color: white;
     /* border-radius: 5px; */
 }
 
 .progress-current {
     font-weight: bold;
+    color: rgba(51,122,183,1);
 }
 
 .loading-spinner {

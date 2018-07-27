@@ -183,7 +183,7 @@ export class MenteePromptsComponent implements OnInit {
     this.step++;
     if (this.model != null) {
       // TBD : Get mentors based on parameters passed from the model.
-      console.log(this.model);
+      // console.log(this.model);
     }
   }
 }
