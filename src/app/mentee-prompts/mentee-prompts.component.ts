@@ -2,7 +2,7 @@ import { MentorOptions } from './../_models/mentorOptions';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../_services/api.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-import { Router } from '../../../node_modules/@angular/router';
+import { Router } from '@angular/router';
 import { Login } from '../_models/userDetails';
 
 @Component({

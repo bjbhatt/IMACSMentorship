@@ -14,9 +14,6 @@ export class LoginResolver implements Resolve<Login> {
         return this.apiService.loggedIn().pipe(
             catchError(error => {
                 this.alertifyService.error('Problem retrieving data');
-                if (route.routeConfig.component.name !== 'HomeComponent') {
-                    this.router.navigate(['/']);
-                }
                 return of(null);
             })
         );

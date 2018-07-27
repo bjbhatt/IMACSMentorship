@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError, Observer, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import { UserProfile, Mentor, Mentee, Login, MentorshipHistory } from './../_models/userDetails';
+import { UserProfile, Mentor, Mentee, Login, MentorshipHistory } from '../_models/userDetails';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -13,7 +13,49 @@ export class ApiService {
   private baseUrl = environment.baseUrl;
   private useMock = !environment.production;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+
+  private get<T>(url: string): Observable<T> {
+    return this.http
+    .get<T>(
+      url)
+    .pipe(
+      map((response: T) => {
+        return response;
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  private postFormEncoded<T>(url: string, body: HttpParams): Observable<T> {
+    return this.http
+    .post<T>(
+      url,
+      body.toString(),
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'application/x-www-form-urlencoded')
+      })
+    .pipe(
+      map((response: T) => {
+        return response;
+      }),
+      catchError(this.handleError)
+    );
+  }
+
+  private postJson<T>(url: string, body: any): Observable<T> {
+    return this.http
+    .post<T>(
+      url,
+      body)
+    .pipe(
+      map((response: T) => {
+        return response;
+      }),
+      catchError(this.handleError)
+    );
+  }
 
   isLoggedIn(): Observable<Login> {
     return this.loggedIn();
@@ -29,12 +71,7 @@ export class ApiService {
       // const login: Login = null;
       return of(login);
     } else {
-      return this.http.get<Login>(this.baseUrl + '?method=LoggedIn').pipe(
-        map(response => {
-          return response;
-        }),
-        catchError(this.handleError)
-      );
+      return this.get<Login>(this.baseUrl + '?method=LoggedIn');
     }
   }
 
@@ -83,77 +120,55 @@ export class ApiService {
       };
       return of(mentor);
     } else {
-      return this.http
-        .get<Mentor>(this.baseUrl + '?method=MentorInfo&userId=' + userId)
-        .pipe(
-          map(response => {
-            return response;
-          }),
-          catchError(this.handleError)
-        );
+      return this.get<Mentor>(this.baseUrl + '?method=MentorInfo&userId=' + userId);
     }
   }
 
   getPastMentees(userId: number): Observable<MentorshipHistory[]> {
     if (this.useMock) {
       const mentorshipHistoryItems: MentorshipHistory[] = [
-          {
-            userId: 2,
-            fullName: 'John Doe',
-            degree: 'Phd, MD',
-            location: 'Hospital de Clinicas',
-            outcome: 'CancelledByMentor',
-            startDate: new Date('06/27/2018'),
-            cancellationDate: new Date('07/22/2018')
-          },
-          {
-            userId: 3,
-            fullName: 'Mary Doe',
-            degree: 'Phd, MD',
-            location: 'Hospital de Clinicas',
-            outcome: 'CancelledByMentee',
-            startDate: new Date('06/27/2018'),
-            cancellationDate: new Date('07/21/2018')
-          },
-          {
-            userId: 4,
-            fullName: 'David Doe',
-            degree: 'Phd, MD',
-            location: 'Hospital de Clinicas',
-            outcome: 'Ended',
-            startDate: new Date('07/22/2016'),
-            endDate: new Date('07/21/2018')
-          }
-        ];
+        {
+          userId: 2,
+          fullName: 'John Doe',
+          degree: 'Phd, MD',
+          location: 'Hospital de Clinicas',
+          outcome: 'CancelledByMentor',
+          startDate: new Date('06/27/2018'),
+          cancellationDate: new Date('07/22/2018')
+        },
+        {
+          userId: 3,
+          fullName: 'Mary Doe',
+          degree: 'Phd, MD',
+          location: 'Hospital de Clinicas',
+          outcome: 'CancelledByMentee',
+          startDate: new Date('06/27/2018'),
+          cancellationDate: new Date('07/21/2018')
+        },
+        {
+          userId: 4,
+          fullName: 'David Doe',
+          degree: 'Phd, MD',
+          location: 'Hospital de Clinicas',
+          outcome: 'Ended',
+          startDate: new Date('07/22/2016'),
+          endDate: new Date('07/21/2018')
+        }
+      ];
       return of(mentorshipHistoryItems);
     } else {
-      return this.http
-        .get<MentorshipHistory[]>(this.baseUrl + '?method=PastMentees&userId=' + userId)
-        .pipe(
-          map(response => {
-            return response;
-          }),
-          catchError(this.handleError)
-        );
+      return this.get<MentorshipHistory[]>(this.baseUrl + '?method=PastMentees&userId=' + userId);
     }
   }
 
-  updateMentorTrainingDate(userId: number, trainingDate: Date): Observable<void> {
+  updateMentorTrainingDate(userId: number, trainingDate: string): Observable<void> {
     if (this.useMock) {
       return of();
     } else {
-      const body = {
-        userId: userId,
-        trainingDate: trainingDate
-      };
-      return this.http
-        .post<void>(this.baseUrl + '?method=MentorTrainingDate&userId=' + userId + '&trainingDate=' + trainingDate, body)
-        .pipe(
-          map(response => {
-            return response;
-          }),
-          catchError(this.handleError)
-        );
+      const body = new HttpParams()
+        .set('userId', userId.toString())
+        .set('trainingDate', trainingDate.toString());
+      return this.postFormEncoded<void>(this.baseUrl + '?method=MentorTrainingDate', body);
     }
   }
 
@@ -161,18 +176,10 @@ export class ApiService {
     if (this.useMock) {
       return of();
     } else {
-      const body = {
-        userId: userId,
-        available: available
-      };
-      return this.http
-        .post<void>(this.baseUrl + '?method=MentorAvailibility', body)
-        .pipe(
-          map(response => {
-            return response;
-          }),
-          catchError(this.handleError)
-        );
+      const body = new HttpParams()
+        .set('userId', userId.toString())
+        .set('available', available.toString());
+      return this.postFormEncoded<void>(this.baseUrl + '?method=MentorAvailibility', body);
     }
   }
 

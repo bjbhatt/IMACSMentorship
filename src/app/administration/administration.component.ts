@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { Login } from './../_models/userDetails';
+
 
 @Component({
   selector: 'app-administration',
@@ -6,10 +10,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./administration.component.css']
 })
 export class AdministrationComponent implements OnInit {
+  login: Login;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.data.subscribe(data => {
+      this.login = data['login'];
+    });
   }
 
 }

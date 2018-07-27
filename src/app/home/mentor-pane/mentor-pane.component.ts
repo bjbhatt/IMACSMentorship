@@ -39,6 +39,7 @@ export class MentorPaneComponent implements OnInit {
       this.apiService.getUserMentorInfo(login.userId).subscribe((mentor: Mentor) => {
         this.model = mentor;
         this.status = mentor.status;
+        this.status = 'Ineligible';
       });
     });
   }
@@ -52,7 +53,7 @@ export class MentorPaneComponent implements OnInit {
     if (this.login && this.trainingDate) {
       // TBD: Save trainingDate
       this.model.trainingDate = this.trainingDate;
-      this.apiService.updateMentorTrainingDate(this.login.userId, new Date(this.model.trainingDate)).subscribe(() => {
+      this.apiService.updateMentorTrainingDate(this.login.userId, this.model.trainingDate).subscribe(() => {
         const today = new Date();
         this.alertifyService.message('Date saved!');
         let years = today.getFullYear() - new Date(this.model.trainingDate).getFullYear();

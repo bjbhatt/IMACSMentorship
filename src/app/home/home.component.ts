@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ApiService } from './../_services/api.service';
-
 import { Utilities } from './../_helpers/Utilities';
 
 import { Login } from './../_models/userDetails';
-import { ActivatedRoute } from '../../../node_modules/@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +13,7 @@ import { ActivatedRoute } from '../../../node_modules/@angular/router';
 export class HomeComponent implements OnInit {
   login: Login;
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
