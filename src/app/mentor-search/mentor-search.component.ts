@@ -1,9 +1,9 @@
-import { MentorSearchOptions } from '../_models/mentorSearchOptions';
+import { MentorSearchOptions } from '../_models/mentorship-search-options';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../_services/api.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Login } from '../_models/apiModels';
+import { Login } from '../_models/all-api-models';
 
 @Component({
   selector: 'app-mentor-search',

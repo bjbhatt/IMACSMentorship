@@ -6,7 +6,7 @@ import { AlertifyService } from '../../_services/alertify.service';
 
 import { Utilities } from '../../_helpers/Utilities';
 
-import { Mentee, Login } from '../../_models/apiModels';
+import { Mentee, Login } from '../../_models/all-api-models';
 
 @Component({
   selector: 'app-home-mentee-pane',

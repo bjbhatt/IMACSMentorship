@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Login } from './../_models/apiModels';
+import { Login } from '../_models/all-api-models';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

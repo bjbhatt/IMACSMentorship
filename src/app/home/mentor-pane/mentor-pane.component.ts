@@ -6,7 +6,7 @@ import { AlertifyService } from '../../_services/alertify.service';
 
 import { Utilities } from '../../_helpers/Utilities';
 
-import { Mentor, Login } from '../../_models/apiModels';
+import { Mentor, Login } from '../../_models/all-api-models';
 
 @Component({
   selector: 'app-home-mentor-pane',

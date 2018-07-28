@@ -1,4 +1,4 @@
-import { Login } from '../_models/apiModels';
+import { Login } from '../_models/all-api-models';
 import { catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { ApiService } from '../_services/api.service';

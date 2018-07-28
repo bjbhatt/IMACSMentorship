@@ -1,5 +1,5 @@
-import { MentorSearch } from '../../_models/apiModels';
-import { MentorSearchOptions } from '../../_models/mentorSearchOptions';
+import { MentorSearch } from '../../_models/all-api-models';
+import { MentorSearchOptions } from '../../_models/mentorship-search-options';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
