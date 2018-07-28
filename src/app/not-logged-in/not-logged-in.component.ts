@@ -19,7 +19,7 @@ export class NotLoggedInComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.login = data['login'];
       if (this.login) {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
       }
       this.imacsWebsiteURL = environment.imacsWebsiteURL;
     });

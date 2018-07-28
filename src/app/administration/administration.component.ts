@@ -19,6 +19,8 @@ export class AdministrationComponent implements OnInit {
       this.login = data['login'];
       if (!this.login) {
         this.router.navigate(['/notLoggedIn']);
+      } else if (!this.login.isAdmin) {
+        this.router.navigate(['/']);
       }
     });
   }
