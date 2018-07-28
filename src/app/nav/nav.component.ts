@@ -2,12 +2,12 @@ import { catchError } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ApiService } from './../_services/api.service';
-import { AlertifyService } from './../_services/alertify.service';
+import { ApiService } from '../_services/api.service';
+import { AlertifyService } from '../_services/alertify.service';
 
-import { Utilities } from './../_helpers/Utilities';
+import { Utilities } from '../_helpers/Utilities';
 
-import { Login } from './../_models/userDetails';
+import { Login } from '../_models/apiModels';
 
 @Component({
   selector: 'app-nav',

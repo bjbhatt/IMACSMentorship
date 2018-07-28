@@ -19,8 +19,10 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NotLoggedInComponent } from './not-logged-in/not-logged-in.component';
 import { MentorRequestsComponent } from './mentor-requests/mentor-requests.component';
 import { MenteePromptsComponent } from './mentee-prompts/mentee-prompts.component';
+import { MentorSearchComponent } from './mentor-search/mentor-search.component';
 import { AdministrationComponent } from './administration/administration.component';
 import { MentorResultsComponent } from './mentor-results/mentor-results.component';
+import { MentorSearchResultComponent } from './mentor-search/mentor-search-result/mentor-search-result.component';
 
 @NgModule({
    declarations: [
@@ -33,8 +35,10 @@ import { MentorResultsComponent } from './mentor-results/mentor-results.componen
       NotLoggedInComponent,
       MentorRequestsComponent,
       MenteePromptsComponent,
-      AdministrationComponent,
-      MentorResultsComponent
+      MentorResultsComponent,
+      MentorSearchComponent,
+      MentorSearchResultComponent,
+      AdministrationComponent
    ],
    imports: [
       BrowserModule,

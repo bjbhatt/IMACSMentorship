@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Utilities } from './../_helpers/Utilities';
+import { Utilities } from '../_helpers/Utilities';
 
-import { Login } from './../_models/userDetails';
+import { Login } from '../_models/apiModels';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

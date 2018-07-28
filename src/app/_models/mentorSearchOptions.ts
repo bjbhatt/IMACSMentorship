@@ -1,4 +1,4 @@
-export interface MentorOptions {
+export interface MentorSearchOptions {
     clinicalCare?: string;
     focus?: string;
     specialization?: string[];

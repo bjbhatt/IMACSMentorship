@@ -6,12 +6,14 @@ import { Router } from '@angular/router';
 import { Login } from '../_models/apiModels';
 
 @Component({
-  selector: 'app-mentee-prompts',
-  templateUrl: './mentee-prompts.component.html',
-  styleUrls: ['./mentee-prompts.component.css']
+  selector: 'app-mentor-search',
+  templateUrl: './mentor-search.component.html',
+  styleUrls: ['./mentor-search.component.css']
 })
-export class MenteePromptsComponent implements OnInit {
+export class MentorSearchComponent implements OnInit {
+  login: Login;
   model: MentorSearchOptions;
+  optionsComplete = false;
   isLoggedIn: boolean;
   step = 1;
   specializations: Map<string, string>;
@@ -180,13 +182,14 @@ export class MenteePromptsComponent implements OnInit {
   }
 
   searchMentor() {
-    this.step++;
-    if (this.model != null) {
-      // TBD : Service call to get mentor search results based on parameters passed from the model.
-      setTimeout(() => { // TBD : Remove timeout after implementing service.
-        this.router.navigate(['/results']);
-      },
-    3000);
-    }
+    // this.step++;
+    // if (this.model != null) {
+    //   // TBD : Service call to get mentor search results based on parameters passed from the model.
+    //   setTimeout(() => { // TBD : Remove timeout after implementing service.
+    //     this.router.navigate(['/results']);
+    //   },
+    // 3000);
+    // }
+    this.optionsComplete = true;
   }
 }

@@ -1,4 +1,4 @@
-import { Login } from '../_models/userDetails';
+import { Login } from '../_models/apiModels';
 import { catchError, map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { AlertifyService } from '../_services/alertify.service';

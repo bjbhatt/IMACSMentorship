@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError, Observer, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import { UserProfile, Mentor, Mentee, Login, MentorshipHistory } from '../_models/userDetails';
+import { UserProfile, Mentor, Mentee, Login, MentorshipHistory } from '../_models/apiModels';
 import { environment } from '../../environments/environment';
 
 @Injectable({
