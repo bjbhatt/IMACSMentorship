@@ -6,27 +6,15 @@
 <nav class="navbar">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-        aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a [routerLink]="['/']" routerLinkActive="router-link-active" class="navbar-brand">IMACS Mentorship</a>
+      <a [routerLink]="['/']" routerLinkActive="router-link-active" class="navbar-brand" title="Navigate to IMACS Mentorship Home">IMACS Mentorship</a>
     </div>
-    <div *ngIf="login" id="navbar" class="navbar-collapse collapse">
+    <div *ngIf="login" id="navbar" class="navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown" dropdown>
-          <a class="dropdown-toggle" dropdownToggle data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Logged in as {{login.fullName}}
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li>
-              <a *ngIf="login.isAdmin" [routerLink]="['/administration']" routerLinkActive="router-link-active">Administration</a>
-              <a *ngIf="login" [routerLink]="['/profile']" routerLinkActive="router-link-active">Update Profile</a>
-            </li>
-          </ul>
+        <li *ngIf="login.isAdmin">
+          <a [routerLink]="['/administration']" routerLinkActive="router-link-active" title="Nagivate to Administration">Administration</a>
+        </li>
+        <li *ngIf="login">
+          <a [routerLink]="['/profile']" routerLinkActive="router-link-active" title="View My ({{login.fullName}}) Profile">View My Profile</a>
         </li>
       </ul>
     </div>

@@ -28,10 +28,16 @@ div.container>img {
 }
 
 .dropdown-toggle:active, .open .dropdown-toggle {
-  background:rgba(255,255,255,.2); 
+  background:rgba(255,255,255,.8); 
 }
 
-.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+li > a {
+  color: #fff;
+
+}
+
+li > a:hover, 
+li > a:focus {
   background-color: rgba(120,162,46,1);
   color: #fff;
 }
