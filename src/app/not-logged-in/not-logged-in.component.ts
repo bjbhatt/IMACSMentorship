@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Login } from '../_models/all-api-models';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-not-logged-in',
@@ -10,6 +11,7 @@ import { Login } from '../_models/all-api-models';
 })
 export class NotLoggedInComponent implements OnInit {
   login: Login;
+  imacsWebsiteURL: string;
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
@@ -19,6 +21,7 @@ export class NotLoggedInComponent implements OnInit {
       if (this.login) {
         this.router.navigate(['/home']);
       }
+      this.imacsWebsiteURL = environment.imacsWebsiteURL;
     });
   }
 }

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://connect3dev.niehs.nih.gov/imacs/ws/MentorshipService.cfc'
+  baseUrl: 'https://connect3dev.niehs.nih.gov/imacs/ws/MentorshipService.cfc',
+  imacsWebsiteURL: 'https://connect3dev.niehs.nih.gov/imacs/'
 };
 
 /*
