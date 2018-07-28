@@ -57,10 +57,6 @@ export class ApiService {
     );
   }
 
-  isLoggedIn(): Observable<Login> {
-    return this.loggedIn();
-  }
-
   loggedIn(): Observable<Login> {
     if (this.useMock) {
       const login: Login = {

@@ -26,7 +26,7 @@ export class NavComponent implements OnInit {
   }
 
   loadModel() {
-    this.apiService.isLoggedIn().subscribe((login: Login) => {
+    this.apiService.loggedIn().subscribe((login: Login) => {
       this.login = login;
     });
   }

@@ -1,6 +1,5 @@
-<div *ngIf="login || login.isAdmin" class="container">
+<div *ngIf="login && login.isAdmin" class="container">
   <p>
     adminstration works!
   </p>
 </div>
-<app-not-logged-in *ngIf="!login || !login?.isAdmin"></app-not-logged-in>

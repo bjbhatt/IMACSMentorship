@@ -1,4 +1,4 @@
-<div *ngIf="!optionsComplete" class="container">
+<div *ngIf="login && !optionsComplete" class="container">
   <div align="center" id="progress-bar" class="prompt-progress-bar row">
     <div [ngClass]="{'progress-active': step >= 2, 'progress-current' : step === 1}" class="progress-item col-md-2 col-sm-2 col-lg-2">Clinical Care
       <span *ngIf="step >= 2" class="glyphicon glyphicon-ok small"></span>
@@ -152,4 +152,4 @@
     </div>
   </div>
 </div>
-<app-mentor-search-result *ngIf="optionsComplete" [mentorSearchOptions]="model"></app-mentor-search-result>
+<app-mentor-search-result *ngIf="login && optionsComplete" [mentorSearchOptions]="model"></app-mentor-search-result>

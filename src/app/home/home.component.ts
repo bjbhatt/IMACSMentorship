@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Utilities } from '../_helpers/Utilities';
 
 import { Login } from '../_models/apiModels';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,12 +13,14 @@ import { ActivatedRoute } from '@angular/router';
 export class HomeComponent implements OnInit {
   login: Login;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.login = data['login'];
+      if (!this.login) {
+        this.router.navigate(['/notLoggedIn']);
+      }
     });
   }
-
 }

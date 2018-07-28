@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 
 import { ApiService } from '../_services/api.service';
 import { AlertifyService } from '../_services/alertify.service';
@@ -13,17 +13,30 @@ import { Utilities } from '../_helpers/Utilities';
   styleUrls: ['./mentor-requests.component.css']
 })
 export class MentorRequestsComponent implements OnInit {
+  login: Login;
   model: Mentor;
-  isLoggedIn: boolean;
   today = new Date();
   showConfirmFormId = 0;
   showDeclineFormId = 0;
 
-  constructor(private apiService: ApiService, private alertifyService: AlertifyService, private router: Router) { }
+  constructor(
+    private apiService: ApiService,
+    private alertifyService: AlertifyService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
-    this.loadModel();
-  }
+    this.route.data.subscribe(data => {
+      this.login = data['login'];
+      if (!this.login) {
+        this.router.navigate(['/notLoggedIn']);
+      } else {
+        this.apiService.getUserMentorInfo(this.login.userId).subscribe((mentor: Mentor) => {
+          this.model = mentor;
+        });
+      }
+    });
+}
 
   acceptMentee(id: number) {
     this.showConfirmFormId = id;
@@ -47,15 +60,6 @@ export class MentorRequestsComponent implements OnInit {
     this.model.pendingRequests.splice(index, 1);
     this.alertifyService.message('Request Declined');
     this.cancel();
-  }
-
-  loadModel() {
-    this.apiService.isLoggedIn().subscribe((login: Login) => {
-      this.isLoggedIn = true;
-      this.apiService.getUserMentorInfo(1).subscribe((mentor: Mentor) => {
-        this.model = mentor;
-      });
-    });
   }
 
   diffInDays(dt: Date): Number {

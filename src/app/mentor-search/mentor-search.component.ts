@@ -2,7 +2,7 @@ import { MentorSearchOptions } from '../_models/mentorSearchOptions';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../_services/api.service';
 import { AlertifyService } from '../_services/alertify.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Login } from '../_models/apiModels';
 
 @Component({
@@ -14,16 +14,24 @@ export class MentorSearchComponent implements OnInit {
   login: Login;
   model: MentorSearchOptions;
   optionsComplete = false;
-  isLoggedIn: boolean;
   step = 1;
   specializations: Map<string, string>;
   expertises: Map<string, string>;
   locations: Map<string, string>;
 
-  constructor(private apiService: ApiService, private alertifyService: AlertifyService, private router: Router) { }
+  constructor(
+    private apiService: ApiService,
+    private alertifyService: AlertifyService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
-    this.loadModel();
+    this.route.data.subscribe(data => {
+      this.login = data['login'];
+      if (!this.login) {
+        this.router.navigate(['/notLoggedIn']);
+      }
+    });
     this.model = {
       clinicalCare: null,
       focus: null,
@@ -58,12 +66,6 @@ export class MentorSearchComponent implements OnInit {
 
   getKeys(map) {
     return Array.from(map.keys());
-  }
-
-  loadModel() {
-    this.apiService.isLoggedIn().subscribe((login: Login) => {
-      this.isLoggedIn = true;
-    });
   }
 
   setClinical(clinical?: string) {

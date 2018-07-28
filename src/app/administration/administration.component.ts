@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Login } from '../_models/apiModels';
 
@@ -12,12 +12,14 @@ import { Login } from '../_models/apiModels';
 export class AdministrationComponent implements OnInit {
   login: Login;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.login = data['login'];
+      if (!this.login) {
+        this.router.navigate(['/notLoggedIn']);
+      }
     });
   }
-
 }

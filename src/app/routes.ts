@@ -10,11 +10,17 @@ import { MentorSearchComponent } from './mentor-search/mentor-search.component';
 import { LoginResolver } from './_resolvers/login-resolver';
 
 export const appRoutes: Routes = [
-    {path: 'home', component: HomeComponent, resolve: {login: LoginResolver} },
-    {path: 'profile', component: UserProfileComponent, resolve: {login: LoginResolver}  },
-    {path: 'administration', component: AdministrationComponent, resolve: {login: LoginResolver}  },
-    {path: 'mentorRequests', component: MentorRequestsComponent, resolve: {login: LoginResolver} },
-    {path: 'mentorSearch', component: MentorSearchComponent, resolve: {login: LoginResolver} },
-    {path: 'notLoggedIn', component: NotLoggedInComponent },
-    {path: '**', component: HomeComponent, resolve: {login: LoginResolver} },
+    {
+        path: '',
+        resolve: {login: LoginResolver},
+        children: [
+            {path: 'home', component: HomeComponent },
+            {path: 'profile', component: UserProfileComponent },
+            {path: 'administration', component: AdministrationComponent },
+            {path: 'mentorRequests', component: MentorRequestsComponent },
+            {path: 'mentorSearch', component: MentorSearchComponent },
+            {path: 'notLoggedIn', component: NotLoggedInComponent },
+            {path: '**', component: HomeComponent }
+        ]
+    }
 ];
