@@ -18,11 +18,11 @@ import { appRoutes } from './routes';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NotLoggedInComponent } from './not-logged-in/not-logged-in.component';
 import { MentorRequestsComponent } from './mentor-requests/mentor-requests.component';
-import { MenteePromptsComponent } from './mentee-prompts/mentee-prompts.component';
+// import { MenteePromptsComponent } from './mentee-prompts/mentee-prompts.component';
+// import { MentorResultsComponent } from './mentor-results/mentor-results.component';
 import { MentorSearchComponent } from './mentor-search/mentor-search.component';
-import { AdministrationComponent } from './administration/administration.component';
-import { MentorResultsComponent } from './mentor-results/mentor-results.component';
 import { MentorSearchResultComponent } from './mentor-search/mentor-search-result/mentor-search-result.component';
+import { AdministrationComponent } from './administration/administration.component';
 
 @NgModule({
    declarations: [
@@ -34,8 +34,8 @@ import { MentorSearchResultComponent } from './mentor-search/mentor-search-resul
       UserProfileComponent,
       NotLoggedInComponent,
       MentorRequestsComponent,
-      MenteePromptsComponent,
-      MentorResultsComponent,
+    //   MenteePromptsComponent,
+    //   MentorResultsComponent,
       MentorSearchComponent,
       MentorSearchResultComponent,
       AdministrationComponent

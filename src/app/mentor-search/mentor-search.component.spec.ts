@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MentorSearchComponent } from './mentor-search.component';
 
-describe('MenteePromptsComponent', () => {
+describe('MentorSearchPromptsComponent', () => {
   let component: MentorSearchComponent;
   let fixture: ComponentFixture<MentorSearchComponent>;
 
