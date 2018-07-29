@@ -15,6 +15,7 @@ export const appRoutes: Routes = [
         resolve: {login: LoginResolver},
         children: [
             {path: 'home', component: HomeComponent },
+            {path: 'profile/:userId', component: UserProfileComponent },
             {path: 'profile', component: UserProfileComponent },
             {path: 'administration', component: AdministrationComponent },
             {path: 'mentorRequests', component: MentorRequestsComponent },

@@ -11,8 +11,15 @@ import { Login } from './../_models/all-api-models';
 })
 export class UserProfileComponent implements OnInit {
   login: Login;
+  userId: number;
+  params: any;
+  userIdMatchesLoginUserId: boolean;
 
-  constructor(private route: ActivatedRoute, private router: Router, private location: Location) { }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private location: Location) {
+      this.route.params.subscribe( params => this.params = params);
+    }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -20,6 +27,8 @@ export class UserProfileComponent implements OnInit {
       if (!this.login) {
         this.router.navigate(['/notLoggedIn']);
       }
+      this.userId = this.params['userId'] ? this.params['userId'] : this.login.userId;
+      this.userIdMatchesLoginUserId = this.userId === this.login.userId;
     });
   }
 

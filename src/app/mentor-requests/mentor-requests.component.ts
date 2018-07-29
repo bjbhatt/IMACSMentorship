@@ -72,6 +72,6 @@ export class MentorRequestsComponent implements OnInit {
   }
 
   showUserProfile(userId: number) {
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/profile', userId]);
   }
 }
