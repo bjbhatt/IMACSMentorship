@@ -1,9 +1,8 @@
-import { MentorSearchOptions } from '../_models/mentorship-search-options';
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../_services/api.service';
-import { AlertifyService } from '../_services/alertify.service';
 import { Router, ActivatedRoute } from '@angular/router';
+
 import { Login } from '../_models/all-api-models';
+import { MentorSearchOptions } from '../_models/mentorship-search-options';
 
 @Component({
   selector: 'app-mentor-search',
@@ -20,8 +19,6 @@ export class MentorSearchComponent implements OnInit {
   locations: Map<string, string>;
 
   constructor(
-    private apiService: ApiService,
-    private alertifyService: AlertifyService,
     private route: ActivatedRoute,
     private router: Router) { }
 

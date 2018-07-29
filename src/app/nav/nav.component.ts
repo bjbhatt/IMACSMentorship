@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { ApiService } from '../_services/api.service';
-import { AlertifyService } from '../_services/alertify.service';
 
 import { Login } from '../_models/all-api-models';
 
@@ -14,15 +12,9 @@ import { Login } from '../_models/all-api-models';
 export class NavComponent implements OnInit {
   login: Login;
 
-  constructor(private apiService: ApiService,
-    private alertifyService: AlertifyService,
-    private router: Router) { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() {
-    this.loadModel();
-  }
-
-  loadModel() {
     this.apiService.loggedIn().subscribe((login: Login) => {
       this.login = login;
     });

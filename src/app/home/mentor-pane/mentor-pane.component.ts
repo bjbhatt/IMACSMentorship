@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { ApiService } from '../../_services/api.service';
 import { AlertifyService } from '../../_services/alertify.service';
@@ -25,15 +24,10 @@ export class MentorPaneComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private alertifyService: AlertifyService,
-    private router: Router
+    private alertifyService: AlertifyService
   ) { }
 
   ngOnInit() {
-    this.loadModel();
-  }
-
-  loadModel() {
     this.apiService.getUserMentorInfo(this.login.userId).subscribe((mentor: Mentor) => {
       this.model = mentor;
       this.status = mentor.status;

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Utilities } from '../_helpers/Utilities';
-
 import { Login } from '../_models/all-api-models';
 
 @Component({

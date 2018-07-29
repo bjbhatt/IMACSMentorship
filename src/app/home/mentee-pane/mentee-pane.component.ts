@@ -1,10 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { ApiService } from '../../_services/api.service';
 import { AlertifyService } from '../../_services/alertify.service';
-
-import { Utilities } from '../../_helpers/Utilities';
 
 import { Mentee, Login } from '../../_models/all-api-models';
 
@@ -25,22 +22,14 @@ export class MenteePaneComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private alertifyService: AlertifyService,
-    private router: Router
   ) { }
 
   ngOnInit() {
-    this.loadModel();
+    this.apiService.getUserMenteeInfo(this.login.userId).subscribe((mentee: Mentee) => {
+      this.model = mentee;
+      this.status = this.model.status;
+    });
   }
-
-  loadModel() {
-    if (this.login) {
-      this.apiService.getUserMenteeInfo(1).subscribe((mentee: Mentee) => {
-        this.model = mentee;
-        this.status = this.model.status;
-      });
-    }
-  }
-
   contact() {
     this.message = '';
     this.showContactForm = true;
