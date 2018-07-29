@@ -1,5 +1,5 @@
 <div class="container">
-  <button (click)="refineSearch()" class="btn btn-md btn-default">Refine Search</button>
+  <button *ngIf="model" (click)="refineSearch()" class="btn btn-md btn-default">Refine Search</button>
   <div *ngIf="!model">
     <div class="prompt-header">
       <h2>

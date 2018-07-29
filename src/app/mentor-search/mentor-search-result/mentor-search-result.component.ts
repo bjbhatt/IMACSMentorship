@@ -13,7 +13,7 @@ import { MentorSearchOptions } from './../../_models/mentorship-search-options';
 export class MentorSearchResultComponent implements OnInit {
   @Input() login: Login;
   @Input() mentorSearchOptions: MentorSearchOptions;
-  @Output() searchAgainEvent = new EventEmitter<MentorSearchOptions>();
+  @Output() refineSearchEvent = new EventEmitter<MentorSearchOptions>();
   model: MentorSearch[];
 
   constructor(private apiService: ApiService) { }
@@ -24,6 +24,6 @@ export class MentorSearchResultComponent implements OnInit {
   }
 
   refineSearch() {
-    this.searchAgainEvent.emit(this.mentorSearchOptions);
+    this.refineSearchEvent.emit(this.mentorSearchOptions);
   }
 }
