@@ -70,4 +70,8 @@ export class MentorRequestsComponent implements OnInit {
     this.showConfirmFormId = 0;
     this.showDeclineFormId = 0;
   }
+
+  showUserProfile(userId: number) {
+    this.router.navigate(['/profile']);
+  }
 }

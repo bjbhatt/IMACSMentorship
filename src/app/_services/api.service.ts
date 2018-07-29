@@ -85,7 +85,7 @@ export class ApiService {
             degree: 'Phd, MD',
             location: 'Hospital de Clinicas',
             requestDate: new Date('06/27/2018'),
-            expirationDate: new Date('07/22/2018')
+            expirationDate: new Date('07/31/2018')
           },
           {
             userId: 3,
@@ -94,7 +94,7 @@ export class ApiService {
             degree: 'MD, MBBS',
             location: 'Duke Medical Research',
             requestDate: new Date('06/27/2018'),
-            expirationDate: new Date('07/27/2018')
+            expirationDate: new Date('07/31/2018')
           },
           {
             userId: 4,
@@ -103,7 +103,7 @@ export class ApiService {
             degree: 'MD, PA-C, MBBS',
             location: 'John Hopkins University School',
             requestDate: new Date('06/27/2018'),
-            expirationDate: new Date('07/27/2018')
+            expirationDate: new Date('07/31/2018')
           }
         ],
         currentMentee: {

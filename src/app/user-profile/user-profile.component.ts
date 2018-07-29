@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { Login } from './../_models/all-api-models';
 
@@ -11,7 +12,7 @@ import { Login } from './../_models/all-api-models';
 export class UserProfileComponent implements OnInit {
   login: Login;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router, private location: Location) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -20,5 +21,9 @@ export class UserProfileComponent implements OnInit {
         this.router.navigate(['/notLoggedIn']);
       }
     });
+  }
+
+  goBack() {
+    this.location.back();
   }
 }
