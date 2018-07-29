@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ApiService } from '../_services/api.service';
-import { AlertifyService } from '../_services/alertify.service';
-import { Login, Mentor } from '../_models/all-api-models';
+import { ApiService } from './../_services/api.service';
+import { AlertifyService } from './../_services/alertify.service';
+import { Login, Mentor } from './../_models/all-api-models';
 
-import { Utilities } from '../_helpers/Utilities';
+import { Utilities } from './../_helpers/Utilities';
 
 @Component({
   selector: 'app-mentor-requests',

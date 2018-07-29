@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Login } from '../_models/all-api-models';
-import { environment } from '../../environments/environment';
+import { Login } from './../_models/all-api-models';
+import { environment } from './../../environments/environment';
 
 @Component({
   selector: 'app-not-logged-in',

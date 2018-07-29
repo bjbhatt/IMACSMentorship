@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ApiService } from '../_services/api.service';
+import { ApiService } from './../_services/api.service';
 
-import { Login } from '../_models/all-api-models';
+import { Login } from './../_models/all-api-models';
 
 @Component({
   selector: 'app-nav',

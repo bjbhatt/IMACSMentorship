@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { Login } from '../_models/all-api-models';
-import { MentorSearchOptions } from '../_models/mentorship-search-options';
+import { Login } from './../_models/all-api-models';
+import { MentorSearchOptions } from './../_models/mentorship-search-options';
 
 @Component({
   selector: 'app-mentor-search',

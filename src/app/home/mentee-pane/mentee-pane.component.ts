@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { ApiService } from '../../_services/api.service';
-import { AlertifyService } from '../../_services/alertify.service';
+import { ApiService } from './../../_services/api.service';
+import { AlertifyService } from './../../_services/alertify.service';
 
-import { Mentee, Login } from '../../_models/all-api-models';
+import { Mentee, Login } from './../../_models/all-api-models';
 
 @Component({
   selector: 'app-home-mentee-pane',
