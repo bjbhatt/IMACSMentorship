@@ -191,4 +191,10 @@ export class MentorSearchComponent implements OnInit {
     // }
     this.optionsComplete = true;
   }
+
+  searchAgainEventHandler($event: MentorSearchOptions) {
+    this.model = $event;
+    this.step = 5;
+    this.optionsComplete = false;
+  }
 }

@@ -152,4 +152,8 @@
     </div>
   </div>
 </div>
-<app-mentor-search-result *ngIf="login && optionsComplete" [login]="login" [mentorSearchOptions]="model"></app-mentor-search-result>
+<app-mentor-search-result 
+  *ngIf="login && optionsComplete" 
+  [login]="login" 
+  [mentorSearchOptions]="model"
+  (searchAgainEvent)="searchAgainEventHandler($event)"></app-mentor-search-result>

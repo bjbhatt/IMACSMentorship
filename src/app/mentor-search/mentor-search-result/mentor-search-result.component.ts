@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { ApiService } from './../../_services/api.service';
 
@@ -13,6 +13,7 @@ import { MentorSearchOptions } from './../../_models/mentorship-search-options';
 export class MentorSearchResultComponent implements OnInit {
   @Input() login: Login;
   @Input() mentorSearchOptions: MentorSearchOptions;
+  @Output() searchAgainEvent = new EventEmitter<MentorSearchOptions>();
   model: MentorSearch[];
 
   constructor(private apiService: ApiService) { }
@@ -20,5 +21,9 @@ export class MentorSearchResultComponent implements OnInit {
   ngOnInit() {
     console.log(this.login);
     console.log(this.mentorSearchOptions);
+  }
+
+  refineSearch() {
+    this.searchAgainEvent.emit(this.mentorSearchOptions);
   }
 }
