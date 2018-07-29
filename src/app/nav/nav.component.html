@@ -14,7 +14,7 @@
           <a [routerLink]="['/administration']" routerLinkActive="router-link-active" title="Nagivate to Administration">Administration</a>
         </li>
         <li *ngIf="login">
-          <a [routerLink]="['/profile']" routerLinkActive="router-link-active" title="View My ({{login.fullName}}) Profile">View My Profile</a>
+          <a [routerLink]="['/profile']" routerLinkActive="router-link-active" title="My Profile ({{login.fullName}})">My Profile</a>
         </li>
       </ul>
     </div>
