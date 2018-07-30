@@ -17,44 +17,44 @@ export class ApiService {
 
   private get<T>(url: string): Observable<T> {
     return this.http
-    .get<T>(
-      url)
-    .pipe(
-      map((response: T) => {
-        return response;
-      }),
-      catchError(this.handleError)
-    );
+      .get<T>(
+        url)
+      .pipe(
+        map((response: T) => {
+          return response;
+        }),
+        catchError(this.handleError)
+      );
   }
 
   private postFormEncoded<T>(url: string, body: HttpParams): Observable<T> {
     return this.http
-    .post<T>(
-      url,
-      body.toString(),
-      {
-        headers: new HttpHeaders()
-          .set('Content-Type', 'application/x-www-form-urlencoded')
-      })
-    .pipe(
-      map((response: T) => {
-        return response;
-      }),
-      catchError(this.handleError)
-    );
+      .post<T>(
+        url,
+        body.toString(),
+        {
+          headers: new HttpHeaders()
+            .set('Content-Type', 'application/x-www-form-urlencoded')
+        })
+      .pipe(
+        map((response: T) => {
+          return response;
+        }),
+        catchError(this.handleError)
+      );
   }
 
   private postJson<T>(url: string, body: any): Observable<T> {
     return this.http
-    .post<T>(
-      url,
-      body)
-    .pipe(
-      map((response: T) => {
-        return response;
-      }),
-      catchError(this.handleError)
-    );
+      .post<T>(
+        url,
+        body)
+      .pipe(
+        map((response: T) => {
+          return response;
+        }),
+        catchError(this.handleError)
+      );
   }
 
   loggedIn(): Observable<Login> {
@@ -157,25 +157,107 @@ export class ApiService {
     }
   }
 
-  updateMentorTrainingDate(userId: number, trainingDate: string): Observable<void> {
+  updateMentorTrainingDate(userId: number, trainingDate: string): Observable<Mentor> {
     if (this.useMock) {
-      return of();
+      const mentor: Mentor = {
+        userId: userId,
+        status: 'Eligible',
+        trainingDate: trainingDate,
+        pendingRequests: [
+          {
+            userId: 2,
+            fullName: 'B J Bhatt',
+            emailAddress: 'a@a.com',
+            degree: 'Phd, MD',
+            location: 'Hospital de Clinicas',
+            requestDate: new Date('06/27/2018'),
+            expirationDate: new Date('07/31/2018')
+          },
+          {
+            userId: 3,
+            fullName: 'Sagar Thakore',
+            emailAddress: 'sagar@mentee.com',
+            degree: 'MD, MBBS',
+            location: 'Duke Medical Research',
+            requestDate: new Date('06/27/2018'),
+            expirationDate: new Date('07/31/2018')
+          },
+          {
+            userId: 4,
+            fullName: 'Jessica Reynolds',
+            emailAddress: 'jessica@mentee.com',
+            degree: 'MD, PA-C, MBBS',
+            location: 'John Hopkins University School',
+            requestDate: new Date('06/27/2018'),
+            expirationDate: new Date('07/31/2018')
+          }
+        ],
+        currentMentee: {
+          userId: 2,
+          fullName: 'Jessica Reynolds',
+          emailAddress: 'jessica@mentee.com',
+          startDate: new Date('06/27/2018'),
+          endDate: new Date('06/26/2020')
+        }
+      };
+      return of(mentor);
     } else {
       const body = new HttpParams()
         .set('userId', userId.toString())
         .set('trainingDate', trainingDate.toString());
-      return this.postFormEncoded<void>(this.baseUrl + '?method=MentorTrainingDate', body);
+      return this.postFormEncoded<Mentor>(this.baseUrl + '?method=MentorTrainingDate', body);
     }
   }
 
-  updateMentorAvailibility(userId: number, available: boolean): Observable<void> {
+  updateMentorAvailibility(userId: number, available: boolean): Observable<Mentor> {
     if (this.useMock) {
-      return of();
+      const mentor: Mentor = {
+        userId: userId,
+        status: available ? 'Current' : 'Eligible',
+        trainingDate: '7/1/2018',
+        pendingRequests: [
+          {
+            userId: 2,
+            fullName: 'B J Bhatt',
+            emailAddress: 'a@a.com',
+            degree: 'Phd, MD',
+            location: 'Hospital de Clinicas',
+            requestDate: new Date('06/27/2018'),
+            expirationDate: new Date('07/31/2018')
+          },
+          {
+            userId: 3,
+            fullName: 'Sagar Thakore',
+            emailAddress: 'sagar@mentee.com',
+            degree: 'MD, MBBS',
+            location: 'Duke Medical Research',
+            requestDate: new Date('06/27/2018'),
+            expirationDate: new Date('07/31/2018')
+          },
+          {
+            userId: 4,
+            fullName: 'Jessica Reynolds',
+            emailAddress: 'jessica@mentee.com',
+            degree: 'MD, PA-C, MBBS',
+            location: 'John Hopkins University School',
+            requestDate: new Date('06/27/2018'),
+            expirationDate: new Date('07/31/2018')
+          }
+        ],
+        currentMentee: {
+          userId: 2,
+          fullName: 'Jessica Reynolds',
+          emailAddress: 'jessica@mentee.com',
+          startDate: new Date('06/27/2018'),
+          endDate: new Date('06/26/2020')
+        }
+      };
+      return of(mentor);
     } else {
       const body = new HttpParams()
         .set('userId', userId.toString())
         .set('available', available.toString());
-      return this.postFormEncoded<void>(this.baseUrl + '?method=MentorAvailibility', body);
+      return this.postFormEncoded<Mentor>(this.baseUrl + '?method=MentorAvailibility', body);
     }
   }
 

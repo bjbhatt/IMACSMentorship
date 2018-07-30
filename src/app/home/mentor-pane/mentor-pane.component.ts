@@ -41,16 +41,8 @@ export class MentorPaneComponent implements OnInit {
 
   updateDateConfirm() {
     if (this.trainingDate || this.trainingDate !== 'Invalid Date') {
-      this.apiService.updateMentorTrainingDate(this.login.userId, this.trainingDate).subscribe(() => {
-        this.model.trainingDate = this.trainingDate;
-        const today = new Date();
-        let years = today.getFullYear() - new Date(this.model.trainingDate).getFullYear();
-        if (new Date(this.model.trainingDate) > Utilities.addYearsToDate(today, -5)) {
-          years--;
-        }
-        if (years >= 5) {
-          this.model.status = 'Eligible';
-        }
+      this.apiService.updateMentorTrainingDate(this.login.userId, this.trainingDate).subscribe((mentorInfo: Mentor) => {
+        this.model = mentorInfo;
         this.status = this.model.status;
         this.cancel();
         this.alertifyService.message('Date saved!');
