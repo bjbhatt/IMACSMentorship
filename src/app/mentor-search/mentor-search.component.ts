@@ -168,15 +168,29 @@ export class MentorSearchComponent implements OnInit {
     }
   }
 
-  disableNext() {
-    if ((this.step === 1 && this.model.clinicalCare == null)
-      || (this.step === 2 && this.model.focus == null)
-      || (this.step === 3 && this.model.specialization.length === 0)
-      || (this.step === 4 && this.model.expertise.length === 0)
-      || (this.step === 5 && this.model.location.length === 0)) {
-      return true;
-    } else {
+  isStepComplete(num) {
+    if ((num === 1 && this.model.clinicalCare == null)
+      || (num === 2 && this.model.focus == null)
+      || (num === 3 && this.model.specialization.length === 0)
+      || (num === 4 && this.model.expertise.length === 0)
+      || (num === 5 && this.model.location.length === 0)) {
       return false;
+    } else {
+      return true;
+    }
+  }
+
+  navigateTo(num) {
+    if (this.isStepComplete(num)) {
+      this.step = num;
+    }
+  }
+
+  disableNext() {
+    if (this.isStepComplete(this.step)) {
+      return false;
+    } else {
+      return true;
     }
   }
 

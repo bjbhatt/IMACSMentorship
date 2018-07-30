@@ -1,18 +1,18 @@
 <div *ngIf="login && !optionsComplete" class="container">
   <div align="center" id="progress-bar" class="prompt-progress-bar row">
-    <div [ngClass]="{'progress-active': step >= 1, 'progress-current' : step === 1}" class="progress-item col-md-2 col-sm-2 col-lg-2">Clinical Care
+    <div [ngClass]="{'progress-active': step >= 1, 'progress-current' : step === 1, 'progress-complete' : isStepComplete(1) && step < 1}" class="progress-item col-md-2 col-sm-2 col-lg-2" (click)="navigateTo(1)">Clinical Care
       <!-- <span *ngIf="step >= 2" class="glyphicon glyphicon-ok small"></span> -->
     </div>
-    <div [ngClass]="{'progress-active': step >= 2, 'progress-current' : step === 2}" class="progress-item col-md-2 col-sm-3 col-lg-2">Focus
+    <div [ngClass]="{'progress-active': step >= 2, 'progress-current' : step === 2, 'progress-complete' : isStepComplete(2) && step < 2}" class="progress-item col-md-2 col-sm-3 col-lg-2" (click)="navigateTo(2)">Focus
       <!-- <span *ngIf="step >= 3" class="glyphicon glyphicon-ok small"></span> -->
     </div>
-    <div [ngClass]="{'progress-active': step >= 3, 'progress-current' : step === 3}" class="progress-item col-md-4 col-sm-4 col-lg-4">Specializations
+    <div [ngClass]="{'progress-active': step >= 3, 'progress-current' : step === 3, 'progress-complete' : isStepComplete(3) && step < 3}" class="progress-item col-md-4 col-sm-4 col-lg-4" (click)="navigateTo(3)">Specializations
       <!-- <span *ngIf="step >= 4" class="glyphicon glyphicon-ok small"></span> -->
     </div>
-    <div [ngClass]="{'progress-active': step >= 4, 'progress-current' : step === 4}" class="progress-item col-md-2 col-sm-3 col-lg-2">Expertise
+    <div [ngClass]="{'progress-active': step >= 4, 'progress-current' : step === 4, 'progress-complete' : isStepComplete(4) && step < 4}" class="progress-item col-md-2 col-sm-3 col-lg-2" (click)="navigateTo(4)">Expertise
       <!-- <span *ngIf="step >= 5" class="glyphicon glyphicon-ok small"></span> -->
     </div>
-    <div [ngClass]="{'progress-active': step >= 5, 'progress-current' : step === 5}" class="progress-item col-md-2 col-sm-2 col-lg-2">Location
+    <div [ngClass]="{'progress-active': step >= 5, 'progress-current' : step === 5, 'progress-complete' : isStepComplete(5) && step < 5}" class="progress-item col-md-2 col-sm-2 col-lg-2" (click)="navigateTo(5)">Location
       <!-- <span *ngIf="step >= 6" class="glyphicon glyphicon-ok small"></span> -->
     </div>
   </div>
