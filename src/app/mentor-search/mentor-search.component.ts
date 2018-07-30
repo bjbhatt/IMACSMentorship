@@ -181,8 +181,20 @@ export class MentorSearchComponent implements OnInit {
   }
 
   navigateTo(num) {
-    if (this.isStepComplete(num - 1)) {
+    if ((this.isStepComplete(num - 1)
+      && this.isStepComplete(this.step))
+      || num <= this.step) {
       this.step = num;
+    }
+  }
+
+  disableProgress(num) {
+    if ((this.isStepComplete(num - 1)
+      && this.isStepComplete(this.step))
+      || num <= this.step) {
+      return false;
+    } else {
+      return true;
     }
   }
 
@@ -191,6 +203,30 @@ export class MentorSearchComponent implements OnInit {
       return false;
     } else {
       return true;
+    }
+  }
+
+  disableSearch() {
+    if (
+      this.isStepComplete(1)
+      && this.isStepComplete(2)
+      && this.isStepComplete(3)
+      && this.isStepComplete(4)
+      && this.isStepComplete(5)
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  progress(pos) {
+    if (this.isStepComplete(pos) && pos !== this.step) {
+      return 'done';
+    } else if (this.step === pos) {
+      return 'current';
+    } else if (this.isStepComplete(pos - 1)) {
+      return 'complete';
     }
   }
 

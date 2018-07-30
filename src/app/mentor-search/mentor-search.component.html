@@ -1,19 +1,23 @@
 <div *ngIf="login && !optionsComplete" class="container">
   <div align="center" id="progress-bar" class="prompt-progress-bar row">
-    <div [ngClass]="{'progress-active': step >= 1, 'progress-current' : step === 1, 'progress-complete' : isStepComplete(1) && step < 1}" class="progress-item col-md-2 col-sm-2 col-lg-2" (click)="navigateTo(1)">Clinical Care
-      <!-- <span *ngIf="step >= 2" class="glyphicon glyphicon-ok small"></span> -->
+    <div [ngClass]="{'progress-done': progress(1) === 'done', 'progress-current' : progress(1) === 'current'}" class="progress-item col-md-2 col-sm-2 col-lg-2"
+      (click)="navigateTo(1)">Clinical Care
     </div>
-    <div [ngClass]="{'progress-active': step >= 2, 'progress-current' : step === 2, 'progress-complete' : isStepComplete(1) && step < 2}" class="progress-item col-md-2 col-sm-3 col-lg-2" (click)="navigateTo(2)">Focus
-      <!-- <span *ngIf="step >= 3" class="glyphicon glyphicon-ok small"></span> -->
+    <div [ngClass]="{'progress-done': progress(2) === 'done', 'progress-current' : progress(2) === 'current', 'progress-complete' : progress(2) === 'complete', 'progress-not-allowed' : disableProgress(2)}"
+      class="progress-item col-md-2 col-sm-3 col-lg-2"
+      (click)="navigateTo(2)">Focus
     </div>
-    <div [ngClass]="{'progress-active': step >= 3, 'progress-current' : step === 3, 'progress-complete' : isStepComplete(2) && step < 3}" class="progress-item col-md-4 col-sm-4 col-lg-4" (click)="navigateTo(3)">Specializations
-      <!-- <span *ngIf="step >= 4" class="glyphicon glyphicon-ok small"></span> -->
+    <div [ngClass]="{'progress-done': progress(3) === 'done', 'progress-current' : progress(3) === 'current', 'progress-complete' : progress(3) === 'complete', 'progress-not-allowed' : disableProgress(3)}"
+      class="progress-item col-md-4 col-sm-4 col-lg-4"
+      (click)="navigateTo(3)">Specializations
     </div>
-    <div [ngClass]="{'progress-active': step >= 4, 'progress-current' : step === 4, 'progress-complete' : isStepComplete(3) && step < 4}" class="progress-item col-md-2 col-sm-3 col-lg-2" (click)="navigateTo(4)">Expertise
-      <!-- <span *ngIf="step >= 5" class="glyphicon glyphicon-ok small"></span> -->
+    <div [ngClass]="{'progress-done': progress(4) === 'done', 'progress-current' : progress(4) === 'current', 'progress-complete' : progress(4) === 'complete', 'progress-not-allowed' : disableProgress(4)}"
+      class="progress-item col-md-2 col-sm-3 col-lg-2"
+      (click)="navigateTo(4)">Expertise
     </div>
-    <div [ngClass]="{'progress-active': step >= 5, 'progress-current' : step === 5, 'progress-complete' : isStepComplete(4) && step < 5}" class="progress-item col-md-2 col-sm-2 col-lg-2" (click)="navigateTo(5)">Location
-      <!-- <span *ngIf="step >= 6" class="glyphicon glyphicon-ok small"></span> -->
+    <div [ngClass]="{'progress-done': progress(5) === 'done', 'progress-current' : progress(5) === 'current', 'progress-complete' : progress(5) === 'complete', 'progress-not-allowed' : disableProgress(5)}"
+      class="progress-item col-md-2 col-sm-2 col-lg-2"
+      (click)="navigateTo(5)">Location
     </div>
   </div>
   <div *ngIf="step === 1" id="clinical-care">
@@ -27,16 +31,13 @@
     <div class="prompt-body">
       <div class="row">
         <div align="center" class="col-md-4 col-sm-4 col-lg-4">
-          <button [ngClass]="{'btn-success': model.clinicalCare === 'yes'}" class="btn btn-default btn-lg btn-block btn-huge"
-            (click)="setClinical('yes')">Yes</button>
+          <button [ngClass]="{'btn-success': model.clinicalCare === 'yes'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setClinical('yes')">Yes</button>
         </div>
         <div align="center" class="col-md-4 col-sm-4 col-lg-4">
-          <button [ngClass]="{'btn-success': model.clinicalCare === 'no'}" class="btn btn-default btn-lg btn-block btn-huge"
-            (click)="setClinical('no')">No</button>
+          <button [ngClass]="{'btn-success': model.clinicalCare === 'no'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setClinical('no')">No</button>
         </div>
         <div align="center" class="col-md-4 col-sm-4 col-lg-4">
-          <button [ngClass]="{'btn-success': model.clinicalCare === 'n/a'}" class="btn btn-default btn-lg btn-block btn-huge"
-            (click)="setClinical('n/a')">Doesn't
+          <button [ngClass]="{'btn-success': model.clinicalCare === 'n/a'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setClinical('n/a')">Doesn't
             <br />Matter</button>
         </div>
       </div>
@@ -57,8 +58,7 @@
             <br />Myositis</button>
         </div>
         <div align="center" class="col-md-4 col-sm-4 col-lg-4">
-          <button [ngClass]="{'btn-success': model.focus === 'juvenile'}" class="btn btn-default btn-lg btn-block btn-huge"
-            (click)="setFocus('juvenile')">Juvenile
+          <button [ngClass]="{'btn-success': model.focus === 'juvenile'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setFocus('juvenile')">Juvenile
             <br />Myositis</button>
         </div>
         <div align="center" class="col-md-4 col-sm-4 col-lg-4">
@@ -147,13 +147,9 @@
         <button [disabled]='disableNext()' class="btn btn-primary btn-lg btn-block btn-nav" (click)="nextPage()">Next</button>
       </div>
       <div *ngIf="step === 5" align="center" class="col-md-6 col-sm-6 col-lg-6">
-        <button [disabled]='disableNext()' class="btn btn-primary btn-lg btn-block btn-nav" (click)="searchMentor()">Search</button>
+        <button [disabled]='disableSearch()' class="btn btn-primary btn-lg btn-block btn-nav" (click)="searchMentor()">Search</button>
       </div>
     </div>
   </div>
 </div>
-<app-mentor-search-result 
-  *ngIf="login && optionsComplete" 
-  [login]="login" 
-  [mentorSearchOptions]="model"
-  (refineSearchEvent)="refineSearchEventHandler($event)"></app-mentor-search-result>
+<app-mentor-search-result *ngIf="login && optionsComplete" [login]="login" [mentorSearchOptions]="model" (refineSearchEvent)="refineSearchEventHandler($event)"></app-mentor-search-result>
