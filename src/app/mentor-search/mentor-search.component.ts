@@ -181,7 +181,7 @@ export class MentorSearchComponent implements OnInit {
   }
 
   navigateTo(num) {
-    if (this.isStepComplete(num)) {
+    if (this.isStepComplete(num - 1)) {
       this.step = num;
     }
   }
