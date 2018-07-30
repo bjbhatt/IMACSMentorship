@@ -1,0 +1,27 @@
+.container{
+    background: rgba(255,255,255,1);
+    min-height: 500px;
+    /* box-shadow: 0px 0px 10px grey; */
+    /* border-radius: 5px; */
+}
+
+.prompt-header{
+    padding: 10px;
+    color: rgba(76,76,76,1);
+}
+
+.prompt-text {
+    font-size: 14pt;
+    color: rgba(76,76,76,1);
+}
+
+.prompt-body {
+    font-size: 14pt;
+    color: rgba(76,76,76,1);
+    padding: 10px;
+    min-height: 300px;
+
+}
+.loading-spinner {
+    margin-top: 50px;
+}
