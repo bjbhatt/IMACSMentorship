@@ -181,7 +181,7 @@ export class MentorSearchComponent implements OnInit {
   }
 
   navigateTo(num) {
-    if ((this.isStepComplete(num - 1)
+    if ((this.previousStepsComplete(num - 1)
       && this.isStepComplete(this.step))
       || num <= this.step) {
       this.step = num;
@@ -189,7 +189,7 @@ export class MentorSearchComponent implements OnInit {
   }
 
   disableProgress(num) {
-    if ((this.isStepComplete(num - 1)
+    if ((this.previousStepsComplete(num - 1)
       && this.isStepComplete(this.step))
       || num <= this.step) {
       return false;
@@ -204,6 +204,16 @@ export class MentorSearchComponent implements OnInit {
     } else {
       return true;
     }
+  }
+
+  previousStepsComplete(pos) {
+    let complete = true;
+    for (let i = 1; i < pos; i++) {
+      if (!this.isStepComplete(pos)) {
+        complete = false;
+      }
+    }
+    return complete;
   }
 
   disableSearch() {
