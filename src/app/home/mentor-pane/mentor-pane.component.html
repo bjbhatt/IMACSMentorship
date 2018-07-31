@@ -67,10 +67,15 @@
       <button class="btn btn-default btn-sm" role="button" (click)="cancel()">Cancel</button>
     </div>
   </div>
-  <p *ngIf="showCancelReqForm" class="buttons">
-    <small>Are you sure you would like to cancel Mentorship?</small>
-    <br />
-    <button class="btn btn-danger btn-sm" role="button" (click)="cancelMentorshipConfirm()">Yes</button>
-    <button class="btn btn-default btn-sm" role="button" (click)="cancel()">No</button>
-  </p>
+  <div *ngIf="showCancelReqForm" class="panel panel-danger buttons">
+    <div class="panel-heading">
+        Cancel Mentorship
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+    </div>
+    <div class="panel-body">
+        <span class="dialog-text">Are you sure you would like to cancel Mentorship?</span> <br />
+        <button class="btn btn-danger btn-sm" role="button" (click)="cancelMentorshipConfirm()">Yes</button>
+        <button class="btn btn-default btn-sm" role="button" (click)="cancel()">No</button>
+    </div>
+  </div>
 </div>
