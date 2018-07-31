@@ -60,7 +60,7 @@
     </div>
     <div class="panel-body">
       <label for="subjectForMentee" class="hidden">Subject for {{model.currentMentee.emailAddress}}:</label>
-      <textarea rows="1" cols="50" class='form-control' id="subjectForMentee" name="subjectForMentee" placeholder="Subject" [(ngModel)]="subject"></textarea>
+      <input type="text" rows="1" cols="50" class='form-control' id="subjectForMentee" name="subjectForMentee" placeholder="Subject" [(ngModel)]="subject" />
       <label for="messageForMentee" class="hidden">Message for {{model.currentMentee.emailAddress}}:</label>
       <textarea rows="5" cols="50" class='form-control' id="messageForMentee" name="messageForMentee" placeholder="Message" [(ngModel)]="message"></textarea>
       <button *ngIf="message && subject" class="btn btn-primary btn-sm" role="button" (click)="contactConfirm()">Send</button>

@@ -47,7 +47,7 @@
     </div>
     <div class="panel-body">
       <label for="subjectForMentor" class="hidden">Subject for {{model.currentMentor.emailAddress}}:</label>
-      <textarea rows="1" cols="50" class='form-control' id="subjectForMentor" name="subjectForMentor" placeholder="Subject" [(ngModel)]="subject"></textarea>
+      <input type="text" class='form-control' id="subjectForMentor" name="subjectForMentor" placeholder="Subject" [(ngModel)]="subject" />
       <label for="messageForMentor" class="hidden">Message for {{model.currentMentor.emailAddress}}:</label>
       <textarea rows="5" cols="50" class='form-control' id="messageForMentor" name="messageForMentor" placeholder="Message" [(ngModel)]="message"></textarea>
       <button *ngIf="message && subject" class="btn btn-primary btn-sm" role="button" (click)="contactConfirm()">Send</button>
