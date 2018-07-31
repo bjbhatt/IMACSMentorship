@@ -32,7 +32,11 @@ export class MentorRequestsComponent implements OnInit {
         this.router.navigate(['/notLoggedIn']);
       } else {
         this.apiService.getUserMentorInfo(this.login.userId).subscribe((mentor: Mentor) => {
-          this.model = mentor;
+          if (mentor.pendingRequests && mentor.pendingRequests.length > 0) {
+            this.model = mentor;
+          } else {
+            this.router.navigate(['/']);
+          }
         });
       }
     });
