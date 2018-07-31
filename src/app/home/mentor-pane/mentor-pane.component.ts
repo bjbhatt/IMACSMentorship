@@ -19,6 +19,7 @@ export class MentorPaneComponent implements OnInit {
   trainingDate: string;
   showContactForm = false;
   message = '';
+  subject = '';
   showCancelReqForm = false;
   status = '';
 
@@ -59,6 +60,7 @@ export class MentorPaneComponent implements OnInit {
 
   contact() {
     this.message = '';
+    this.subject = '';
     this.showContactForm = true;
   }
 

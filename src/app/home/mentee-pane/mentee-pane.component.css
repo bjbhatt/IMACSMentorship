@@ -10,3 +10,12 @@
     position: absolute;
     bottom: 0;
 }
+
+.form-control {
+    margin-bottom: 5px;
+}
+
+.panel {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}

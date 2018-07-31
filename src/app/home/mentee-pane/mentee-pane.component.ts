@@ -16,6 +16,7 @@ export class MenteePaneComponent implements OnInit {
   showContactForm = false;
   showCancelReqForm = false;
   message = '';
+  subject = '';
   showUpdateDateForm = false;
   status = '';
 
@@ -32,6 +33,7 @@ export class MenteePaneComponent implements OnInit {
   }
   contact() {
     this.message = '';
+    this.subject = '';
     this.showContactForm = true;
   }
 
