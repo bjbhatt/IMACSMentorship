@@ -11,13 +11,19 @@
     <button *ngIf="model.trainingDate" class="btn btn-primary btn-md" role="button" (click)="updateDate()">Update Date</button>
     <button *ngIf="!model.trainingDate" class="btn btn-primary btn-md" role="button" (click)="updateDate()">Set Date</button>
   </p>
-  <p *ngIf="showUpdateDateForm" class="buttons">
-    <label for="trainingDate" class="hidden">Post Doctoral Training Date:</label>
-    <input type="text" class="form-control" id="trainingDate" name="trainingDate" placeholder="Training Date..." [(ngModel)]="trainingDate"
-      bsDatepicker />
-    <button class="btn btn-primary btn-sm" role="button" (click)="updateDateConfirm()">Set/Update</button>
-    <button class="btn btn-default btn-sm" role="button" (click)="cancel()">Cancel</button>
-  </p>
+  <div *ngIf="showUpdateDateForm" class="panel panel-primary buttons">
+    <div class="panel-heading">
+      Set / Update Training Date
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+    </div>
+    <div class="panel-body">
+        <label for="trainingDate" class="hidden">Post Doctoral Training Date:</label>
+        <input type="text" class="form-control" id="trainingDate" name="trainingDate" placeholder="Training Date" [(ngModel)]="trainingDate"
+          bsDatepicker />
+        <button class="btn btn-primary btn-sm" role="button" (click)="updateDateConfirm()">Set / Update</button>
+        <button class="btn btn-default btn-sm" role="button" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
 </div>
 
 <div *ngIf="status == 'Eligible'" class="jumbotron">
