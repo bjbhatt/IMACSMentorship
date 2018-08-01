@@ -25,3 +25,71 @@
 .loading-spinner {
     margin-top: 50px;
 }
+
+.result-header {
+    padding: 5px;
+    color: rgba(76,76,76,1);
+}
+
+.top-bar {
+    padding: 5px;
+    color: rgba(76,76,76,1);
+    background-color: rgba(242,242,242,1);
+}
+
+.count {
+    padding: 7px;
+    margin-left: 0px;
+    margin-right: 0px;
+    /* background-color: rgba(191,191,191,1);
+    color: white; */
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+.btn-group > .btn {
+    margin: 0px;
+}
+
+.mentor-image{
+    height: 75px;
+    width: 75px;
+}
+
+.mentor-list{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 2em;
+}
+
+.mentor-actions{
+    width: 70%;
+}
+
+.result-text {
+    font-size: 14pt;
+    color: rgba(76,76,76,1);
+}
+
+.confirm-form {
+    padding: 10px;
+}
+
+.mentor-text{
+    font-size: 14pt;
+    color: rgba(76,76,76,1);
+}
+
+.results{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.messageMentor {
+    margin-top: 20px;
+}
+
+.form-control {
+    margin-bottom: 10px;
+}

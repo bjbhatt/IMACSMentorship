@@ -4,6 +4,8 @@ import { ApiService } from './../../_services/api.service';
 
 import { MentorSearch, Login } from './../../_models/all-api-models';
 import { MentorSearchOptions } from './../../_models/mentorship-search-options';
+import { AlertifyService } from './../../_services/alertify.service';
+import { ActivatedRoute, Router } from './../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-mentor-search-result',
@@ -15,10 +17,45 @@ export class MentorSearchResultComponent implements OnInit {
   @Input() mentorSearchOptions: MentorSearchOptions;
   @Output() refineSearchEvent = new EventEmitter<MentorSearchOptions>();
   model: MentorSearch[];
+  mentorSelected: MentorSearch;
+  message = '';
+  subject = '';
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    private alertifyService: AlertifyService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
+    this.mentorSelected = null;
+    this.route.data.subscribe(data => {
+      this.login = data['login'];
+      if (!this.login) {
+        this.router.navigate(['/notLoggedIn']);
+      } else {
+        // TBD : Read search results from the model.
+        this.model = [{
+          userId: 9,
+          fullName: 'Sagar Thakore',
+          emailAddress: 'sagar@mentee.com',
+          degree: 'PHD, MD',
+          location: 'Duke University',
+          available: true,
+          availableAfter: null
+        },
+        {
+          userId: 10,
+          fullName: 'John Doe',
+          emailAddress: 'John@mentee.com',
+          degree: 'MD, MBBS',
+          location: 'XYZ University',
+          available: true,
+          availableAfter: null
+        }
+        ];
+      }
+    });
     console.log(this.login);
     console.log(this.mentorSearchOptions);
   }
@@ -26,4 +63,21 @@ export class MentorSearchResultComponent implements OnInit {
   refineSearch() {
     this.refineSearchEvent.emit(this.mentorSearchOptions);
   }
+
+  requestMentorship(userId: number) {
+    this.mentorSelected = this.model.find(x => x.userId === userId);
+  }
+
+  requestMentorshipConfirm(userId: number) {
+    // TBD: Send Message
+    console.log(this.subject);
+    console.log(this.message);
+    this.alertifyService.message('Message sent');
+    this.cancel();
+  }
+
+  cancel() {
+    this.mentorSelected = null;
+  }
+
 }
