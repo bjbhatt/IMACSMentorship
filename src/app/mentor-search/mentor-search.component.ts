@@ -37,7 +37,7 @@ export class MentorSearchComponent implements OnInit {
       location: [],
     };
     this.specializations = new Map<string, string>()
-      .set('dermatomyositis', 'Dermato-myositis')
+      .set('dermatomyositis', 'Dermatomyositis')
       .set('polymyositis', 'Polymyositis')
       .set('inclusion_body_myositis', 'Inclusion Body Myositis')
       .set('n/a', 'Doesn\'t Matter');

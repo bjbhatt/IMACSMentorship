@@ -35,6 +35,7 @@ export class MentorSearchResultComponent implements OnInit {
         this.router.navigate(['/notLoggedIn']);
       } else {
         // TBD : Read search results from the model.
+        // this.model = [];
         this.model = [{
           userId: 9,
           fullName: 'Sagar Thakore',
@@ -66,6 +67,9 @@ export class MentorSearchResultComponent implements OnInit {
 
   requestMentorship(userId: number) {
     this.mentorSelected = this.model.find(x => x.userId === userId);
+    this.subject = 'Mentorship Request';
+    this.message = 'Dear ' + this.mentorSelected.fullName + ', \n\n'
+    + 'I am writing to ask if you will me be my IMACS mentor. I am amet linc, lorem Ipsum dolor set amet quo nunc status amet linc…';
   }
 
   requestMentorshipConfirm(userId: number) {
@@ -74,6 +78,11 @@ export class MentorSearchResultComponent implements OnInit {
     console.log(this.message);
     this.alertifyService.message('Message sent');
     this.cancel();
+    this.router.navigate(['/']);
+  }
+
+  showUserProfile(userId: number) {
+    this.router.navigate(['/profile', userId]);
   }
 
   cancel() {

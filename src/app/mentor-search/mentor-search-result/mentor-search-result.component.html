@@ -17,57 +17,73 @@
   </div>
 
   <div *ngIf="model">
-      <div class="result-header">
-          <h3>
-            <p>Choose a potential mentor below:
-            </p>
-          </h3>
-        </div>
-        <div class="row top-bar">
-          <div class="col-md-10 col-sm-10 col-lg-10"><h4><strong>{{model.length}}</strong> Myositis experts match your criteria</h4></div>
-          <div class="col-md-2 col-sm-2 col-lg-2"><button *ngIf="model" (click)="refineSearch()" class="btn btn-md btn-default">Search Again</button></div>
-        </div>
-        <div *ngIf="mentorSelected === null" class="results">
-          <table class="mentor-list">
-            <tr *ngFor="let m of model">
-              <td>
-                <div class="image">
-                  <img class="mentor-image" alt="Mentor Picture" src="assets/images/user-alternate.png">
-                </div>
-              </td>
-              <td>
-                <div class="mentor-details">
-                  <span class="mentor-text">
-                    {{m.fullName}}
-                    <br /> {{m.degree}}
-                    <br /> {{m.location}}
-                  </span>
-                </div>
-              </td>
-              <td class="mentor-actions"
-                align="right">
-                <div class="btn-group btn-group-lg">
-                  <button class="btn btn-lg btn-primary" (click)="requestMentorship(m.userId)">Request Mentorship</button>
-                  <button class="btn btn-lg btn-default">Learn More</button>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div *ngIf="model && mentorSelected != null" id="sendMessage">
-          <div class="messageMentor panel panel-primary">
-            <div class="panel-heading">
-              Ask <strong>{{mentorSelected.fullName}}</strong> to be your IMACS Mentor:
-            </div>
-            <div class="panel-body">
-                <label for="subject" class="hidden">Subject:</label>
-                <input type="text" rows="1" cols="50" class='form-control' id="subject" name="subject" placeholder="Subject" [(ngModel)]="subject" />
-                <label for="message" class="hidden">Message:</label>
-                <textarea rows="5" cols="50" class='form-control' id="message" name="message" placeholder="Message" [(ngModel)]="message"></textarea>
-                <button *ngIf="message && subject" class="btn btn-primary btn-sm" role="button" (click)="requestMentorshipConfirm(mentorSelected)">Send</button>
-                <button class="btn btn-default btn-sm" role="button" (click)="cancel()">Cancel</button>
-              </div>
-          </div>
+    <div class="result-header">
+      <h3>
+        <p *ngIf="model.length != 0">Choose a potential mentor below:
+        </p>
+        <p *ngIf="model.length === 0">Try again...
+        </p>
+      </h3>
+    </div>
+    <div class="row top-bar">
+      <div class="col-md-10 col-sm-10 col-lg-10">
+        <h4>
+          <strong>{{model.length}}</strong> Myositis experts match your criteria</h4>
       </div>
+      <div class="col-md-2 col-sm-2 col-lg-2">
+        <button *ngIf="model.length != 0" (click)="refineSearch()" class="btn btn-md btn-default">Search Again</button>
+      </div>
+    </div>
+    <div *ngIf="mentorSelected === null" class="results">
+      <table class="mentor-list">
+        <tr *ngFor="let m of model">
+          <td>
+            <div class="image">
+              <img class="mentor-image" alt="Mentor Picture" src="assets/images/user-alternate.png">
+            </div>
+          </td>
+          <td>
+            <div class="mentor-details">
+              <span class="mentor-text">
+                {{m.fullName}}
+                <br /> {{m.degree}}
+                <br /> {{m.location}}
+              </span>
+            </div>
+          </td>
+          <td class="mentor-actions" align="right">
+            <div class="btn-group btn-group-lg">
+              <button class="btn btn-lg btn-primary" (click)="requestMentorship(m.userId)">Request Mentorship</button>
+              <button class="btn btn-lg btn-default" (click)="showUserProfile(m.userId)">Learn More</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="model.length != 0 && mentorSelected != null" id="sendMessage">
+      <div class="messageMentor panel panel-primary">
+        <div class="panel-heading">
+          Ask
+          <strong>{{mentorSelected.fullName}}</strong> to be your IMACS Mentor
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+        </div>
+        <div class="panel-body">
+          <label for="subject" class="hidden">Subject:</label>
+          <input type="text" rows="1" cols="50" class='form-control' id="subject" name="subject" placeholder="Subject" [(ngModel)]="subject"
+          />
+          <label for="message" class="hidden">Message:</label>
+          <textarea rows="5" cols="50" class='form-control' id="message" name="message" placeholder="Message" [(ngModel)]="message"></textarea>
+          <button *ngIf="message && subject" class="btn btn-primary btn-sm" role="button" (click)="requestMentorshipConfirm(mentorSelected)">Send</button>
+          <button class="btn btn-default btn-sm" role="button" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </div>
   </div>
-  
+  <div *ngIf="model.length === 0" class="text-center">
+    <h3>
+      <span class="result-header">Please loosen your search criteria.</span>
+    </h3>
+    <button *ngIf="model" (click)="refineSearch()" class="btn btn-lg btn-default">
+      <span class="fa fa-repeat"></span> Search Again</button>
+  </div>
+</div>
