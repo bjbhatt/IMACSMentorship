@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { BsDatepickerModule, BsDropdownModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, BsDropdownModule, PaginationModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -46,7 +46,8 @@ import { AdministrationComponent } from './administration/administration.compone
       HttpClientModule,
       RouterModule.forRoot(appRoutes),
       BsDatepickerModule.forRoot(),
-      BsDropdownModule.forRoot()
+      BsDropdownModule.forRoot(),
+      PaginationModule.forRoot()
    ],
    providers: [
     AlertifyService,

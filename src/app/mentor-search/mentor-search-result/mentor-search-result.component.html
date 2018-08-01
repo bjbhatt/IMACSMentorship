@@ -36,7 +36,7 @@
     </div>
     <div *ngIf="mentorSelected === null" class="results">
       <table class="mentor-list">
-        <tr *ngFor="let m of model">
+        <tr *ngFor="let m of returnedArray">
           <td>
             <div class="image">
               <img class="mentor-image" alt="Mentor Picture" src="assets/images/user-alternate.png">
@@ -59,7 +59,9 @@
           </td>
         </tr>
       </table>
+      <pagination [totalItems]="model.length" [itemsPerPage] = "5" (pageChanged)="pageChanged($event)" [(ngModel)] = "page" class="pull-left"></pagination>
     </div>
+
     <div *ngIf="model.length != 0 && mentorSelected != null" id="sendMessage">
       <div class="messageMentor panel panel-primary">
         <div class="panel-heading">

@@ -6,6 +6,7 @@ import { MentorSearch, Login } from './../../_models/all-api-models';
 import { MentorSearchOptions } from './../../_models/mentorship-search-options';
 import { AlertifyService } from './../../_services/alertify.service';
 import { ActivatedRoute, Router } from './../../../../node_modules/@angular/router';
+import { PageChangedEvent} from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'app-mentor-search-result',
@@ -20,6 +21,8 @@ export class MentorSearchResultComponent implements OnInit {
   mentorSelected: MentorSearch;
   message = '';
   subject = '';
+  page = 1;
+  returnedArray: MentorSearch[];
 
   constructor(
     private apiService: ApiService,
@@ -53,8 +56,63 @@ export class MentorSearchResultComponent implements OnInit {
           location: 'XYZ University',
           available: true,
           availableAfter: null
+        },
+        {
+          userId: 10,
+          fullName: 'John Doe',
+          emailAddress: 'John@mentee.com',
+          degree: 'MD, MBBS',
+          location: 'XYZ University',
+          available: true,
+          availableAfter: null
+        },
+        {
+          userId: 10,
+          fullName: 'John Doe',
+          emailAddress: 'John@mentee.com',
+          degree: 'MD, MBBS',
+          location: 'XYZ University',
+          available: true,
+          availableAfter: null
+        },
+        {
+          userId: 10,
+          fullName: 'John Doe',
+          emailAddress: 'John@mentee.com',
+          degree: 'MD, MBBS',
+          location: 'XYZ University',
+          available: true,
+          availableAfter: null
+        },
+        {
+          userId: 10,
+          fullName: 'John Doe',
+          emailAddress: 'John@mentee.com',
+          degree: 'MD, MBBS',
+          location: 'XYZ University',
+          available: true,
+          availableAfter: null
+        },
+        {
+          userId: 10,
+          fullName: 'John Doe',
+          emailAddress: 'John@mentee.com',
+          degree: 'MD, MBBS',
+          location: 'XYZ University',
+          available: true,
+          availableAfter: null
+        },
+        {
+          userId: 10,
+          fullName: 'John Doe',
+          emailAddress: 'John@mentee.com',
+          degree: 'MD, MBBS',
+          location: 'XYZ University',
+          available: true,
+          availableAfter: null
         }
         ];
+        this.returnedArray = this.model.slice(0, 5);
       }
     });
     console.log(this.login);
@@ -87,6 +145,12 @@ export class MentorSearchResultComponent implements OnInit {
 
   cancel() {
     this.mentorSelected = null;
+  }
+
+  pageChanged(event: PageChangedEvent): void {
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.returnedArray = this.model.slice(startItem, endItem);
   }
 
 }
