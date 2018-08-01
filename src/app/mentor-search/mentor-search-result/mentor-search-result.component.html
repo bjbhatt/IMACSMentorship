@@ -35,6 +35,7 @@
       </div>
     </div>
     <div *ngIf="mentorSelected === null" class="results">
+        <pagination [totalItems]="model.length" [itemsPerPage] = "5" (pageChanged)="pageChanged($event)" [(ngModel)] = "page" class="pull-left"></pagination>
       <table class="mentor-list">
         <tr *ngFor="let m of returnedArray">
           <td>
@@ -59,7 +60,6 @@
           </td>
         </tr>
       </table>
-      <pagination [totalItems]="model.length" [itemsPerPage] = "5" (pageChanged)="pageChanged($event)" [(ngModel)] = "page" class="pull-left"></pagination>
     </div>
 
     <div *ngIf="model.length != 0 && mentorSelected != null" id="sendMessage">
