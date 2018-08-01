@@ -16,6 +16,31 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  private handleError(httpError: any) {
+    const applicationError = httpError.headers.get('Application-Error');
+    let error = {};
+    if (applicationError) {
+      error = {
+        type: 'application',
+        content: JSON.parse(applicationError)
+      };
+    } else if (httpError.status === 403) {
+      error = {
+        type: 'system',
+        message:
+          'You are either not logged in or you don\'t have perimssions to perform requested operation'
+      };
+    } else {
+      error = {
+        type: 'system',
+        message:
+          'Internal Server Error while performing the requested operation'
+      };
+    }
+
+    return throwError(error);
+  }
+
   private get<T>(url: string): Observable<T> {
     return this.http
       .get<T>(
@@ -539,30 +564,5 @@ export class ApiService {
     //       map(response => response),
     //       catchError(this.handleError)
     //     );
-  }
-
-  private handleError(httpError: any) {
-    const applicationError = httpError.headers.get('Application-Error');
-    let error = {};
-    if (applicationError) {
-      error = {
-        type: 'application',
-        content: JSON.parse(applicationError)
-      };
-    } else if (httpError.status === 403) {
-      error = {
-        type: 'system',
-        message:
-          'You are either not logged in or you don\'t have perimssions to perform requested operation'
-      };
-    } else {
-      error = {
-        type: 'system',
-        message:
-          'Internal Server Error while performing the requested operation'
-      };
-    }
-
-    return throwError(error);
   }
 }
