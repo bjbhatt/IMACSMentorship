@@ -8,6 +8,15 @@
   </p>
 </div>
 
+<div *ngIf="status == 'Unavailable'" class="jumbotron">
+  <h2>
+    <strong>Not Eligible to be a Mentee</strong>
+  </h2>
+  <h4>
+    You are not eligible to become a Mentee, because...
+  </h4>
+</div>
+
 <div *ngIf="status == 'Pending'" class="jumbotron">
   <h2>
     <strong>Pending Mentee request to</strong>

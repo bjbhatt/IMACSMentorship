@@ -39,6 +39,15 @@
   </p>
 </div>
 
+<div *ngIf="status == 'Unavailable'" class="jumbotron">
+  <h2>
+    <strong>Not Eligible to be a Mentor</strong>
+  </h2>
+  <h4>
+    You are not eligible to become a Mentor, because...
+  </h4>
+</div>
+
 <div *ngIf="status == 'Current' && !model.currentMentee" class="jumbotron">
   <h2>
     <strong>Mentor with</strong>
