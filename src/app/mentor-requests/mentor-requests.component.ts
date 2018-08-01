@@ -3,7 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { ApiService } from './../_services/api.service';
 import { AlertifyService } from './../_services/alertify.service';
-import { Login, Mentor } from './../_models/all-api-models';
+import { Login, Mentor, PendingMenteeRequest, PendingMentorRequest } from './../_models/all-api-models';
+import { PageChangedEvent} from 'ngx-bootstrap/pagination';
 
 import { Utilities } from './../_helpers/Utilities';
 
@@ -18,6 +19,8 @@ export class MentorRequestsComponent implements OnInit {
   today = new Date();
   showConfirmFormId = 0;
   showDeclineFormId = 0;
+  page = 1;
+  returnedArray: PendingMentorRequest[];
 
   constructor(
     private apiService: ApiService,
@@ -40,6 +43,7 @@ export class MentorRequestsComponent implements OnInit {
         });
       }
     });
+    this.returnedArray = this.model.pendingRequests.slice(0, 5);
 }
 
   acceptMentee(id: number) {
@@ -77,5 +81,11 @@ export class MentorRequestsComponent implements OnInit {
 
   showUserProfile(userId: number) {
     this.router.navigate(['/profile', userId]);
+  }
+
+  pageChanged(event: PageChangedEvent): void {
+    const startItem = (event.page - 1) * event.itemsPerPage;
+    const endItem = event.page * event.itemsPerPage;
+    this.returnedArray = this.model.pendingRequests.slice(startItem, endItem);
   }
 }

@@ -8,8 +8,9 @@
     </h3>
   </div>
   <div class="requests">
+      <pagination *ngIf="model.pendingRequests.length > 5" [totalItems]="model.pendingRequests.length" [itemsPerPage] = "5" (pageChanged)="pageChanged($event)" [(ngModel)] = "page" class="pull-left"></pagination>
     <table class="mentee-list">
-      <tr *ngFor="let m of model.pendingRequests">
+      <tr *ngFor="let m of returnedArray">
         <td>
           <div class="image">
             <img class="mentee-image" alt="Mentee Picture" src="assets/images/user-alternate.png">
@@ -66,5 +67,6 @@
         </td>
       </tr>
     </table>
+    <pagination *ngIf="model.pendingRequests.length > 5" [totalItems]="model.pendingRequests.length" [itemsPerPage] = "5" (pageChanged)="pageChanged($event)" [(ngModel)] = "page" class="pull-left"></pagination>
   </div>
 </div>
