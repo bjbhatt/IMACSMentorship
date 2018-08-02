@@ -66,6 +66,7 @@ export class MentorRequestsComponent implements OnInit {
     // TBD: Decline Mentee
     const index = this.model.pendingRequests.findIndex(x => x.userId === id);
     this.model.pendingRequests.splice(index, 1);
+    this.returnedArray = this.model.pendingRequests.slice(0, 5);
     this.alertifyService.message('Request Declined');
     this.cancel();
   }
