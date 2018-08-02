@@ -23,6 +23,8 @@ export class MentorSearchResultComponent implements OnInit {
   subject = '';
   page = 1;
   returnedArray: MentorSearch[];
+  showProfile = false;
+  selectedUserId: number;
 
   constructor(
     private apiService: ApiService,
@@ -140,7 +142,8 @@ export class MentorSearchResultComponent implements OnInit {
   }
 
   showUserProfile(userId: number) {
-    this.router.navigate(['/profile', userId]);
+    this.selectedUserId = userId;
+    this.showProfile = true;
   }
 
   cancel() {
@@ -153,4 +156,7 @@ export class MentorSearchResultComponent implements OnInit {
     this.returnedArray = this.model.slice(startItem, endItem);
   }
 
+  closeUserProfile() {
+    this.showProfile = false;
+  }
 }

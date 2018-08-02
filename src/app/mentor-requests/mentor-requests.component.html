@@ -1,4 +1,4 @@
-<div *ngIf="login" class="container">
+<div *ngIf="login && !showProfile" class="container">
   <div class="request-header">
     <h3>
       <p>Manage your {{model.pendingRequests.length}} mentor requests
@@ -69,4 +69,7 @@
     </table>
     <!-- <pagination *ngIf="model.pendingRequests.length > 5" [totalItems]="model.pendingRequests.length" [itemsPerPage] = "5" (pageChanged)="pageChanged($event)" [(ngModel)] = "page" class="pull-left"></pagination> -->
   </div>
+</div>
+<div *ngIf="login && showProfile">
+  <app-user-profile [login]='login' [userId]='selectedUserId' [backButtonText]="'Back To Mentor Request Page'" (closeUserProfile)="closeUserProfile()"></app-user-profile> 
 </div>

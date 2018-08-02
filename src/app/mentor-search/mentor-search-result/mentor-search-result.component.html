@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="!showProfile" class="container">
   <div *ngIf="!model">
     <div class="prompt-header">
       <h2>
@@ -89,4 +89,7 @@
     <button *ngIf="model" (click)="refineSearch()" class="btn btn-lg btn-default">
       <span class="fa fa-repeat"></span> Search Again</button>
   </div>
+</div>
+<div *ngIf="showProfile">
+  <app-user-profile [login]='login' [userId]='selectedUserId' [backButtonText]="'Back To Mentor Search Page'" (closeUserProfile)="closeUserProfile()"></app-user-profile> 
 </div>

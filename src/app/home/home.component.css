@@ -13,7 +13,7 @@
 
 .container{
     background: rgba(255,255,255,1);
-    min-height: 100%;
+    min-height: 500px;
     /* box-shadow: 0px 0px 10px grey; */
     /* border-radius: 5px; */
 }

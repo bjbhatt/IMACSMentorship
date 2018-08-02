@@ -21,6 +21,8 @@ export class MentorRequestsComponent implements OnInit {
   showDeclineFormId = 0;
   page = 1;
   returnedArray: PendingMentorRequest[];
+  showProfile = false;
+  selectedUserId: number;
 
   constructor(
     private apiService: ApiService,
@@ -81,7 +83,12 @@ export class MentorRequestsComponent implements OnInit {
   }
 
   showUserProfile(userId: number) {
-    this.router.navigate(['/profile', userId]);
+    this.selectedUserId = userId;
+    this.showProfile = true;
+  }
+
+  closeUserProfile() {
+    this.showProfile = false;
   }
 
   pageChanged(event: PageChangedEvent): void {
