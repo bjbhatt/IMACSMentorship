@@ -90,6 +90,4 @@
       <span class="fa fa-repeat"></span> Search Again</button>
   </div>
 </div>
-<div *ngIf="showProfile">
-  <app-user-profile [login]='login' [userId]='selectedUserId' [backButtonText]="'Back To Mentor Search Page'" (closeUserProfile)="closeUserProfile()"></app-user-profile> 
-</div>
+<app-user-profile *ngIf="showProfile" [login]='login' [userId]='selectedUserId' [backButtonText]="'Back To Mentor Search Page'" (closeUserProfile)="closeUserProfile()"></app-user-profile> 
