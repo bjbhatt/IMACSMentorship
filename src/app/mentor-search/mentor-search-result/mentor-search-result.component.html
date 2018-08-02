@@ -60,7 +60,7 @@
           </td>
         </tr>
       </table>
-      <pagination *ngIf="model.length > 5" [totalItems]="model.length" [itemsPerPage] = "5" (pageChanged)="pageChanged($event)" [(ngModel)] = "page" class="pull-left"></pagination>
+      <!-- <pagination *ngIf="model.length > 5" [totalItems]="model.length" [itemsPerPage] = "5" (pageChanged)="pageChanged($event)" [(ngModel)] = "page" class="pull-left"></pagination> -->
     </div>
 
     <div *ngIf="model.length != 0 && mentorSelected != null" id="sendMessage">
