@@ -9,7 +9,7 @@
     </div>
     <div [ngClass]="{'progress-done': progress(3) === 'done', 'progress-current' : progress(3) === 'current', 'progress-complete' : progress(3) === 'complete', 'progress-not-allowed' : disableProgress(3)}"
       class="progress-item col-md-4 col-sm-4 col-lg-4"
-      (click)="navigateTo(3)">Specializations
+      (click)="navigateTo(3)">Specialization
     </div>
     <div [ngClass]="{'progress-done': progress(4) === 'done', 'progress-current' : progress(4) === 'current', 'progress-complete' : progress(4) === 'complete', 'progress-not-allowed' : disableProgress(4)}"
       class="progress-item col-md-2 col-sm-3 col-lg-2"
@@ -31,44 +31,36 @@
     <div class="prompt-body">
       <div class="row">
         <div align="center" class="col-md-4 col-sm-4 col-lg-4">
-          <button [ngClass]="{'btn-success': model.clinicalCare === 'yes'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setClinical('yes')">Yes</button>
+          <button [ngClass]="{'btn-success': model.patients === 'yes'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setPatient('yes')">Yes</button>
         </div>
         <div align="center" class="col-md-4 col-sm-4 col-lg-4">
-          <button [ngClass]="{'btn-success': model.clinicalCare === 'no'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setClinical('no')">No</button>
+          <button [ngClass]="{'btn-success': model.patients === 'no'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setPatient('no')">No</button>
         </div>
         <div align="center" class="col-md-4 col-sm-4 col-lg-4">
-          <button [ngClass]="{'btn-success': model.clinicalCare === 'n/a'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setClinical('n/a')">Doesn't
+          <button [ngClass]="{'btn-success': model.patients === 'n/a'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setPatient('n/a')">Doesn't
             <br />Matter</button>
         </div>
       </div>
     </div>
   </div>
-  <div *ngIf="step === 2" id="focus">
+  <div *ngIf="step === 2" id="patientType">
     <div class="prompt-header">
       <h3>
-        <p>I want my mentor to
+        <p>I want my mentor to 
           <strong>focus</strong> on:
         </p>
       </h3>
     </div>
     <div class="prompt-body">
       <div class="row">
-        <div align="center" class="col-md-4 col-sm-4 col-lg-4">
-          <button [ngClass]="{'btn-success': model.focus === 'adult'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setFocus('adult')">Adult
-            <br />Myositis</button>
-        </div>
-        <div align="center" class="col-md-4 col-sm-4 col-lg-4">
-          <button [ngClass]="{'btn-success': model.focus === 'juvenile'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setFocus('juvenile')">Juvenile
-            <br />Myositis</button>
-        </div>
-        <div align="center" class="col-md-4 col-sm-4 col-lg-4">
-          <button [ngClass]="{'btn-success': model.focus === 'n/a'}" class="btn btn-default btn-lg btn-block btn-huge" (click)="setFocus('n/a')">Doesn't
-            <br />Matter</button>
+        <div *ngFor="let patientType of getKeys(patientTypes)" align="center" class="col-md-3 col-sm-3 col-lg-3">
+          <button title="{{patientTypes.get(patientType)}}" [ngClass]="{'btn-success': model.patientType === patientType}" class="btn btn-default btn-lg btn-block btn-huge"
+            (click)="setPatientType(patientType)">{{patientTypes.get(patientType)}}</button>
         </div>
       </div>
     </div>
   </div>
-  <div *ngIf="step === 3" id="specialization">
+  <div *ngIf="step === 3" id="clinicalForm">
     <div class="prompt-header">
       <h3>
         <p>I want a mentor who
@@ -79,14 +71,14 @@
     </div>
     <div class="prompt-body">
       <div class="row">
-        <div *ngFor="let specialization of getKeys(specializations)" align="center" class="col-md-3 col-sm-3 col-lg-3">
-          <button [ngClass]="{'btn-success': model.specialization.indexOf(specialization, 0) > -1}" class="btn btn-default btn-lg btn-block btn-huge"
-            (click)="setSpecialization(specialization)">{{specializations.get(specialization)}}</button>
+        <div *ngFor="let clinicalForm of getKeys(clinicalForms)" align="center" class="col-md-3 col-sm-3 col-lg-3">
+          <button title="{{clinicalForms.get(clinicalForm)}}" [ngClass]="{'btn-success': model.clinicalForm.indexOf(clinicalForm, 0) > -1}" class="btn btn-default btn-lg btn-block btn-huge"
+            (click)="setClinicalForm(clinicalForm)">{{clinicalForms.get(clinicalForm)}}</button>
         </div>
       </div>
     </div>
   </div>
-  <div *ngIf="step === 4" id="expertise">
+  <div *ngIf="step === 4" id="researchArea">
     <div class="prompt-header">
       <h3>
         <p>I want a mentor who is an
@@ -97,9 +89,9 @@
     </div>
     <div class="prompt-body">
       <div class="row">
-        <div *ngFor="let expertise of getKeys(expertises)" align="center" class="col-md-3 col-sm-3 col-lg-3">
-          <button [ngClass]="{'btn-success': model.expertise.indexOf(expertise, 0) > -1}" class="btn btn-default btn-lg btn-block btn-huge"
-            (click)="setExpertise(expertise)">{{expertises.get(expertise)}}</button>
+        <div *ngFor="let researchArea of getKeys(researchAreas)" align="center" class="col-md-3 col-sm-3 col-lg-3">
+          <button title="{{researchAreas.get(researchArea)}}" [ngClass]="{'btn-success': model.researchArea.indexOf(researchArea, 0) > -1}" class="btn btn-default btn-lg btn-block btn-huge"
+            (click)="setResearchArea(researchArea)">{{researchAreas.get(researchArea)}}</button>
         </div>
       </div>
     </div>
@@ -116,7 +108,7 @@
     <div class="prompt-body">
       <div class="row">
         <div *ngFor="let location of getKeys(locations)" align="center" class="col-md-3 col-sm-3 col-lg-3">
-          <button [ngClass]="{'btn-success': model.location.indexOf(location, 0) > -1}" class="btn btn-default btn-lg btn-block btn-huge"
+          <button title="{{locations.get(location)}}" [ngClass]="{'btn-success': model.location.indexOf(location, 0) > -1}" class="btn btn-default btn-lg btn-block btn-huge"
             (click)="setLocation(location)">{{locations.get(location)}}</button>
         </div>
       </div>

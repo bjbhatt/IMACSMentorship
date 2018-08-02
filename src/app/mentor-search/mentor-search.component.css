@@ -29,11 +29,14 @@
 }
 
 .btn-huge{
-    min-height: 80px;
-    min-width: 80px;
-    font-size: 15pt;
+    min-height: 88px;
+    min-width: 88px;
+    max-height: 88px;
+    font-size: 1em;
     font-weight: bold;
     white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .navigation-buttons {

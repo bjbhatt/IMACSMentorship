@@ -14,8 +14,9 @@ export class MentorSearchComponent implements OnInit {
   model: MentorSearchOptions;
   optionsComplete = false;
   step = 1;
-  specializations: Map<string, string>;
-  expertises: Map<string, string>;
+  clinicalForms: Map<number, string>;
+  patientTypes: Map<number, string>;
+  researchAreas: Map<number, string>;
   locations: Map<string, string>;
 
   constructor(
@@ -30,26 +31,42 @@ export class MentorSearchComponent implements OnInit {
       }
     });
     this.model = {
-      clinicalCare: null,
-      focus: null,
-      specialization: [],
-      expertise: [],
+      patients: null,
+      patientType: null,
+      clinicalForm: [],
+      researchArea: [],
       location: [],
     };
-    this.specializations = new Map<string, string>()
-      .set('dermatomyositis', 'Dermatomyositis')
-      .set('polymyositis', 'Polymyositis')
-      .set('inclusion_body_myositis', 'Inclusion Body Myositis')
-      .set('n/a', 'Doesn\'t Matter');
-    this.expertises = new Map<string, string>()
-      .set('epidemiology', 'Epidemiology')
-      .set('disease_assesment', 'Disease Assesment')
-      .set('clinical_trials_therapy', 'Clinical Trials/Therapy')
-      .set('disease_history', 'Disease History')
-      .set('pathology', 'Pathology')
-      .set('outcomes', 'Outcomes')
-      .set('muscle_molecular_biology', 'Muscle Molecular Biology')
-      .set('immunology', 'Immunology');
+    this.patientTypes = new Map<number, string>()
+      .set(1, 'Adult')
+      .set(2, 'Juvenile')
+      .set(3, 'Both')
+      .set(0, 'Doesn\'t Matter');
+    this.clinicalForms = new Map<number, string>()
+      .set(1, 'Dermatomyositis')
+      .set(2, 'Polymyositis')
+      .set(3, 'Inclusion Body Myositis')
+      .set(0, 'Doesn\'t Matter');
+    this.researchAreas = new Map<number, string>()
+      .set(1, 'Epidemiology')
+      .set(2, 'Diagnostic/Classification/Subclassification Criteria')
+      .set(4, 'Clinical presentation and manisfestations')
+      .set(5, 'Natural history of disease')
+      .set(6, 'Genetic risk factors')
+      .set(7, 'Disease assessment')
+      .set(8, 'Outcomes research')
+      .set(9, 'Therapy / prognosis')
+      .set(10, 'Clinical trials')
+      .set(11, 'Muscle structure or ultrastructure')
+      .set(12, 'Muscle molecular biology, biochemistry or function')
+      .set(13, 'Environmental factors / myotoxins')
+      .set(14, 'Animal models')
+      .set(15, 'Pathology')
+      .set(16, 'Immunology')
+      .set(17, 'Pathogenesis of disease')
+      .set(18, 'Pre-clinical therapeutic development')
+      .set(19, 'Other')
+      .set(0, 'Doesn\'t Matter');
     this.locations = new Map<string, string>()
       .set('north_america', 'North America')
       .set('europe', 'Europe')
@@ -65,74 +82,51 @@ export class MentorSearchComponent implements OnInit {
     return Array.from(map.keys());
   }
 
-  setClinical(clinical?: string) {
-    this.model.clinicalCare = clinical;
+  setPatient(patient?: string) {
+    this.model.patients = patient;
   }
 
-  setFocus(focus?: string) {
-    this.model.focus = focus;
+  setPatientType(patientType?: number) {
+    this.model.patientType = patientType;
   }
 
-  // TBD : Wish to use this unified function but getting issues.
-  // using individual funtions for now.
-  // setData(string?: string, array?: string[]) {
-  //   const index = array.indexOf(string, 0);
-  //   if (string === 'n/a') {
-  //     if (index > -1) {
-  //       array = [];
-  //     } else {
-  //       array = [];
-  //       array.push(string);
-  //     }
-  //   } else if (index > -1) {
-  //     array.splice(index, 1);
-  //   } else {
-  //     const index_na = array.indexOf('n/a', 0);
-  //     if (index_na > -1) {
-  //       array.splice(index_na, 1);
-  //     }
-  //     array.push(string);
-  //   }
-  //   console.log(array);
-  // }
-
-  setSpecialization(specialization?: string) {
-    const index = this.model.specialization.indexOf(specialization, 0);
-    if (specialization === 'n/a') {
+  setClinicalForm(clinicalForm?: number) {
+    const index = this.model.clinicalForm.indexOf(clinicalForm, 0);
+    if (clinicalForm === 0) {
       if (index > -1) {
-        this.model.specialization.splice(index, 1);
+        this.model.clinicalForm.splice(index, 1);
       } else {
-        this.model.specialization = [];
-        this.model.specialization.push('n/a');
+        this.model.clinicalForm = [];
+        this.model.clinicalForm.push(0);
       }
     } else if (index > -1) {
-      this.model.specialization.splice(index, 1);
+      this.model.clinicalForm.splice(index, 1);
     } else {
-      const index_na = this.model.specialization.indexOf('n/a', 0);
+      const index_na = this.model.clinicalForm.indexOf(0, 0);
       if (index_na > -1) {
-        this.model.specialization.splice(index_na, 1);
+        this.model.clinicalForm.splice(index_na, 1);
       }
-      this.model.specialization.push(specialization);
+      this.model.clinicalForm.push(clinicalForm);
     }
   }
 
-  setExpertise(expertise?: string) {
-    const index = this.model.expertise.indexOf(expertise, 0);
-    if (expertise === 'n/a') {
+  setResearchArea(researchArea?: number) {
+    const index = this.model.researchArea.indexOf(researchArea, 0);
+    if (researchArea === 0) {
       if (index > -1) {
-        this.model.expertise.splice(index, 1);
+        this.model.researchArea.splice(index, 1);
       } else {
-        this.model.expertise = [];
-        this.model.expertise.push('n/a');
+        this.model.researchArea = [];
+        this.model.researchArea.push(0);
       }
     } else if (index > -1) {
-      this.model.expertise.splice(index, 1);
+      this.model.researchArea.splice(index, 1);
     } else {
-      const index_na = this.model.expertise.indexOf('n/a', 0);
+      const index_na = this.model.researchArea.indexOf(0, 0);
       if (index_na > -1) {
-        this.model.expertise.splice(index_na, 1);
+        this.model.researchArea.splice(index_na, 1);
       }
-      this.model.expertise.push(expertise);
+      this.model.researchArea.push(researchArea);
     }
   }
 
@@ -169,10 +163,10 @@ export class MentorSearchComponent implements OnInit {
   }
 
   isStepComplete(num) {
-    if ((num === 1 && this.model.clinicalCare == null)
-      || (num === 2 && this.model.focus == null)
-      || (num === 3 && this.model.specialization.length === 0)
-      || (num === 4 && this.model.expertise.length === 0)
+    if ((num === 1 && this.model.patients == null)
+      || (num === 2 && this.model.patientType == null)
+      || (num === 3 && this.model.clinicalForm.length === 0)
+      || (num === 4 && this.model.researchArea.length === 0)
       || (num === 5 && this.model.location.length === 0)) {
       return false;
     } else {
