@@ -66,7 +66,6 @@ export class MentorSearchComponent implements OnInit {
       .set(17, 'Pathogenesis of disease')
       .set(18, 'Pre-clinical therapeutic development')
       .set(19, 'Other')
-      .set(20, 'this is a test mysositis which is very long text and it is longer than before now for testing')
       .set(0, 'Doesn\'t Matter');
     this.locations = new Map<string, string>()
       .set('north_america', 'North America')
