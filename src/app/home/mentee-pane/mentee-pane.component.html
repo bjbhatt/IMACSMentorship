@@ -26,18 +26,31 @@
     <button class="btn btn-primary btn-md" role="button" (click)="contact('mentee')">Contact Mentor</button>
     <button class="btn btn-danger btn-md" role="button" (click)="cancelMentorship('mentee')">Cancel Mentorship Request</button>
   </p>
-  <p *ngIf="showContactForm" class="buttons">
-    <label for="messageToMentor" class="hidden">Send E-Mail to {{model.pendingRequest.emailAddress}}:</label>
-    <textarea rows="5" cols="50" class='form-control' id="messageToMentor" name="messageToMentor" placeholder="Send E-Mail to {{model.pendingRequest.fullName}} [{{model.pendingRequest.emailAddress}}].."></textarea>
-    <button class="btn btn-primary btn-sm" role="button" (click)="sendMessage('mentee')">Send</button>
-    <button class="btn btn-default btn-sm" role="button" (click)="cancel()">Cancel</button>
-  </p>
-  <p *ngIf="showCancelReqForm" class="buttons">
-    <small>Are you sure you would like to cancel Mentorship Request?</small>
-    <br />
-    <button class="btn btn-danger btn-sm" role="button" (click)="cancelMentorshipConfirm()">Yes</button>
-    <button class="btn btn-default btn-sm" role="button" (click)="cancel()">No</button>
-  </p>
+  <div *ngIf="showContactForm" class="panel panel-primary buttons">
+    <div class="panel-heading">Send E-Mail to
+        <strong>{{model.pendingRequest.fullName}}</strong> [{{model.pendingRequest.emailAddress}}]
+        
+    </div>
+    <div class="panel-body">
+        <label for="subjectForMentor" class="hidden">Send E-Mail to {{model.pendingRequest.emailAddress}}:</label>
+        <input type="text" class='form-control' id="subjectForMentor" name="subjectForMentor" placeholder="Subject" [(ngModel)]="subject" />
+        <label for="messageForMentor" class="hidden">Send E-Mail to {{model.pendingRequest.emailAddress}}:</label>
+        <textarea class='form-control' id="messageForMentor" name="messageforMentor" placeholder="Message" [(ngModel)]="message"></textarea>
+        <button *ngIf="message && subject" class="btn btn-primary btn-sm" role="button" (click)="sendMessage('mentee')">Send</button>
+        <button class="btn btn-default btn-sm" role="button" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+  <div *ngIf="showCancelReqForm" class="panel panel-danger buttons">
+      <div class="panel-heading">
+          Cancel Mentorship
+          
+      </div>
+      <div class="panel-body">
+          <div class="dialog-text">Are you sure you would like to cancel Mentorship?</div>
+          <button class="btn btn-danger btn-sm" role="button" (click)="cancelMentorshipConfirm()">Yes</button>
+          <button class="btn btn-default btn-sm" role="button" (click)="cancel()">No</button>
+      </div>
+    </div>
 </div>
 
 <div *ngIf="status == 'Current'" class="jumbotron">
@@ -52,7 +65,7 @@
   <div *ngIf="showContactForm" class="panel panel-primary buttons">
     <div class="panel-heading">Send E-Mail to
       <strong>{{model.currentMentor.fullName}}</strong> [{{model.currentMentor.emailAddress}}]
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+      
     </div>
     <div class="panel-body">
       <label for="subjectForMentor" class="hidden">Subject for {{model.currentMentor.emailAddress}}:</label>
@@ -66,7 +79,7 @@
   <div *ngIf="showCancelReqForm" class="panel panel-danger buttons">
       <div class="panel-heading">
           Cancel Mentorship
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+          
       </div>
       <div class="panel-body">
           <div class="dialog-text">Are you sure you would like to cancel Mentorship?</div>

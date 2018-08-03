@@ -14,7 +14,7 @@
   <div *ngIf="showUpdateDateForm" class="panel panel-primary buttons">
     <div class="panel-heading">
       Set / Update Training Date
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+      
     </div>
     <div class="panel-body">
         <label for="trainingDate" class="hidden">Post Doctoral Training Date:</label>
@@ -71,7 +71,7 @@
   <div *ngIf="showContactForm" class="panel panel-primary buttons">
     <div class="panel-heading">Send E-Mail to
       <strong>{{model.currentMentee.fullName}}</strong> [{{model.currentMentee.emailAddress}}]
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+      
     </div>
     <div class="panel-body">
       <label for="subjectForMentee" class="hidden">Subject for {{model.currentMentee.emailAddress}}:</label>
@@ -85,7 +85,7 @@
   <div *ngIf="showCancelReqForm" class="panel panel-danger buttons">
     <div class="panel-heading">
         Cancel Mentorship
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+        
     </div>
     <div class="panel-body">
         <div class="dialog-text">Are you sure you would like to cancel Mentorship?</div>
